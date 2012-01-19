@@ -25,6 +25,15 @@
         font-weight: 300;
       }
 
+      a:link, a:visited {
+        color: #4f79b8;
+        text-decoration: none;
+      }
+      a:hover, a:active {
+        color: #2e65d2;
+        text-decoration: underline;
+      }
+
       #header {
         position: fixed;
         top: 0;
@@ -32,11 +41,11 @@
         bottom: 0;
         width: 300px;
       }
+      #header .inner > * {
+        margin-bottom: 20px;
+      }
       #header .inner {
         padding: 30px 40px;
-      }
-      #header .title {
-        text-align: center;
       }
       #header .title span {
         display: block;
@@ -46,6 +55,24 @@
       }
       #header h1 span:first-child {
         font-size: 60%;
+      }
+      #header ul.menu {
+        font-size: 83%;
+        list-style-type: none;
+        margin-left: 0;
+        padding: 0;
+      }
+      #header ul.menu li {
+        margin-bottom: .5em;
+      }
+      #header ul.menu li a:before {
+        content: "\00BB \0020";
+      }
+      #header .footer {
+        font-size: 60%;
+      }
+      #header .glyph {
+        font-size: 200%;
       }
 
       #content {
@@ -77,14 +104,17 @@
         <h1 class="title">
           <span>Ian presents</span>
           <span>Things of</span>
-          <span>Variable</span>
-          <span>Interest</span>
+          <span>Variable Interest</span>
         </h1>
 
         <ul class="menu">
           <li><a href="one">Lorem Ipsum</a></li>
           <li><a href="one">Dolor a Sit Amit</a></li>
         </ul>
+
+        <div class="glyph">
+          &#x2766;
+        </div>
 
       </div>
     </div>
