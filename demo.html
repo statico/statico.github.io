@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+  <head lang="en-us">
+
+    <title>test</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css' />
+    <style type="text/css">
+
+      html, body {
+        height: 100%;
+        background: #eee;
+        color: #333;
+        font-family: 'Georgia';
+        font-size: 15px;
+        text-rendering: optimizeLegibility;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+      }
+
+      #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+      }
+      #header .inner {
+        padding: 30px 40px;
+      }
+      #header .title {
+        text-align: center;
+      }
+      #header .title span {
+        display: block;
+      }
+      #header h1 {
+        line-height: 1.2;
+      }
+      #header h1 span:first-child {
+        font-size: 60%;
+      }
+
+      #content {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 300px;
+        line-height: 1.5;
+      }
+      #content .inner {
+        width: 500px;
+        padding: 30px 40px;
+        margin: 0 auto;
+        background: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        background: -webkit-linear-gradient(left, rgba(245,245,245,1) 1%,#fff 4%,#fff 50%,#fff 96%,rgba(245,245,245,1) 99%);
+
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <div id="header">
+      <div class="inner">
+
+        <h1 class="title">
+          <span>Ian presents</span>
+          <span>Things of</span>
+          <span>Variable</span>
+          <span>Interest</span>
+        </h1>
+
+        <ul class="menu">
+          <li><a href="one">Lorem Ipsum</a></li>
+          <li><a href="one">Dolor a Sit Amit</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="inner">
+
+        <h2>Lorem Ipsum</h2>
+
+        <p>
+          Lorem lean startup ipsum product market fit customer development
+          acquihire technical cofounder. User engagement A/B testing shrink
+          a market venture capital pitch deck. Social bookmarking group buying
+          crowded market pivot onboarding freemium prototype ping pong. Early
+          stage disruptive ecosystem community outreach dynamic location based
+          strategic investor.
+        </p>
+        <p>
+          Accelerator photo sharing business school drop out ramen hustle crush
+          it revenue traction platforms. Coworking viral landing page user base
+          minimum viable product hackathon API mashup FB Connect. Main
+          differentiators business model micro economics marketplace equity
+          augmented reality human computer interaction. Board members super angel
+          preferred stock. Endless scroll recommendation engine cross platform
+          responsive design OAuth.
+        </p>
+        <p>
+          Tablet publishing HTML5 mobile first really simple syndication meetups
+          white board walls. User experience iterate algorithm gamification
+          semantic web value add market research stealth. Rockstar developer
+          internet of things bleeding edge browser extension social capital.
+          Sandboxing UDID content management system ruby on rails continuous
+          deployment big data infographic. Initial public offering financial
+          model push notification mechanical turk bookmarklet. Term sheet
+          convertible note colluding bootstrapping. Cloud computing subscription
+          model out of the box proactive solution.
+        </p>
+
+      </div>
+    </div>
+
+  </body>
+
+  <script>
+    (function() {
+      var SIZE = 128, GRAY = 240, VARIANCE = 10;
+
+      var canvas = document.createElement('canvas');
+      canvas.width = canvas.height = SIZE;
+
+      var ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      var imagedata = ctx.createImageData(SIZE, SIZE);
+      var data = imagedata.data;
+      for (var i = 0, len = SIZE * SIZE * 4; i < len; i += 4) {
+        data[i] = data[i + 1] = data[i + 2] = Math.random() * VARIANCE * 2 - VARIANCE + GRAY;
+        data[i + 3] = 255;
+      }
+      ctx.putImageData(imagedata, 0, 0);
+
+      document.body.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
+      document.body.style.backgroundRepeat = 'repeat';
+      document.body.style.backgroundAttachment = 'fixed';
+
+    })();
+  </script>
+
+</html>
+
