@@ -10,7 +10,6 @@
     <style type="text/css">
 
       html, body {
-        height: 100%;
         background: #eee;
         color: #333;
         font-family: 'Georgia';
@@ -23,6 +22,7 @@
       h1, h2, h3 {
         font-family: 'Open Sans', sans-serif;
         font-weight: 300;
+        margin-top: 0;
       }
 
       a:link, a:visited {
@@ -34,62 +34,69 @@
         text-decoration: underline;
       }
 
-      #header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 300px;
+      .header, .footer, .content {
+        width: 640px;
+        margin: 0 auto;
+        clear: both;
       }
-      #header .inner {
+
+      .header * {
+        margin: 0;
+      }
+      .header .inner {
         padding: 30px 40px;
       }
-      #header .title span {
-        display: block;
+      .header .icon {
+        width: 115px;
+        float: left;
       }
-      #header .icon img {
-        width: 70px;
+      .header .icon img {
+        height: 90px;
         opacity: .65;
       }
-      #header h1 {
-        line-height: 1.2;
-        margin: 0 0 20px
+      .header .title span {
+        display: block;
       }
-      #header h1 span:first-child {
+      .header h1 {
+        line-height: 1.2;
+      }
+      .header h1 span:first-child {
         font-size: 60%;
       }
-      #header ul.menu {
+      .header ul.menu {
+        display: none; /* XXX */
         font-size: 83%;
         list-style-type: none;
         margin-left: 0;
         padding: 0;
       }
-      #header ul.menu li {
+      .header ul.menu li {
         margin-bottom: .5em;
       }
-      #header ul.menu li a:before {
+      .header ul.menu li a:before {
         content: "\00BB \0020";
       }
-      #header .footer {
+      .header .footer {
         font-size: 60%;
       }
 
-      #content {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 300px;
+      .content {
         line-height: 1.5;
-      }
-      #content .inner {
-        width: 500px;
-        padding: 30px 40px;
-        margin: 0 auto;
+        margin-bottom: 30px;
         background: #fff;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        border: 1px solid #ddd;
         background: -webkit-linear-gradient(left, rgba(245,245,245,1) 1%,#fff 4%,#fff 50%,#fff 96%,rgba(245,245,245,1) 99%);
+      }
+      .content .inner {
+        padding: 30px 40px;
+      }
 
+      .footer {
+        line-height: 1.5;
+        text-align: center;
+        font-size: 60;
+        margin-bottom: 30px;
       }
 
     </style>
@@ -97,7 +104,7 @@
   </head>
   <body>
 
-    <div id="header">
+    <div class="header">
       <div class="inner">
 
         <div class="icon">
@@ -118,7 +125,7 @@
       </div>
     </div>
 
-    <div id="content">
+    <div class="content">
       <div class="inner">
 
         <h2>Lorem Ipsum</h2>
@@ -155,6 +162,15 @@
       </div>
     </div>
 
+    <div class="footer">
+      <a href="http://github.com/statico">GitHub</a>
+      - <a href="http://twitter.com/statico">Twitter</a>
+      - <a href="http://flickr.com/statico">Flickr</a>
+      - <a href="http://langworth.com/contact">Email</a>
+      <br/>
+      © 2012 Ian Langworth. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
+    </div>
+
   </body>
 
   <script>
@@ -169,15 +185,16 @@
 
       var imagedata = ctx.createImageData(SIZE, SIZE);
       var data = imagedata.data;
+      var value;
       for (var i = 0, len = SIZE * SIZE * 4; i < len; i += 4) {
-        data[i] = data[i + 1] = data[i + 2] = Math.random() * VARIANCE * 2 - VARIANCE + GRAY;
+        value = Math.random() * VARIANCE * 2 - VARIANCE + GRAY;
+        data[i] = data[i + 1] = data[i + 2] = value;
         data[i + 3] = 255;
       }
       ctx.putImageData(imagedata, 0, 0);
 
       document.body.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
       document.body.style.backgroundRepeat = 'repeat';
-      document.body.style.backgroundAttachment;
 
     })();
   </script>
