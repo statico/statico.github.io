@@ -41,17 +41,19 @@
         bottom: 0;
         width: 300px;
       }
-      #header .inner > * {
-        margin-bottom: 20px;
-      }
       #header .inner {
         padding: 30px 40px;
       }
       #header .title span {
         display: block;
       }
+      #header .icon img {
+        width: 70px;
+        opacity: .65;
+      }
       #header h1 {
         line-height: 1.2;
+        margin: 0 0 20px
       }
       #header h1 span:first-child {
         font-size: 60%;
@@ -70,9 +72,6 @@
       }
       #header .footer {
         font-size: 60%;
-      }
-      #header .glyph {
-        font-size: 200%;
       }
 
       #content {
@@ -101,6 +100,10 @@
     <div id="header">
       <div class="inner">
 
+        <div class="icon">
+          <img src="ian.svg" />
+        </div>
+
         <h1 class="title">
           <span>Ian presents</span>
           <span>Things of</span>
@@ -111,10 +114,6 @@
           <li><a href="one">Lorem Ipsum</a></li>
           <li><a href="one">Dolor a Sit Amit</a></li>
         </ul>
-
-        <div class="glyph">
-          &#x2766;
-        </div>
 
       </div>
     </div>
@@ -178,7 +177,7 @@
 
       document.body.style.backgroundImage = 'url(' + canvas.toDataURL() + ')';
       document.body.style.backgroundRepeat = 'repeat';
-      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundAttachment;
 
     })();
   </script>
