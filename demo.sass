@@ -1,0 +1,107 @@
+$width: 750px
+$gap: 30px
+$half-gap: $gap / 2
+
+$fg: #333
+$bg: #eee
+$font-size: 16px
+$link: #4f79b8
+$link-hover: #2e65d2
+
+html, body
+  background: $bg
+  color: $fg
+  font-family: 'Georgia'
+  font-size: $font-size
+  text-rendering: optimizeLegibility
+  font-variant-ligatures: common-ligatures
+  hyphens: auto
+  margin: 0
+  padding: 0
+
+h1, h2, h3
+  font-family: 'Open Sans', sans-serif
+  font-weight: 300
+  margin-top: 0
+
+a
+  &:link, &:visited
+    color: $link
+    text-decoration: none
+  &:hover, &:active
+    color: $link-hover
+    text-decoration: underline
+
+.header, .footer, .content
+  width: $width
+  margin: 0 auto
+  clear: both
+
+.header
+  *
+    margin: 0
+  a
+    &:link, &:visited
+      text-decoration: none
+      color: $fg
+    &:hover, &:active
+      color: $link-hover
+
+  $icon-width: 115px
+  $menu-width: 170px
+  $title-width: $width - ($gap * 2) - $icon-width - $menu-width - 20px
+
+  .inner
+    padding: $gap $gap 0
+    & > *
+      vertical-align: bottom
+      display: inline-block
+      margin-bottom: $gap
+
+  .icon
+    width: $icon-width
+    img
+      height: 95px
+      opacity: .65
+
+  .title
+    width: $title-width
+    line-height: 1.2
+    span
+      display: block
+      &:first-child
+        font-size: 60%
+
+  .menu
+    padding: 0
+    width: $menu-width
+    list-style-type: none
+    text-align: right
+    li
+      display: inline
+      margin-left: .5em
+
+.content
+  .inner
+    padding: $gap
+  margin-bottom: $gap
+
+.prose
+  line-height: 1.5
+  background: #fff
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
+  border: 1px solid #ddd
+  background: -webkit-linear-gradient(left, rgba(245, 245, 245, 1) 1%, white 4%, white 50%, white 96%, rgba(245, 245, 245, 1) 99%)
+  .meta
+    float: right
+    color: $fg + #444
+    font-size: smaller
+
+.footer
+  line-height: 1.5
+  text-align: center
+  font-size: 80%
+  margin-bottom: $gap
+
+.no-margin
+  margin: 0

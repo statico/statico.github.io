@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head lang="en-us">
 
@@ -7,99 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css' />
-    <style type="text/css">
-
-      html, body {
-        background: #eee;
-        color: #333;
-        font-family: 'Georgia';
-        font-size: 15px;
-        text-rendering: optimizeLegibility;
-        margin: 0;
-        padding: 0;
-      }
-
-      h1, h2, h3 {
-        font-family: 'Open Sans', sans-serif;
-        font-weight: 300;
-        margin-top: 0;
-      }
-
-      a:link, a:visited {
-        color: #4f79b8;
-        text-decoration: none;
-      }
-      a:hover, a:active {
-        color: #2e65d2;
-        text-decoration: underline;
-      }
-
-      .header, .footer, .content {
-        width: 640px;
-        margin: 0 auto;
-        clear: both;
-      }
-
-      .header * {
-        margin: 0;
-      }
-      .header .inner {
-        padding: 30px 40px;
-      }
-      .header .icon {
-        width: 115px;
-        float: left;
-      }
-      .header .icon img {
-        height: 90px;
-        opacity: .65;
-      }
-      .header .title span {
-        display: block;
-      }
-      .header h1 {
-        line-height: 1.2;
-      }
-      .header h1 span:first-child {
-        font-size: 60%;
-      }
-      .header ul.menu {
-        display: none; /* XXX */
-        font-size: 83%;
-        list-style-type: none;
-        margin-left: 0;
-        padding: 0;
-      }
-      .header ul.menu li {
-        margin-bottom: .5em;
-      }
-      .header ul.menu li a:before {
-        content: "\00BB \0020";
-      }
-      .header .footer {
-        font-size: 60%;
-      }
-
-      .content {
-        line-height: 1.5;
-        margin-bottom: 30px;
-        background: #fff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        border: 1px solid #ddd;
-        background: -webkit-linear-gradient(left, rgba(245,245,245,1) 1%,#fff 4%,#fff 50%,#fff 96%,rgba(245,245,245,1) 99%);
-      }
-      .content .inner {
-        padding: 30px 40px;
-      }
-
-      .footer {
-        line-height: 1.5;
-        text-align: center;
-        font-size: 60;
-        margin-bottom: 30px;
-      }
-
-    </style>
+    <link href='demo.css' rel='stylesheet' type='text/css' />
 
   </head>
   <body>
@@ -108,25 +16,29 @@
       <div class="inner">
 
         <div class="icon">
-          <img src="ian.svg" />
+          <a href="/"><img src="ian.svg" /></a>
         </div>
 
-        <h1 class="title">
-          <span>Ian presents</span>
-          <span>Things of</span>
-          <span>Variable Interest</span>
-        </h1>
+        <a href="/" class="title">
+          <h1>
+            <span>Ian presents</span>
+            <span>Things of</span>
+            <span>Variable Interest</span>
+          </h1>
+        </a>
 
         <ul class="menu">
-          <li><a href="one">Lorem Ipsum</a></li>
-          <li><a href="one">Dolor a Sit Amit</a></li>
+          <li><a href="/">« Index</a></li>
+          <li><a href="http://langworth.com/contact">✉ Contact</a></li>
         </ul>
 
       </div>
     </div>
 
-    <div class="content">
+    <div class="content prose">
       <div class="inner">
+
+        <p class="meta">Monday, January 23, 2012</p>
 
         <h2>Lorem Ipsum</h2>
 
@@ -158,16 +70,27 @@
           convertible note colluding bootstrapping. Cloud computing subscription
           model out of the box proactive solution.
         </p>
+        <p class="no-margin">☠</p>
 
       </div>
     </div>
 
+    <div class="content"><div class="inner">
+    <div id="disqus_thread"></div>
+      <script type="text/javascript">
+          var disqus_shortname = 'ianlangworthblog';
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </div></div>
+
     <div class="footer">
-      <a href="http://github.com/statico">GitHub</a>
-      - <a href="http://twitter.com/statico">Twitter</a>
-      - <a href="http://flickr.com/statico">Flickr</a>
-      - <a href="http://langworth.com/contact">Email</a>
-      <br/>
       © 2012 Ian Langworth. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
     </div>
 
