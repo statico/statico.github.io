@@ -78,6 +78,9 @@ a:hover, a:active {
     font-size: 13px;
     line-height: 1.4;
     margin: 0 40px; }
+  .content img:first-child {
+    display: block;
+    margin: 0 auto; }
 
 .extra .inner {
   padding: 0 40px 30px; }
