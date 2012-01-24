@@ -1,6 +1,6 @@
 $width: 750px
-$gap: 30px
-$half-gap: $gap / 2
+$hgap: 40px
+$vgap: $hgap * .75
 
 $fg: #333
 $bg: #eee
@@ -23,6 +23,7 @@ h1, h2, h3
   font-family: 'Open Sans', sans-serif
   font-weight: 300
   margin-top: 0
+  line-height: 1
 
 a
   &:link, &:visited
@@ -32,7 +33,7 @@ a
     color: $link-hover
     text-decoration: underline
 
-.header, .footer, .content
+.header, .footer, .content, .extra
   width: $width
   margin: 0 auto
   clear: both
@@ -48,15 +49,14 @@ a
       color: $link-hover
 
   $icon-width: 115px
-  $menu-width: 170px
-  $title-width: $width - ($gap * 2) - $icon-width - $menu-width - 20px
+  $title-width: $width - ($hgap * 2) - $icon-width - 20px
 
   .inner
-    padding: $gap $gap 0
+    padding: $vgap $hgap 0
     & > *
       vertical-align: bottom
       display: inline-block
-      margin-bottom: $gap
+      margin-bottom: $vgap
 
   .icon
     width: $icon-width
@@ -66,42 +66,44 @@ a
 
   .title
     width: $title-width
-    line-height: 1.2
+    h1
+      line-height: 1.2
     span
       display: block
       &:first-child
         font-size: 60%
 
-  .menu
-    padding: 0
-    width: $menu-width
-    list-style-type: none
-    text-align: right
-    li
-      display: inline
-      margin-left: .5em
-
 .content
   .inner
-    padding: $gap
-  margin-bottom: $gap
-
-.prose
+    padding: $vgap $hgap
+    & > *:last-child
+      margin-bottom: 0
+  margin-bottom: $vgap
   line-height: 1.5
   background: #fff
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
   border: 1px solid #ddd
+
   background: -webkit-linear-gradient(left, rgba(245, 245, 245, 1) 1%, white 4%, white 50%, white 96%, rgba(245, 245, 245, 1) 99%)
+
+  h1, h2, h3
+    margin-bottom: $vgap
   .meta
     float: right
     color: $fg + #444
     font-size: smaller
+    margin-top: 0
+
+.extra
+  .inner
+    padding: 0 $vgap $hgap
+  margin-bottom: $vgap
 
 .footer
   line-height: 1.5
   text-align: center
   font-size: 80%
-  margin-bottom: $gap
+  margin-bottom: $vgap
 
 .no-margin
   margin: 0
