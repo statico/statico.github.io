@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<div class="content">
+  <div class="inner">
+
+    <p class="meta">{{ page.date | date_to_long_string }}</p>
+
+    <h2>{{ page.title }}</h2>
+
+    {{ content }}
+
+    <p class="no-margin">☠</p>
+
+  </div>
+</div>
+
+<div class="extra"><div class="inner">
+  {% include disqus.html %}
+</div></div>
+

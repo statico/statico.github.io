@@ -1,1 +1,10 @@
 .sass-cache
+
+_site/*
+
+Thumbs.db
+.DS_Store
+
+!.gitkeep
+
+.rbenv-version

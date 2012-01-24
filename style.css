@@ -1,5 +1,5 @@
 html, body {
-  background: #eeeeee;
+  background: #eeeeee url(/bg.png);
   color: #333333;
   font-family: "Georgia";
   font-size: 16px;
@@ -73,10 +73,8 @@ a:hover, a:active {
     font-size: smaller;
     margin-top: 0; }
 
-.extra {
-  margin-bottom: 30px; }
-  .extra .inner {
-    padding: 0 30px 40px; }
+.extra .inner {
+  padding: 0 40px 30px; }
 
 .footer {
   line-height: 1.5;

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en-us">
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+    <meta name="author" content="{{ site.author.name }}">
+
+    <title>{{ page.title }}</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css" />
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all" />
+
+  </head>
+  <body>
+
+    <div class="header">
+      <div class="inner">
+
+        <div class="icon">
+          <a href="/"><img src="/ian.svg" /></a>
+        </div>
+
+        <a href="/" class="title">
+          <h1>
+            <span>Ian presents</span>
+            <span>Things of</span>
+            <span>Variable Interest</span>
+          </h1>
+        </a>
+
+      </div>
+    </div>
+
+    {{ content }}
+
+    <div class="footer">
+      © 2012 Ian Langworth. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
+    </div>
+
+  </body>
+
+  {% include analytics.html %}
+</html>
+
