@@ -97,8 +97,10 @@ a
 
   background: -webkit-linear-gradient(left, rgba(245, 245, 245, 1) 1%, white 4%, white 50%, white 96%, rgba(245, 245, 245, 1) 99%)
 
-  h1, h2, h3
+  h2
     margin-bottom: $vgap
+  h3
+    margin: $vgap 0
   .meta
     float: right
     color: $fg + #444
@@ -106,16 +108,18 @@ a
     font-size: 80%
     line-height: 1
 
-  code
+  code, .highlight
     font-family: Menlo, Monaco, monospace
-  .highlight
     font-size: 13px
+
+  .highlight
     line-height: 1.4
     margin: 0 40px
 
   img:first-child
+    border-radius: 2px
     display: block
-    margin: 0 auto
+    margin: $vgap auto
 
 .extra
   .inner
