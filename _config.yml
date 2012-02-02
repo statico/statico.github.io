@@ -6,7 +6,7 @@ var:
   rss_path: /atom.xml
 
 production_url: http://statico.github.com
-title: Ian Langworth Presents Things of Variable Interest
+title: Ian Langworth's Things of Variable Interest
 
 author:
   name: Ian Langworth

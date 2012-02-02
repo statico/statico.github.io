@@ -44,11 +44,12 @@ a:hover, a:active {
   width: 115px; }
   .header .icon img {
     height: 95px;
-    opacity: 0.65; }
+    opacity: 0.8; }
 .header .title {
   width: 535px; }
   .header .title h1 {
-    line-height: 1.2; }
+    line-height: 1.2;
+    font-size: 280%; }
   .header .title span {
     display: block; }
     .header .title span:first-child {
@@ -70,8 +71,9 @@ a:hover, a:active {
   .content .meta {
     float: right;
     color: #777777;
-    font-size: smaller;
-    margin-top: 0; }
+    margin-top: 0;
+    font-size: 80%;
+    line-height: 1; }
   .content code {
     font-family: Menlo, Monaco, monospace; }
   .content .highlight {
