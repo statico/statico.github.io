@@ -1,3 +1,9 @@
+/*!
+ * Style for statico.github.com.
+ *
+ * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
+ */
+
 $width: 750px
 $hgap: 40px
 $vgap: $hgap * .75
@@ -18,6 +24,10 @@ html, body
   hyphens: auto
   margin: 0
   padding: 0
+
+  -webkit-perspective: 500
+  -moz-perspective: 500
+  perspective: 500
 
 h1, h2, h3
   font-family: 'Open Sans', sans-serif
@@ -119,6 +129,11 @@ a
 
 .no-margin
   margin: 0
+
+/* This trick kinda works. See http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/ */
+.reverse
+  unicode-bidi: bidi-override
+  direction: rtl
 
 /* PYGMENTS */
 .hll
