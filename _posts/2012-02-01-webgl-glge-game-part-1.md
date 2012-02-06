@@ -41,30 +41,35 @@ One advantage of using an HTML5 canvas within a web page is that your GUI can be
 
 [GLGE][glge] calls itself "WebGL for the lazy." It provides a collection of classes to make management of the scene, camera and object much easier than if you were to write raw WebGL constructs. It also optimizes your scene by reusing meshes and materials whenever it can.
 
-For the uninitiated, a **mesh** is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or **vector**) of X, Y and Z coordinates in space. A **material** is applied to a mesh to give it a texture. A **scene** is what you're looking at at any given moment -- a tree of objects and object groups (the **scene graph**). You look at a scene through a viewport, whose direction, width and height is defined by the scene's **camera**.
-
 To start using GLGE you'll need a web page with a canvas and the GLGE library. The following is that with some simple initialization code:
 
 {% highlight html %}
 <!doctype html>
 <html>
-  <head lang="en-us">
-    <title>test</title>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
-  </head>
   <body>
-    <canvas id="canvas" width="1024" height="768"></canvas>
-    <script>
-      // ...
+
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script id="scene-xml" type="text/xml">
+      <glge>
+      </glge>
     </script>
+
+    <script>
+      var doc = new GLGE.Document();
+      doc.onLoad = function() {
+        var renderer = new GLGE.Renderer(document.getElementById('canvas'));
+      };
+      doc.parseScript('scene-xml');
+    </script>
+
   </body>
 </html>
 {% endhighlight %}
 
-(XXX - describe GLGE init)
-
 If you're wondering what the `<script type="text/html">` is all about, good! By specifying a non-JavaScript MIME type you can use `<script>` tags to store useful information such as XML, which is useful because GLGE lets you build scenes with XML.
+
+Some of the terms will seem alien if you've never worked with OpenGL before, so here's a quick primer: A **mesh** is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or **vector**) of X, Y and Z coordinates in space. A **material** is applied to a mesh to give it a texture. A **scene** is what you're looking at at any given moment -- a tree of objects and object groups (the **scene graph**). You look at a scene through a viewport, whose direction, width and height is defined by the scene's **camera**.
 
 ### An XML Scene
 
@@ -134,7 +139,7 @@ searching for "free game music" -- first hit, picked Canopy
 imagined the game being "cute"
 ducks bobbing in time with the music
 used a keyboard BPM meter to time the music
-120 BPM? perfect! 
+120 BPM? perfect!
 
 
   [ducksgame]: http://statico.github.com/webgl-demos/ducks/
