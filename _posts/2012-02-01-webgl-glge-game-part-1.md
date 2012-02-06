@@ -4,17 +4,21 @@ title: Building a WebGL game with GLGE, Part 1
 draft: true
 ---
 
-![ducks](images/ducks-splash.png)
+[![ducks](images/ducks-splash.png)][ducksgame]
 
-This is a three-part monologue on how I built a WebGL game with very little experience in programming 3D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed. (She scored 15 seconds.)
+How difficult is it to build a WebGL-based browser game without any prior 3D experience? Very. Concepts such as normals and matrix transformations can be intimidating to someone who hasn't recently passed a linear algebra exam, and a huge amount of knowledge is required just to get something moving on the screen. Luckily, frameworks such as [GLGE][glge] abstract a lot of the hard stuff away and let budding game developers develop games more quickly.
 
-Whether you're new to OpenGL entirely or just WebGL, the place to start is probably [Learning WebGL][learningwebgl]. There's a nice tutorial worth looking at which covers the basics. This game arose out of my evaluation of the GLGE library, which wraps WebGL into a nice API and includes a few utilities. I do have plans to evaluate other libraries like Three.js and even cover "raw" WebGL game development once I'm good enough, but that will be a later discussion.
+This is a three-part monologue on how I built a WebGL game with very little experience in programming 2D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed. (She scored 15 seconds.)
 
 I have passing familiarity with tools like Infini-D, Blender and Flash, so when I think of a 3D scene I imagine objects and groups of objects at coordinates in space, not meshes and normals and transformation matrices. Part of this experience was learning how to translate those artistic ideas into OpenGL concepts, and GLGE luckily helps a lot with doing that.
 
-### The Idea
+### The Origin of the Idea: COLLADA Models
 
-I started by spending some time with GLGE, which includes [a handful of useful examples][glgeexamples] including a demonstration of a water-like texture and another using [COLLADA][collada] models. The water demo was really cool, but once I saw the [rubber duck COLLADA model][rubberduck] it seemed obvious that the two needed to go together -- "Why don't I put the ducks _in_ the water and make them bob around a little?"
+I started by spending some time with GLGE, which includes [a handful of useful examples][glgeexamples] including a demonstration of a water-like texture and another using [COLLADA][collada] models. The water demo was really cool, but once I saw the [rubber duck COLLADA model][duckdae] it seemed obvious that the two needed to go together -- "Why don't I put the ducks _in_ the water and make them bob around a little?"
+
+  [glge]: http://www.glge.org/
+  [glgeexamples]: https://github.com/supereggbert/GLGE/tree/master/examples
+  [duckdae]: https://collada.org/owl/browse.php?sess=0&parent=126&expand=1&order=name&curview=0&sortname=ASC
 
 ![GLGE water demo](images/glge-water.png)
 
@@ -24,17 +28,18 @@ The COLLADA demo includes a cartoonish aeroplane with a spinning propeller anima
 
 ![GLGE COLLADA demo](images/glge-collada.png)
 
-### The Non-Programming Part
+### Burnout Management
 
 Part of this exercise was to also test my project-management skills. In building this game I needed to stay within my limit span of attention and avoid getting burnt out. While developing I made sure I was focused on _playability_ and _fun_ as opposed to spending hours fixing every flippant bug that appeared. If something was "good enough," like the accuracy of the aiming target, I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect duct-collecting simulation.
 
-One big time-saver was being able to use HTML5 elements to build the GUI. Instead of trying to build a 2D menu out of rectangle and text primitives you can simply overlay XXX
+One advantage of using an HTML5 canvas within a web page is that your GUI can be build using good ol' HTML. Many game developers seem to build menu systems and GUIs from scratch. With CSS3 directives like [`box-shadow`][box-shadow] and [`border-image`][border-image] you can create some nifty-looking GUIs without building tons of infrastructure. Translucent `<div>`s can be overlayed on top of the canvas, too. I saved a lot of time by using absolutely-positioned `<div>`s for my modal menu dialogs.
 
-One advantage of using an HTML5 canvas within a web page is that your GUI can be build using good ol' HTML. With CSS3 directives like `box-shadow` and `border-pattern` (XXX cite) you can create some nify-looking GUIs without building an entire windowing system. Translucent `<div>`s can be overlayed on top of the canvas, too. I was able to create a simple modal menu system very easily.
+  [box-shadow]: http://caniuse.com/#search=box-shadow
+  [border-image]: http://www.css3files.com/border/
 
 ### Getting Started with GLGE
 
-GLGE is a framework "for the lazy WebGL programmer" (XXX cite). It provides a collection of classes to make management of the scene, camera and object much easier than if you were to write raw WebGL constructs. It also optimizes your scene by reusing meshes and materials whenever it can.
+[GLGE][glge] calls itself "WebGL for the lazy." It provides a collection of classes to make management of the scene, camera and object much easier than if you were to write raw WebGL constructs. It also optimizes your scene by reusing meshes and materials whenever it can.
 
 For the uninitiated, a **mesh** is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or **vector**) of X, Y and Z coordinates in space. A **material** is applied to a mesh to give it a texture. A **scene** is what you're looking at at any given moment -- a tree of objects and object groups (the **scene graph**). You look at a scene through a viewport, whose direction, width and height is defined by the scene's **camera**.
 
@@ -73,7 +78,7 @@ Here's that scene in a GLGE XML document, which you should be able to follow:
 
 (XXX - xml of scene with four ducks)
 
-The duck is imported from the COLLADA XML file `duck.dae`, which references the image `duck.png` to use as a texture. The current version of GLGE will let you wait until it has loaded the COLLADA data but doesn't block on loading assets referenced _inside_ of the `.dae`. This could lead to models being drawn without textures (they'll appear as black silouhettes) before the textures are loaded. Currently you'll have to create your own preloader if you want to get around this -- more on that later.
+The duck is imported from the COLLADA XML file `duck.dae`, which references the image `duck.png` to use as a texture. The current version of GLGE will let you wait until it has loaded the COLLADA data but doesn't block on loading assets referenced _inside_ of the `.dae`. This could lead to models being drawn without textures (they'll appear as black silhouettes) before the textures are loaded. Currently you'll have to create your own preloader if you want to get around this -- more on that later.
 
 The COLLADA file contains everything you need to display a nice duckie, including mesh and texture. If you look at the GLGE demos you'll see examples of specifying meshes and textures inside of the XML -- it's very verbose.
 
@@ -101,7 +106,7 @@ A simple bob back-and-forth is a little boring. Anyone who's ever tried to stand
 
 In GLGE XML that looks like this:
 
-(XXX - xml animation)
+(XXX - XML animation)
 
 The number of animation frames is a little arbitrary since you can adjust the frame rate of any animation dynamically. It's probably a good idea to have an animation FPS greater-than-or-equal to the global FPS so they aren't choppy.
 
@@ -130,3 +135,6 @@ imagined the game being "cute"
 ducks bobbing in time with the music
 used a keyboard BPM meter to time the music
 120 BPM? perfect! 
+
+
+  [ducksgame]: http://statico.github.com/webgl-demos/ducks/
