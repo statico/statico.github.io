@@ -41,7 +41,39 @@ One advantage of using an HTML5 canvas within a web page is that your GUI can be
 
 [GLGE][glge] calls itself "WebGL for the lazy." It provides a collection of classes to make management of the scene, camera and object much easier than if you were to write raw WebGL constructs. It also optimizes your scene by reusing meshes and materials whenever it can.
 
-To start using GLGE you'll need a web page with a canvas and the GLGE library. The following is that with some simple initialization code:
+First, if you've never worked with OpenGL before, some of the terms will seem alien. A **mesh** is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or **vector**) of X, Y and Z coordinates in space. A **material** is applied to a mesh to give it a texture. A **scene** is what you're looking at at any given moment -- a tree of objects and object groups (the **scene graph**). You look at a scene through a viewport, whose direction, width and height is defined by the scene's **camera**.
+
+GLGE lets you initialize your scene in two ways: XML and JavaScript. The XML method is a declarative approach using XML which lets you define objects in the scene and the camera. You can give each element an ID which you can refer to within other parts of the XML document or within JavaScript later, much like ``document.getElementById()`` in an HTML DOM.
+
+Creating a scene with XML is pretty easy, so let's do that. Imagine a simple scene with four ducks spaced equally around the origin and the camera is pointing straight down at the ducks:
+
+![ducks drawing](images/4ducks-sketchup.png)
+
+Here's how that scene could be described in GLGE XML:
+
+{% highlight xml %}
+<glge>
+
+  <camera id="maincamera" loc_z="20" />
+
+  <scene id="mainscene" camera="#maincamera"
+      ambient_color="#fff" background_color="#999">
+
+    <light id="mainlight" loc_y="5" type="L_POINT" />
+
+    <collada document="duck.dae" loc_x="-1" loc_y="-1" />
+    <collada document="duck.dae" loc_x="-1" loc_y="1" />
+    <collada document="duck.dae" loc_x="1" loc_y="-1" />
+    <collada document="duck.dae" loc_x="1" loc_y="1" />
+
+  </scene>
+
+</glge>
+{% endhighlight %}
+
+Straightforward, right? First, declare a camera positioned 20 units up on the Z axies, and by default the camera looks straight down the Z axis. Next, declare a scene which references the color, contains a simple light source, and puts four ducks on the ground. The ducks are models are defined in another file, `duck.dae`, and we'll get to that in a second.
+
+You can save this XML in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document. You can do this using `<script>` tags with `type="text/xml"`.
 
 {% highlight html %}
 <!doctype html>
@@ -52,14 +84,23 @@ To start using GLGE you'll need a web page with a canvas and the GLGE library. T
 
     <script id="scene-xml" type="text/xml">
       <glge>
+        <!-- XML scene from above -->
       </glge>
     </script>
 
     <script>
       var doc = new GLGE.Document();
+
       doc.onLoad = function() {
+        // Tell GLGE to use our canvas.
         var renderer = new GLGE.Renderer(document.getElementById('canvas'));
+
+        // Set up the scene.
+        var scene = doc.getElement('mainscene');
+        renderer.setScene(scene);
+
       };
+
       doc.parseScript('scene-xml');
     </script>
 
@@ -69,19 +110,8 @@ To start using GLGE you'll need a web page with a canvas and the GLGE library. T
 
 If you're wondering what the `<script type="text/html">` is all about, good! By specifying a non-JavaScript MIME type you can use `<script>` tags to store useful information such as XML, which is useful because GLGE lets you build scenes with XML.
 
-Some of the terms will seem alien if you've never worked with OpenGL before, so here's a quick primer: A **mesh** is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or **vector**) of X, Y and Z coordinates in space. A **material** is applied to a mesh to give it a texture. A **scene** is what you're looking at at any given moment -- a tree of objects and object groups (the **scene graph**). You look at a scene through a viewport, whose direction, width and height is defined by the scene's **camera**.
-
 ### An XML Scene
 
-GLGE lets you initialize your scene in two ways: XML and JavaScript. The XML method is a declarative approach using XML which lets you define objects in the scene and the camera. You can give each element an ID which you can refer to within other parts of the XML document or within JavaScript later, much like ``document.getElementById()`` in an HTML DOM.
-
-So let's imagine a simple scene with four ducks. You're looking down at the ducks.
-
-(XXX - drawing of scene)
-
-Here's that scene in a GLGE XML document, which you should be able to follow:
-
-(XXX - xml of scene with four ducks)
 
 The duck is imported from the COLLADA XML file `duck.dae`, which references the image `duck.png` to use as a texture. The current version of GLGE will let you wait until it has loaded the COLLADA data but doesn't block on loading assets referenced _inside_ of the `.dae`. This could lead to models being drawn without textures (they'll appear as black silhouettes) before the textures are loaded. Currently you'll have to create your own preloader if you want to get around this -- more on that later.
 
