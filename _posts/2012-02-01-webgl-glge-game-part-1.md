@@ -30,7 +30,8 @@ The COLLADA demo includes a cartoonish aeroplane with a spinning propeller anima
 
 ### Burnout Management
 
-Part of this exercise was to also test my project-management skills. In building this game I needed to stay within my limit span of attention and avoid getting burnt out. While developing I made sure I was focused on _playability_ and _fun_ as opposed to spending hours fixing every flippant bug that appeared. If something was "good enough," like the accuracy of the aiming target, I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect duct-collecting simulation.
+Part of this exercise was to also test my project-management skills.
+The last game I finished was so much work that I didn't write another one for years. In building this game I needed to stay within my limit span of attention and avoid getting burnt out. While developing I made sure I was focused on _playability_ and _fun_ as opposed to spending hours fixing every flippant bug that appeared. If something was "good enough," like the accuracy of the aiming target, I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect duct-collecting simulation.
 
 One advantage of using an HTML5 canvas within a web page is that your GUI can be build using good ol' HTML. Many game developers seem to build menu systems and GUIs from scratch. With CSS3 directives like [`box-shadow`][box-shadow] and [`border-image`][border-image] you can create some nifty-looking GUIs without building tons of infrastructure. Translucent `<div>`s can be overlayed on top of the canvas, too. I saved a lot of time by using absolutely-positioned `<div>`s for my modal menu dialogs.
 
@@ -73,7 +74,13 @@ Here's how that scene could be described in GLGE XML:
 
 Straightforward, right? First, declare a camera positioned 20 units up on the Z axies, and by default the camera looks straight down the Z axis. Next, declare a scene which references the color, contains a simple light source, and puts four ducks on the ground. The ducks are models are defined in another file, `duck.dae`, and we'll get to that in a second.
 
-You can save this XML in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document. You can do this using `<script>` tags with `type="text/xml"`.
+The duck is imported from the [COLLADA XML file `duck.dae`][duckdae], which references the image [`duck.png`][duckdae] to use as a texture. The COLLADA file contains everything needed to display a nice duckie, including meshes and materials.
+
+Each duck is placed on the corners of a square around the origin. The units used are completely arbitrary -- I wasn't able to find a clear description of what to use for units or how many or how few should be in a viewport. After looking at some other examples I chose to assume that, in the game, the ducks would be scattered across a 20 x 10 rectangle, and I chose that I'd figure out various window sizes and aspect ratios later.
+
+You can save this XML in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document using `<script type="text/xml">` tags. For clarify, however, I'll use the
+
+To render this scene with GLGE
 
 {% highlight html %}
 <!doctype html>
@@ -84,7 +91,21 @@ You can save this XML in a separate file, but when starting out with GLGE you'll
 
     <script id="scene-xml" type="text/xml">
       <glge>
-        <!-- XML scene from above -->
+
+        <camera id="maincamera" loc_z="20" />
+
+        <scene id="mainscene" camera="#maincamera"
+            ambient_color="#fff" background_color="#999">
+
+          <light id="mainlight" loc_y="5" type="L_POINT" />
+
+          <collada document="duck.dae" loc_x="-1" loc_y="-1" />
+          <collada document="duck.dae" loc_x="-1" loc_y="1" />
+          <collada document="duck.dae" loc_x="1" loc_y="-1" />
+          <collada document="duck.dae" loc_x="1" loc_y="1" />
+
+        </scene>
+
       </glge>
     </script>
 
@@ -112,14 +133,6 @@ If you're wondering what the `<script type="text/html">` is all about, good! By 
 
 ### An XML Scene
 
-
-The duck is imported from the COLLADA XML file `duck.dae`, which references the image `duck.png` to use as a texture. The current version of GLGE will let you wait until it has loaded the COLLADA data but doesn't block on loading assets referenced _inside_ of the `.dae`. This could lead to models being drawn without textures (they'll appear as black silhouettes) before the textures are loaded. Currently you'll have to create your own preloader if you want to get around this -- more on that later.
-
-The COLLADA file contains everything you need to display a nice duckie, including mesh and texture. If you look at the GLGE demos you'll see examples of specifying meshes and textures inside of the XML -- it's very verbose.
-
-Each duck is placed on the corners of a square around the origin. The units used are completely arbitrary -- I wasn't able to find a clear description of what to use for units or how many or how few should be in a viewport. After looking at some other examples I chose to assume that, in the game, the ducks would be scattered across a 20 x 10 rectangle, and I chose that I'd figure out various window sizes and aspect ratios later.
-
-In the "camera looking at the front" angle, at least according to Blender's conventions, the negative Y axis is coming towards you, the X axis goes across the screen horizontally, and the Z axis XXX
 
 ### Intro to The JavaScript API
 
@@ -173,3 +186,5 @@ used a keyboard BPM meter to time the music
 
 
   [ducksgame]: http://statico.github.com/webgl-demos/ducks/
+
+The current version of GLGE will let you wait until it has loaded the COLLADA data but doesn't block on loading assets referenced _inside_ of the `.dae`. This could lead to models being drawn without textures (they'll appear as black silhouettes) before the textures are loaded. Currently you'll have to create your own preloader if you want to get around this -- more on that later.
