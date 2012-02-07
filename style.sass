@@ -40,12 +40,12 @@ a
     color: $link-hover
     text-decoration: underline
 
-.header, .footer, .content, .extra
+header, footer, article, section
   width: $width
   margin: 0 auto
   clear: both
 
-.header
+header
   *
     margin: 0
   a
@@ -81,7 +81,7 @@ a
       &:first-child
         font-size: 60%
 
-.content
+article
   .inner
     padding: $vgap $hgap
     & > *:last-child
@@ -118,11 +118,11 @@ a
     display: block
     margin: $vgap auto
 
-.extra
+section
   .inner
     padding: 0 $hgap $vgap
 
-.footer
+footer
   line-height: 1.5
   text-align: center
   font-size: 80%
