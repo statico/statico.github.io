@@ -6,6 +6,8 @@ draft: true
 
 [![ducks](images/ducks-splash.png)][ducksgame]
 
+*([Play the game][ducksgame] or [view the source][duckssource].)*
+
 How difficult is it to build a WebGL-based browser game without any prior 3D experience? Very. Concepts such as normals and matrix transformations can be intimidating to someone who hasn't recently passed a linear algebra exam, and a huge amount of knowledge is required just to get something moving on the screen. Luckily, frameworks such as [GLGE][glge] abstract a lot of the hard stuff away and let budding game developers develop games more quickly.
 
 This is a three-part monologue on how I built a WebGL game with very little experience in programming 2D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed. (She scored 15 seconds.)
@@ -16,22 +18,15 @@ I have passing familiarity with tools like Infini-D, Blender and Flash, so when 
 
 I started by spending some time with GLGE, which includes [a handful of useful examples][glgeexamples] including a demonstration of a water-like texture and another using [COLLADA][collada] models. The water demo was really cool, but once I saw the [rubber duck COLLADA model][duckdae] it seemed obvious that the two needed to go together -- "Why don't I put the ducks _in_ the water and make them bob around a little?"
 
-  [glge]: http://www.glge.org/
-  [glgeexamples]: https://github.com/supereggbert/GLGE/tree/master/examples
-  [duckdae]: https://collada.org/owl/browse.php?sess=0&parent=126&expand=1&order=name&curview=0&sortname=ASC
-
-![GLGE water demo](images/glge-water.png)
+![GLGE COLLADA demo](images/glge-collada.png)
 
 COLLADA, which I hadn't heard of before, is an open specification for 3D models which can include textures and animations. Most 3D modeling software can import and export COLLADA (extension `.dae`), including Blender and Google SketchUp. GLGE lets you import COLLADA documents almost seamlessly.
 
 The COLLADA demo includes a cartoonish aeroplane with a spinning propeller animation. While imagining ducks bobbing in the water the idea of catching ducks with the plane popped into my head. I also recalled playing flight simulators where the plane had a limited turning radius and navigating through obstacles was a challenge. Thus, catching ducks with a kinda-hard-to-maneuver plane seemed like it could be a simple, somewhat-fun game.
 
-![GLGE COLLADA demo](images/glge-collada.png)
-
 ### Burnout Management
 
-Part of this exercise was to also test my project-management skills.
-The last game I finished was so much work that I didn't write another one for years. In building this game I needed to stay within my limit span of attention and avoid getting burnt out. While developing I made sure I was focused on _playability_ and _fun_ as opposed to spending hours fixing every flippant bug that appeared. If something was "good enough," like the accuracy of the aiming target, I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect duct-collecting simulation.
+Part of this exercise was to also test my project-management skills. [The last game I finished][friend-rescue] was so much work that I didn't write another one for years. In building this game I needed to stay within my limit span of attention and avoid getting burnt out. While developing I made sure I was focused on _playability_ and _fun_ as opposed to spending hours fixing every flippant bug that appeared. If something was "good enough," like the accuracy of the aiming target, I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect duct-collecting simulation.
 
 One advantage of using an HTML5 canvas within a web page is that your GUI can be build using good ol' HTML. Many game developers seem to build menu systems and GUIs from scratch. With CSS3 directives like [`box-shadow`][box-shadow] and [`border-image`][border-image] you can create some nifty-looking GUIs without building tons of infrastructure. Translucent `<div>`s can be overlayed on top of the canvas, too. I saved a lot of time by using absolutely-positioned `<div>`s for my modal menu dialogs.
 
@@ -53,19 +48,24 @@ Creating a scene with XML is pretty easy, so let's do that. Imagine a simple sce
 Here's how that scene could be described in GLGE XML:
 
 {% highlight xml %}
+<?xml version="1.0"?>
 <glge>
 
-  <camera id="maincamera" loc_z="20" />
+  <camera id="maincamera" loc_z="10" />
 
   <scene id="mainscene" camera="#maincamera"
-      ambient_color="#fff" background_color="#999">
+         ambient_color="#fff" background_color="#999">
 
     <light id="mainlight" loc_y="5" type="L_POINT" />
 
-    <collada document="duck.dae" loc_x="-1" loc_y="-1" />
-    <collada document="duck.dae" loc_x="-1" loc_y="1" />
-    <collada document="duck.dae" loc_x="1" loc_y="-1" />
-    <collada document="duck.dae" loc_x="1" loc_y="1" />
+    <collada document="duck.dae" loc_x="-1" loc_y="-1"
+             rot_x="1.57" rot_y="4.71" scale=".01" />
+    <collada document="duck.dae" loc_x="-1" loc_y="1"
+             rot_x="1.57" rot_y="4.71" scale=".01" />
+    <collada document="duck.dae" loc_x="1" loc_y="-1"
+             rot_x="1.57" rot_y="4.71" scale=".01" />
+    <collada document="duck.dae" loc_x="1" loc_y="1"
+             rot_x="1.57" rot_y="4.71" scale=".01" />
 
   </scene>
 
@@ -74,40 +74,20 @@ Here's how that scene could be described in GLGE XML:
 
 Straightforward, right? First, declare a camera positioned 20 units up on the Z axies, and by default the camera looks straight down the Z axis. Next, declare a scene which references the color, contains a simple light source, and puts four ducks on the ground. The ducks are models are defined in another file, `duck.dae`, and we'll get to that in a second.
 
-The duck is imported from the [COLLADA XML file `duck.dae`][duckdae], which references the image [`duck.png`][duckdae] to use as a texture. The COLLADA file contains everything needed to display a nice duckie, including meshes and materials.
+The duck is imported from the [COLLADA sample XML file `duck.dae`][duckdae], which references the image [`duck.png`][duckdae] to use as a texture. The COLLADA file contains everything needed to display a nice duckie, including meshes and materials. Each duck needs to be rotated on the X and Y axes -- π/2 and 3π/2 radians, respectively, and rounding to two decimal places is good enough.
 
 Each duck is placed on the corners of a square around the origin. The units used are completely arbitrary -- I wasn't able to find a clear description of what to use for units or how many or how few should be in a viewport. After looking at some other examples I chose to assume that, in the game, the ducks would be scattered across a 20 x 10 rectangle, and I chose that I'd figure out various window sizes and aspect ratios later.
 
-You can save this XML in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document using `<script type="text/xml">` tags. For clarify, however, I'll use the
-
-To render this scene with GLGE
+You can save this XML in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document using `<script type="text/xml">` tags. For clarify, however, I'll assume the XML is saved as a separate file, `scene.xml`. Here's a minimal page and script that will load the scene
 
 {% highlight html %}
 <!doctype html>
 <html>
   <body>
 
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <canvas id="canvas" width="550" height="400"></canvas>
 
-    <script id="scene-xml" type="text/xml">
-      <glge>
-
-        <camera id="maincamera" loc_z="20" />
-
-        <scene id="mainscene" camera="#maincamera"
-            ambient_color="#fff" background_color="#999">
-
-          <light id="mainlight" loc_y="5" type="L_POINT" />
-
-          <collada document="duck.dae" loc_x="-1" loc_y="-1" />
-          <collada document="duck.dae" loc_x="-1" loc_y="1" />
-          <collada document="duck.dae" loc_x="1" loc_y="-1" />
-          <collada document="duck.dae" loc_x="1" loc_y="1" />
-
-        </scene>
-
-      </glge>
-    </script>
+    <script src="glge-compiled-min.js"></script>
 
     <script>
       var doc = new GLGE.Document();
@@ -120,14 +100,24 @@ To render this scene with GLGE
         var scene = doc.getElement('mainscene');
         renderer.setScene(scene);
 
+        // Simple stupid render loop.
+        setInterval(function() {
+          renderer.render();
+        }, 1000 / 30);
       };
 
-      doc.parseScript('scene-xml');
+      doc.load('scene.xml');
     </script>
 
   </body>
 </html>
 {% endhighlight %}
+
+The script begins by creating a new `GLGE.Document`, which represents the scene. Setting the `onLoad` property lets you execute code once the document has been loaded, which is akin to `document.onload` in browsers. The handler creates a new `GLGE.Renderer` objects bound to the `<canvas>` element and initializes it with the `<scene id="mainscene">` defined in the XML. A simple loop calls `render()`, which abstracts away the mountains of WebGL primitives required to push polygons to your graphics hardware. For simplicity I used JavaScript's built-in `setInterval()`, but a smarter solution would be to use [window.requestAnimationFrame][raf].
+
+
+
+
 
 If you're wondering what the `<script type="text/html">` is all about, good! By specifying a non-JavaScript MIME type you can use `<script>` tags to store useful information such as XML, which is useful because GLGE lets you build scenes with XML.
 
@@ -185,6 +175,11 @@ used a keyboard BPM meter to time the music
 120 BPM? perfect!
 
 
-  [ducksgame]: http://statico.github.com/webgl-demos/ducks/
-
 The current version of GLGE will let you wait until it has loaded the COLLADA data but doesn't block on loading assets referenced _inside_ of the `.dae`. This could lead to models being drawn without textures (they'll appear as black silhouettes) before the textures are loaded. Currently you'll have to create your own preloader if you want to get around this -- more on that later.
+
+  [ducksgame]: http://statico.github.com/webgl-demos/ducks/
+  [duckssource]: http://github.com/statico/webgl-demos/tree/master/ducks/
+  [glge]: http://www.glge.org/
+  [glgeexamples]: https://github.com/supereggbert/GLGE/tree/master/examples
+  [duckdae]: https://collada.org/owl/browse.php?sess=0&parent=126&expand=1&order=name&curview=0&sortname=ASC
+  [raf]: http://www.html5rocks.com/en/tutorials/speed/html5/#toc-request-ani-frame
