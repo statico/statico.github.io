@@ -28,7 +28,11 @@ The COLLADA demo includes a cartoonish aeroplane with a spinning propeller anima
 
 [GLGE][glge] calls itself "WebGL for the lazy." It provides a collection of classes to make management of the scene, camera and object much easier than if you were to write raw WebGL constructs. It also optimizes your scene by reusing meshes and materials whenever it can.
 
-First, if you've never worked with OpenGL before, some of the terms will seem alien. A **mesh** is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or **vector**) of X, Y and Z coordinates in space. A **material** is applied to a mesh to give it a texture. A **scene** is what you're looking at at any given moment -- a tree of objects and object groups (the **scene graph**). You look at a scene through a viewport, whose direction, width and height is defined by the scene's **camera**.
+Meshes and materials? Some of the terms might seem alien if you've never worked with OpenGL before, so here's a primer. A *mesh* is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or *vector*) of X, Y and Z coordinates in space. A *material* is applied to a mesh to give it a texture. A *scene* is what you're looking at at any given moment -- a tree of objects and object groups (the *scene graph*). You look at a scene through a viewport, whose direction, width and height is defined by the scene's *camera*.
+
+If you want to dive in to the docs and examples immediately, perform the following. Clone or download & unzip [the GLGE project from GitHub][glge-github], run `python -m SimpleHTTPServer` from within the `GLGE/` directory, and connect to [http://localhost:8000/](http://localhost:8000/). This will give you fast access to the API and, unlike using `file:///`, will let you run the examples without triggering any cross-domain security hooplah.
+
+### Making a scene
 
 GLGE lets you initialize your scene in two ways: XML and JavaScript. The XML method is a declarative approach using XML which lets you define objects in the scene and the camera. You can give each element an ID which you can refer to within other parts of the XML document or within JavaScript later, much like ``document.getElementById()`` in an HTML DOM.
 
@@ -110,7 +114,7 @@ Put this all together and viola, ducks! (Check out [the full source][fourducks-s
 
 ![4ducks-rendered](images/4ducks-rendered.png)
 
-### Let's get animated
+### Getting animated
 
 Animations in GLGE are wonderfully easy to use. Similar to CSS3 animation, you specify a duration and keyframes and the engine will "[tween][tweening]" in between the keyframes.
 
