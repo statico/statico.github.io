@@ -142,14 +142,26 @@ Let's have the ducks bob back and forth as if they're sitting in water. But a si
 </animation_vector>
 {% endhighlight %}
 
+Did you notice that the `<animation_vector>` has an ID of `bob`? When attaching animations to objects in the scene you simply need to refer to the ID in CSS-selector-like syntax:
 
+{% highlight xml %}
+(XXX - <collada> objects)
+{% endhighlight %}
 
+And there you have it -- bobbing ducks. Unfortunately, all of the ducks bob in perfect sync, which seems unnatural. It would be a little more fun if all of the ducks moved independently, and making that happen is a perfect task for the GLGE JavaScript API.
 
 ### Intro to The JavaScript API
 
 The XML declaration is good for setting up an initial scene, but what if you want to add or remove objects dynamically or move things around? Enter the [GLGE API][api] which lets you do everything the XML document can do and much more. It is in fact possible to create a scene entirely with JavaScript and without any XML at all -- but the JavaScript ends up being much more verbose and looks like copy-and-paste boilerplate. If your scene starts the same way every time, stick with XML.
 
-Regardless of how you created the scene you'll need JavaScript to manipulate it.
+Regardless of how you created the scene you'll need JavaScript to manipulate it. In the case of our ducks, we created the scene and animations using XML, but to make the ducks bob independently we should use JavaScript. Yes, you could create four different `<animation_vector>`s, but that would be a lot more work.
+
+Each GLGE animation has a fixed number of frames and loops indefinitely by default. An easy way to make the ducks XXX
+
+
+
+
+
   [ducksgame]: http://statico.github.com/webgl-demos/ducks/
   [duckssource]: http://github.com/statico/webgl-demos/tree/master/ducks/
   [glge]: http://www.glge.org/
