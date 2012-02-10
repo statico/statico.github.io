@@ -8,11 +8,12 @@ draft: true
 
 *([Play the game][ducksgame] or [view the complete source][duckssource].)*
 
-How difficult is it to build a WebGL-based browser game without any prior 3D experience? Very. Concepts such as normals and matrix transformations can be intimidating to someone who hasn't recently passed a linear algebra exam, and a huge amount of knowledge is required just to get something moving on the screen. Luckily, frameworks such as [GLGE][glge] abstract a lot of the hard stuff away and let budding game developers develop games more quickly.
+How difficult is it to build a WebGL-based browser game without any prior 3D experience? Very. Concepts such as normals and matrix transformations can be intimidating to someone who hasn't recently passed a linear algebra exam. There's a pile of knowledge required before you can get something more than a simple triangle to move on the screen. Luckily, frameworks such as [GLGE][glge] abstract a lot of the hard stuff away and let budding game developers develop games more quickly.
 
-This is a three-part monologue on how I built a WebGL game with very little experience in programming 2D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed. (She scored 15 seconds.)
+Personally, I have passing familiarity with tools like Infini-D, Blender and Flash, so when I think of a 3D scene I imagine objects and groups of objects at coordinates in space, not meshes and normals and transformation matrices. Part of this experience was learning how to translate those artistic ideas into OpenGL concepts. GLGE helps a lot with doing that.
 
-I have passing familiarity with tools like Infini-D, Blender and Flash, so when I think of a 3D scene I imagine objects and groups of objects at coordinates in space, not meshes and normals and transformation matrices. Part of this experience was learning how to translate those artistic ideas into OpenGL concepts, and GLGE luckily helps a lot with doing that.
+This is a three-part monologue on how I built a WebGL game with very little experience in programming 2D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed.
+
 
 ### The origin of the idea: COLLADA models
 
