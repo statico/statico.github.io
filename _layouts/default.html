@@ -50,6 +50,40 @@
 
   </body>
 
+  <script>
+    (function() {
+
+      // Why? Because it's more fun this way.
+      var SIZE = 128, GRAY = 240, VARIANCE = 10;
+
+      function setBackground(url) {
+        document.body.style.backgroundImage = 'url(' + url + ')';
+        document.body.style.backgroundRepeat = 'repeat';
+      }
+
+      var canvas = document.createElement('canvas');
+      canvas.width = canvas.height = SIZE;
+
+      var ctx = canvas.getContext('2d');
+      if (!ctx) {
+        setBackground('/bg.png');
+        return;
+      }
+
+      var imagedata = ctx.createImageData(SIZE, SIZE);
+      var data = imagedata.data;
+      var value;
+      for (var i = 0, len = SIZE * SIZE * 4; i < len; i += 4) {
+        value = Math.random() * VARIANCE * 2 - VARIANCE + GRAY;
+        data[i] = data[i + 1] = data[i + 2] = value;
+        data[i + 3] = 255;
+      }
+      ctx.putImageData(imagedata, 0, 0);
+      setBackground(canvas.toDataURL());
+
+    })();
+  </script>
+
   {% include analytics.html %}
 </html>
 
