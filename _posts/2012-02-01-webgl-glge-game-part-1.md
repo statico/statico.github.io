@@ -180,12 +180,11 @@ And there you have it - four ducks moving independently! (See the [live demo][fo
 
 ![4ducks independent](images/4ducks-independent.png)
 
+### Next up...
 
+This should have give you a taste of how you can use GLGE to build a basic 3D scene as well as add a little animation. If you want to learn more, check out the [GLGE home page][glge] and the [GLGE examples][glgeexamples] directory for more demos. Don't forget to play [the game][ducksgame], too!
 
-
-
-
-
+In part 2 of this series I'll cover more details of GLGE in the context of the game as well as how I built the game logic with Backbone. Stay tuned.
 
 
   [ducksgame]: http://statico.github.com/webgl-demos/ducks/
