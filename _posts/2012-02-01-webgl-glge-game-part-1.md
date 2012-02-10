@@ -69,7 +69,7 @@ Here's how that scene could be described in GLGE XML:
 
 Straightforward, right? First, declare a camera positioned 20 units up on the Z axies, and by default the camera looks straight down the Z axis. Next, declare a scene which references the color, contains a simple light source, and puts four ducks on the ground. The ducks are models are defined in another file, `duck.dae`, and we'll get to that in a second.
 
-The duck is imported from the [COLLADA sample XML file `duck.dae`][duckdae], which references the image [`duck.png`][duckdae] to use as a texture. The COLLADA file contains everything needed to display a nice duckie, including meshes and materials. Each duck needs to be rotated on the X and Y axes -- π/2 and 3π/2 radians, respectively. Rounding to two decimal places is good enough.
+The duck is imported from the [COLLADA sample XML file `duck.dae`][duckdae], which references an image `duckCM.png` to use as a texture. The COLLADA file contains everything needed to display a nice duckie, including meshes and materials. Each duck needs to be rotated on the X and Y axes -- π/2 and 3π/2 radians, respectively. Rounding to two decimal places is good enough.
 
 Each duck is placed on the corners of a square around the origin. The units used are completely arbitrary -- I wasn't able to find a clear description of what to use for units or how many or how few should be in a viewport. After looking at some other examples I chose to assume that, in the game, the ducks would be scattered across a 20 x 10 rectangle, and I chose that I'd figure out various window sizes and aspect ratios later.
 
@@ -116,7 +116,7 @@ Put this all together and viola, ducks! (Check out [the full source][fourducks-s
 
 ### Getting animated
 
-Animations in GLGE are wonderfully easy to use. Similar to CSS3 animation, you specify a duration and keyframes and the engine will "[tween][tweening]" in between the keyframes.
+Animations in GLGE are wonderfully easy to use. Similar to CSS3 animation, you specify a duration and keyframes and the engine will ["tween"][tweening] in between the keyframes.
 
 Let's have the ducks bob back and forth as if they're sitting in water. But a simple bob back-and-forth is a little boring; anyone who's ever tried to stand on a raft in an lake knows that balance isn't limited to a single axis. In addition to the lateral wobble the ducks should also bob forward and backward a little. In GLGE XML, this type of animation can be declared like this:
 
@@ -133,9 +133,9 @@ Let's have the ducks bob back and forth as if they're sitting in water. But a si
 
   <animation_curve channel="DRotY">
     <linear_point x="1" y="0" />
-    <linear_point x="15" y="-.2" />
+    <linear_point x="15" y="-.1" />
     <linear_point x="30" y="0" />
-    <linear_point x="45" y="-.2" />
+    <linear_point x="45" y="-.1" />
     <linear_point x="60" y="0" />
   </animation_curve>
 
@@ -145,7 +145,10 @@ Let's have the ducks bob back and forth as if they're sitting in water. But a si
 Did you notice that the `<animation_vector>` has an ID of `bob`? When attaching animations to objects in the scene you simply need to refer to the ID in CSS-selector-like syntax:
 
 {% highlight xml %}
-(XXX - <collada> objects)
+<collada document="duck.dae" animation="#bob" ... />
+<collada document="duck.dae" animation="#bob" ... />
+<collada document="duck.dae" animation="#bob" ... />
+<collada document="duck.dae" animation="#bob" ... />
 {% endhighlight %}
 
 And there you have it -- bobbing ducks. Unfortunately, all of the ducks bob in perfect sync, which seems unnatural. It would be a little more fun if all of the ducks moved independently, and making that happen is a perfect task for the GLGE JavaScript API.
@@ -159,10 +162,10 @@ Regardless of how you created the scene you'll need JavaScript to manipulate it.
 First, we can modify the XML to give each duck a unique ID, which will make retrieval using `doc.getElement()` easy. (We could use `doc.getChildren()` and traverse the scene graph, but that's kind of overkill for this demonstration.)
 
 {% highlight xml %}
-<collada id="duck1" document="duck.dae" ... />
-<collada id="duck2" document="duck.dae" ... />
-<collada id="duck3" document="duck.dae" ... />
-<collada id="duck4" document="duck.dae" ... />
+<collada id="duck1" document="duck.dae" animation="#bob" ... />
+<collada id="duck2" document="duck.dae" animation="#bob" ... />
+<collada id="duck3" document="duck.dae" animation="#bob" ... />
+<collada id="duck4" document="duck.dae" animation="#bob" ... />
 {% endhighlight %}
 
 One way to do the animation would be to create four different `<animation_vector>`s, but that's not very scalable if you have a hundred ducks on the screen. An easier way is to adjust the animation's current frame by setting the object's `animationStart` property, which is usually a timestamp of the start of the animation. Adding some amount of random offset to the timestamp will adjust the current frame of animation:
@@ -190,8 +193,14 @@ In part 2 of this series I'll cover more details of GLGE in the context of the g
   [ducksgame]: http://statico.github.com/webgl-demos/ducks/
   [duckssource]: http://github.com/statico/webgl-demos/tree/master/ducks/
   [glge]: http://www.glge.org/
+  [api]: http://www.glge.org/api-docs/
   [glgeexamples]: https://github.com/supereggbert/GLGE/tree/master/examples
-  [duckdae]: https://collada.org/owl/browse.php?sess=0&parent=126&expand=1&order=name&curview=0&sortname=ASC
+  [duckdae]: http://collada.org/owl/browse.php?sess=0&parent=126&expand=1&order=name&curview=0
   [raf]: http://www.html5rocks.com/en/tutorials/speed/html5/#toc-request-ani-frame
   [fourducks]: http://statico.github.com/webgl-demos/fourducks/
   [fourducks-source]: https://github.com/statico/webgl-demos/tree/master/fourducks
+  [fourducks-anim]: http://statico.github.com/webgl-demos/fourducks-anim/
+  [friendrescue]: https://github.com/statico/friend-rescue
+  [tweening]: http://en.wikipedia.org/wiki/Tweening
+  [glgegithub]: https://github.com/supereggbert/GLGE
+  [collada]: http://collada.org

@@ -134,10 +134,14 @@ footer
   text-align: center
   font-style: italic
 
-/* This trick kinda works. See http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/ */
+// This trick kinda works. See http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/
 .reverse
   unicode-bidi: bidi-override
   direction: rtl
+
+// Don't highlight errors in XML -- I use "..." a lot.
+.highlight .xml .err
+  border-width: 0
 
 /* PYGMENTS */
 .hll
