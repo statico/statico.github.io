@@ -154,9 +154,35 @@ And there you have it -- bobbing ducks. Unfortunately, all of the ducks bob in p
 
 The XML declaration is good for setting up an initial scene, but what if you want to add or remove objects dynamically or move things around? Enter the [GLGE API][api] which lets you do everything the XML document can do and much more. It is in fact possible to create a scene entirely with JavaScript and without any XML at all -- but the JavaScript ends up being much more verbose and looks like copy-and-paste boilerplate. If your scene starts the same way every time, stick with XML.
 
-Regardless of how you created the scene you'll need JavaScript to manipulate it. In the case of our ducks, we created the scene and animations using XML, but to make the ducks bob independently we should use JavaScript. Yes, you could create four different `<animation_vector>`s, but that would be a lot more work.
+Regardless of how you created the scene you'll need JavaScript to manipulate it. In the case of our ducks, we created the scene and animations using XML, but to make the ducks bob independently we can use JavaScript.
 
-Each GLGE animation has a fixed number of frames and loops indefinitely by default. An easy way to make the ducks XXX
+First, we can modify the XML to give each duck a unique ID, which will make retrieval using `doc.getElement()` easy. (We could use `doc.getChildren()` and traverse the scene graph, but that's kind of overkill for this demonstration.)
+
+{% highlight xml %}
+<collada id="duck1" document="duck.dae" ... />
+<collada id="duck2" document="duck.dae" ... />
+<collada id="duck3" document="duck.dae" ... />
+<collada id="duck4" document="duck.dae" ... />
+{% endhighlight %}
+
+One way to do the animation would be to create four different `<animation_vector>`s, but that's not very scalable if you have a hundred ducks on the screen. An easier way is to adjust the animation's current frame by setting the object's `animationStart` property, which is usually a timestamp of the start of the animation. Adding some amount of random offset to the timestamp will adjust the current frame of animation:
+
+{% highlight javascript %}
+// Animate each duck individually.
+var i, duck;
+for (i = 1; i <= 4; i++) {
+    duck = doc.getElement('duck' + i);
+    duck.animationStart += Math.floor(Math.random() * 1000);
+}
+{% endhighlight %}
+
+And there you have it - four ducks moving independently! (See the [live demo][fourducks-anim].)
+
+![4ducks independent](images/4ducks-independent.png)
+
+
+
+
 
 
 
