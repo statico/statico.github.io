@@ -14,16 +14,15 @@ Personally, I have passing familiarity with tools like Infini-D, Blender and Fla
 
 This is a three-part monologue on how I built a WebGL game with very little experience in programming 2D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed.
 
-
 ### The origin of the idea: COLLADA models
 
-I started by spending some time with GLGE, which includes [a handful of useful examples][glgeexamples] including a demonstration of a water-like texture and another using [COLLADA][collada] models. The water demo was really cool, but once I saw the [rubber duck COLLADA model][duckdae] it seemed obvious that the two needed to go together -- "Why don't I put the ducks _in_ the water and make them bob around a little?"
+I started by spending some time with GLGE, which includes [a handful of useful examples][glgeexamples] including demos of water and [COLLADA][collada] models. The water demo was really cool, but once I saw the [rubber duck COLLADA model][duckdae] it seemed obvious that the two needed to go together -- "Why don't I put the ducks _in_ the water and make them bob around a little?"
 
 ![GLGE COLLADA demo](images/glge-collada.png)
 
-COLLADA, which I hadn't heard of before, is an open specification for 3D models which can include textures and animations. Most 3D modeling software can import and export COLLADA (extension `.dae`), including Blender and Google SketchUp. GLGE lets you import COLLADA documents almost seamlessly.
+COLLADA, which I hadn't heard of before, is an open specification for 3D models that can include textures and animations. COLLADA files (extension `.dae`) are XML and can be imported and exported using common 3D modeling packages such as Blender and Google SketchUp. GLGE lets you import COLLADA documents almost seamlessly.
 
-The COLLADA demo includes a cartoonish aeroplane with a spinning propeller animation. While imagining ducks bobbing in the water the idea of catching ducks with the plane popped into my head. I also recalled playing flight simulators where the plane had a limited turning radius and navigating through obstacles was a challenge. Thus, catching ducks with a kinda-hard-to-maneuver plane seemed like it could be a simple, somewhat-fun game.
+The COLLADA demo includes a cartoonish aeroplane with a spinning propeller animation. While I was imagining ducks in the water the idea of catching ducks with the plane popped into my head. I also remembered playing flight simulators where controlling the plane was a challenge because of its limited maneuverability. Catching ducks with a kinda-hard-to-maneuver plane seemed like it could be a simple, somewhat-fun game.
 
 ### Getting started with GLGE
 
