@@ -2,7 +2,6 @@ permalink: /:title.html
 auto: true
 pygments: true
 var:
-  archive_path: /archive.html
   rss_path: /atom.xml
 
 production_url: http://statico.github.com
@@ -12,6 +11,5 @@ author:
   name: Ian Langworth
   github: statico
   twitter: statico
-  feedbuder: XXX
 
 exclude: .rbenv-version

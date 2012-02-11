@@ -20,17 +20,17 @@ I started by spending some time with GLGE, which includes [a handful of useful e
 
 ![GLGE COLLADA demo](images/glge-collada.png)
 
-COLLADA, which I hadn't heard of before, is an open specification for 3D models that can include textures and animations. COLLADA files (extension `.dae`) are XML and can be imported and exported using common 3D modeling packages such as Blender and Google SketchUp. GLGE lets you import COLLADA documents almost seamlessly.
+COLLADA is an open specification for 3D models that can include textures and animations. COLLADA files (extension `.dae`) are XML and can be imported and exported using common 3D modeling packages such as Blender and Google SketchUp. GLGE lets you import COLLADA documents almost seamlessly.
 
-The COLLADA demo includes a cartoonish aeroplane with a spinning propeller animation. While I was imagining ducks in the water the idea of catching ducks with the plane popped into my head. I also remembered playing flight simulators where controlling the plane was a challenge because of its limited maneuverability. Catching ducks with a kinda-hard-to-maneuver plane seemed like it could be a simple, somewhat-fun game.
+The COLLADA demo includes a cartoonish aeroplane with a spinning propeller animation. This made me remember flight simulators -- planes have limited maneuverability and controlling their movement is a challenge. Catching ducks with a kinda-hard-to-maneuver plane seemed like it could be a simple, somewhat-fun game.
 
 ### Getting started with GLGE
 
-[GLGE][glge] calls itself "WebGL for the lazy." It provides a collection of classes to make management of the scene, camera and object much easier than if you were to write raw WebGL constructs. It also optimizes your scene by reusing meshes and materials whenever it can.
-
-Meshes and materials? Some of the terms might seem alien if you've never worked with OpenGL before, so here's a primer. A *mesh* is a collection of triangles which make up the shape of an object. A triangle is merely a list of three points, where each point is a three-tuple (or *vector*) of X, Y and Z coordinates in space. A *material* is applied to a mesh to give it a texture. A *scene* is what you're looking at at any given moment -- a tree of objects and object groups (the *scene graph*). You look at a scene through a viewport, whose direction, width and height is defined by the scene's *camera*.
+[GLGE][glge] calls itself "WebGL for the lazy." It provides a collection of classes to make management of the camera, scene and its objects much easier than if you were to write raw WebGL constructs. It also optimizes by reusing meshes and materials whenever it can.
 
 If you want to dive in to the docs and examples immediately, perform the following. Clone or download & unzip [the GLGE project from GitHub][glge-github], run `python -m SimpleHTTPServer` from within the `GLGE/` directory, and connect to [http://localhost:8000/](http://localhost:8000/). This will give you fast access to the API and, unlike using `file:///`, will let you run the examples without triggering any cross-domain security hooplah.
+
+Some of the terms might seem alien if you've never worked with OpenGL before, so here's a primer. A *mesh* is a collection of polygons which make up the shape of an object. A polygon is a list of points, where each point is a three-tuple (or *vector*) of X, Y and Z coordinates. A *material* is applied to a mesh to give it the appearance of texture. A *scene* is what you're looking at at any given moment -- a tree of objects and object groups called the *scene graph*. You look at a scene through a viewport, whose direction, width and height is defined by the scene's *camera*.
 
 ### Making a scene
 
@@ -67,13 +67,15 @@ Here's how that scene could be described in GLGE XML:
 </glge>
 {% endhighlight %}
 
-Straightforward, right? First, declare a camera positioned 20 units up on the Z axies, and by default the camera looks straight down the Z axis. Next, declare a scene which references the color, contains a simple light source, and puts four ducks on the ground. The ducks are models are defined in another file, `duck.dae`, and we'll get to that in a second.
+Straightforward, right? First, declare a camera positioned 20 units up on the Z axis -- by default the camera looks straight down the Z axis. Next, declare a scene which contains a simple light source and puts four ducks on the ground.
 
-The duck is imported from the [COLLADA sample XML file `duck.dae`][duckdae], which references an image `duckCM.png` to use as a texture. The COLLADA file contains everything needed to display a nice duckie, including meshes and materials. Each duck needs to be rotated on the X and Y axes -- π/2 and 3π/2 radians, respectively. Rounding to two decimal places is good enough.
+The duck is imported from the [COLLADA sample XML file `duck.dae`][duckdae], which references an image `duckCM.png` to use as a texture. The COLLADA file contains everything needed to display the duckie including meshes and materials. Model assets aren't always modeled the way you want, so each duck needs to be rotated on the X and Y axes to π/2 and 3π/2 radians, respectively. Rounding to two decimal places is good enough.
 
-Each duck is placed on the corners of a square around the origin. The units used are completely arbitrary -- I wasn't able to find a clear description of what to use for units or how many or how few should be in a viewport. After looking at some other examples I chose to assume that, in the game, the ducks would be scattered across a 20 x 10 rectangle, and I chose that I'd figure out various window sizes and aspect ratios later.
+Each duck is placed on the corners of a square around the origin. The units used are completely arbitrary; I wasn't able to find a clear description of what to use for units or how many or how few should be in a viewport. In the game I chose to assume that the ducks would be scattered across a 20 x 10 rectangle and I planned to figure out various window sizes and aspect ratios later.
 
-You can save this XML in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document using `<script type="text/xml">` tags. For clarify, however, I'll assume the XML is saved as a separate file, `scene.xml`. Here's a minimal page and script that will load the scene
+XML for the scenes can be saved in a separate file, but when starting out with GLGE you'll probably find it easier to embed the XML inside the HTML document using `<script type="text/xml">` tags. For clarify, however, I'll assume the XML is saved as a separate file, `scene.xml`.
+
+Here's a minimal HTML5 page which will render the scene:
 
 {% highlight html %}
 <!doctype html>
@@ -108,7 +110,7 @@ You can save this XML in a separate file, but when starting out with GLGE you'll
 </html>
 {% endhighlight %}
 
-The script begins by creating a new `GLGE.Document`, which represents the scene. Setting the `onLoad` property lets you execute code once the document has been loaded, which is akin to `document.onload` in browsers. The handler creates a new `GLGE.Renderer` objects bound to the `<canvas>` element and initializes it with the `<scene id="mainscene">` defined in the XML. A simple loop calls `render()`, which abstracts away the mountains of WebGL primitives required to push polygons to your graphics hardware. For simplicity I used JavaScript's built-in `setInterval()`, but a smarter solution would be to use [window.requestAnimationFrame][raf].
+The script begins by creating a new `GLGE.Document`, which represents the scene. Setting the `onLoad` property lets you execute code once the document has been loaded, which is akin to `document.onload` in browsers. The handler creates a new `GLGE.Renderer` objects bound to the `<canvas>` element and initializes it with the `<scene id="mainscene">` defined in the XML. A simple loop calls `render()`, which abstracts away the mountains of WebGL primitives required to push polygons to your graphics hardware. For simplicity I used JavaScript's built-in `setInterval()`, but a better solution would be to use [window.requestAnimationFrame][raf].
 
 Put this all together and viola, ducks! (Check out [the full source][fourducks-source] or the [live demo][fourducks].)
 
@@ -116,9 +118,9 @@ Put this all together and viola, ducks! (Check out [the full source][fourducks-s
 
 ### Getting animated
 
-Animations in GLGE are wonderfully easy to use. Similar to CSS3 animation, you specify a duration and keyframes and the engine will ["tween"][tweening] in between the keyframes.
+Animations in GLGE are easy to use and are similar to CSS3 animations: specify a duration and keyframes and the engine will [tween][tweening] in between them.
 
-Let's have the ducks bob back and forth as if they're sitting in water. But a simple bob back-and-forth is a little boring; anyone who's ever tried to stand on a raft in an lake knows that balance isn't limited to a single axis. In addition to the lateral wobble the ducks should also bob forward and backward a little. In GLGE XML, this type of animation can be declared like this:
+Let's have the ducks bob back and forth as if they're floating in water. A simple bob back-and-forth is a little boring; anyone who's ever tried to balance on a raft in an lake knows that movement isn't limited to a single axis. In addition to the lateral wobble the ducks should also bob forward and backward a little. In GLGE XML, this type of animation can be declared like this:
 
 {% highlight xml %}
 <animation_vector id="bob" frames="60">
@@ -142,7 +144,9 @@ Let's have the ducks bob back and forth as if they're sitting in water. But a si
 </animation_vector>
 {% endhighlight %}
 
-Did you notice that the `<animation_vector>` has an ID of `bob`? When attaching animations to objects in the scene you simply need to refer to the ID in CSS-selector-like syntax:
+This declares a sixty-frame animation with the ID of `bob`. It contains two subelements which each specify an object property to manipulate and a line along which the property's values will be set over the course of the animation. The properties here are `DRotX` and `DRotY` which, set the object's rotation along the X and Y axes relative to its starting rotation (the values of the `rot_x` and `rot_y` attributes in XML).
+
+When attaching animations to objects in the scene you simply need to refer to the ID in CSS-selector-like syntax:
 
 {% highlight xml %}
 <collada document="duck.dae" animation="#bob" ... />
@@ -151,15 +155,17 @@ Did you notice that the `<animation_vector>` has an ID of `bob`? When attaching 
 <collada document="duck.dae" animation="#bob" ... />
 {% endhighlight %}
 
-And there you have it -- bobbing ducks. Unfortunately, all of the ducks bob in perfect sync, which seems unnatural. It would be a little more fun if all of the ducks moved independently, and making that happen is a perfect task for the GLGE JavaScript API.
+And there you have it -- bobbing ducks!
+
+Unfortunately, all of the ducks bob in perfect sync, which appears unnatural unless the ducks are training for synchronized swimming. It would be more fun if all of the ducks moved independently. Making that happen is a perfect task for the GLGE JavaScript API.
 
 ### Intro to The JavaScript API
 
-The XML declaration is good for setting up an initial scene, but what if you want to add or remove objects dynamically or move things around? Enter the [GLGE API][api] which lets you do everything the XML document can do and much more. It is in fact possible to create a scene entirely with JavaScript and without any XML at all -- but the JavaScript ends up being much more verbose and looks like copy-and-paste boilerplate. If your scene starts the same way every time, stick with XML.
+The XML declaration is great for setting the initial scene, but what if you want to add or remove objects dynamically or move things around? Enter the [GLGE API][api], which lets you do everything the XML document can do and more. It's even possible to create a scene entirely with JavaScript -- no XML at all -- but the JavaScript will be very verbose and feel a lot like boilerplate. If your scene starts the same way every time, stick with XML.
 
 Regardless of how you created the scene you'll need JavaScript to manipulate it. In the case of our ducks, we created the scene and animations using XML, but to make the ducks bob independently we can use JavaScript.
 
-First, we can modify the XML to give each duck a unique ID, which will make retrieval using `doc.getElement()` easy. (We could use `doc.getChildren()` and traverse the scene graph, but that's kind of overkill for this demonstration.)
+First, we can modify the XML to give each duck a unique ID, which will make retrieval using `doc.getElement()` easy. (Alternatively we could use `doc.getChildren()` and traverse the scene graph, but that's kind of overkill for this demonstration.)
 
 {% highlight xml %}
 <collada id="duck1" document="duck.dae" animation="#bob" ... />
@@ -168,7 +174,7 @@ First, we can modify the XML to give each duck a unique ID, which will make retr
 <collada id="duck4" document="duck.dae" animation="#bob" ... />
 {% endhighlight %}
 
-One way to do the animation would be to create four different `<animation_vector>`s, but that's not very scalable if you have a hundred ducks on the screen. An easier way is to adjust the animation's current frame by setting the object's `animationStart` property, which is usually a timestamp of the start of the animation. Adding some amount of random offset to the timestamp will adjust the current frame of animation:
+One way to do the animation would be to create four different `<animation_vector>`s, but that's not very scalable if you have a hundred ducks on the screen. An easier way is to adjust the animation's current frame by setting the object's `animationStart` property, which is a timestamp of the start of the animation. Adding some amount of random offset to the timestamp will adjust the current frame of animation:
 
 {% highlight javascript %}
 // Animate each duck individually.
@@ -185,9 +191,9 @@ And there you have it - four ducks moving independently! (See the [live demo][fo
 
 ### Next up...
 
-This should have give you a taste of how you can use GLGE to build a basic 3D scene as well as add a little animation. If you want to learn more, check out the [GLGE home page][glge] and the [GLGE examples][glgeexamples] directory for more demos. Don't forget to play [the game][ducksgame], too!
+This should have give you a taste of how you can use GLGE to build a basic 3D scene and add a little animation. If you want to learn more, check out the [GLGE home page][glge] and the [GLGE examples][glgeexamples] directory for more demos. Don't forget to play [the game][ducksgame], too!
 
-In part 2 of this series I'll cover more details of GLGE in the context of the game as well as how I built the game logic with Backbone. Stay tuned.
+In part 2 of this series I'll cover more details of GLGE in the context of the game as well as how I used [Backbone][backbone] to build game logic. Stay tuned.
 
 
   [ducksgame]: http://statico.github.com/webgl-demos/ducks/
