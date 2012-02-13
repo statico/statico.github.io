@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Building a WebGL game with GLGE, Part 1
-draft: true
 ---
 
 [![ducks](images/ducks-splash.png)][ducksgame]
