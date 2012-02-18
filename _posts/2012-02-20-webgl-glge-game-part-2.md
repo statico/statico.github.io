@@ -26,6 +26,8 @@ controller is a backbone "View". sure, could just extend Events, but meh. emits 
 
 modes: menu mode, play mode, score mode
 
+menu and score mores are "demo" modes -- stuff is happening but no user input needed. turned out to be an important choice because it demonstrates how to play the game before they play -- no tutorial needed.
+
 smarter system would be to create and destroy scenes by defining transitions between modes. ex: score->play or menu->play means resetting the game, but play->menu does nothing.
 
 controller has its own game loop. probably not a good idea, but meh.
@@ -35,3 +37,19 @@ each loop iteration does collision detection for ducks & ship. backbone's collec
 (XXX - tick() code)
 
 ### a view
+
+example 1, create a scene, but don't create the ducks just yet
+
+use backbone views - bind to 'add' to create ducks. bind to remove too. when removing, show animation.
+
+(XXX - game.ducks.bind callbacks)
+
+while we're binding events, set up callbacks for game mode changes. again, could have been smarter with state transitions, but meh.
+
+(XXX - JS for game.bind)
+
+### a menu
+
+create a menu - big advantage of webgl/html5 is that you can use html to make the GUI
+
+(XXX - menu XML and css)
