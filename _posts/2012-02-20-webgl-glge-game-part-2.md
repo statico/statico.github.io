@@ -10,7 +10,7 @@ draft: true
 
 In [part one][part1] of this series I covered GLGE basics by demonstrating how to set up a scene with four bobbing ducks. In this part I'll describe how I built the logic for the game and mapped it to a 3D view.
 
-Keep in mind that part of building *Ducks* was an excercise in burn out management. [The last game I finished][friend-rescue] was so much work that I didn't write another one for years. To build the game I needed to stay within my limit span of attention and avoid getting burnt out, so I made sure I was focused on _play ability_ and _fun_ instead of fixing every bug which appeared. If something was "good enough" I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect duct-collecting simulation.
+Keep in mind that part of building *Ducks* was an excercise in burn out management. [The last game I finished][friend-rescue] was so much work that I didn't write another one for years. To build the game I needed to stay within my limit span of attention and avoid getting burnt out, so I made sure I was focused on _play ability_ and _fun_ instead of fixing every bug which appeared. If something was "good enough" I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect, duct-collecting simulation.
 
 ### A Game with a Backbone
 
@@ -78,6 +78,20 @@ var DuckCollection = Backbone.Collection.extend({
 });
 {% endhighlight %}
 
+Easy, right? And that's not even the fun part. It's much more exciting to bind
+
+### a view
+
+example 1, create a scene, but don't create the ducks just yet
+
+use backbone views - bind to 'add' to create ducks. bind to remove too. when removing, show animation.
+
+(XXX - game.ducks.bind callbacks)
+
+while we're binding events, set up callbacks for game mode changes. again, could have been smarter with state transitions, but meh.
+
+(XXX - JS for game.bind)
+
 
 
 ### a controller
@@ -95,18 +109,6 @@ controller has its own game loop. probably not a good idea, but meh.
 each loop iteration does collision detection for ducks & ship. backbone's collections give you an each() method.
 
 (XXX - tick() code)
-
-### a view
-
-example 1, create a scene, but don't create the ducks just yet
-
-use backbone views - bind to 'add' to create ducks. bind to remove too. when removing, show animation.
-
-(XXX - game.ducks.bind callbacks)
-
-while we're binding events, set up callbacks for game mode changes. again, could have been smarter with state transitions, but meh.
-
-(XXX - JS for game.bind)
 
 ### a menu
 
