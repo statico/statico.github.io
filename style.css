@@ -108,6 +108,9 @@ footer {
   text-align: center;
   font-style: italic; }
 
+#dsq-content {
+  font-size: 16px; }
+
 .reverse {
   unicode-bidi: bidi-override;
   direction: rtl; }
