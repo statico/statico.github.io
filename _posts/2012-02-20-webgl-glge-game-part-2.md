@@ -12,7 +12,21 @@ In [part one][part1] of this series I covered GLGE basics by demonstrating how t
 
 Keep in mind that part of building *Ducks* was an excercise in burn out management. [The last game I finished][friend-rescue] was so much work that I didn't write another one for years. To build the game I needed to stay within my limit span of attention and avoid getting burnt out, so I made sure I was focused on _play ability_ and _fun_ instead of fixing every bug which appeared. If something was "good enough" I kept it as is and decided to move on. A finished buggy game is better than an unplayable, perfect, duct-collecting simulation.
 
+### Basic Duck Logic
+
+game is played on a plane, 20x10
+
+ducks and the ship have a radius of 1
+
+each frame, ship tries to move towards the target
+
+each frame a simple collision detection algorithm checks the ship's radius and each duck on the plane. if there's a collision, the duck is removed.
+
+the game ends when all of the ducks are gone
+
 ### A Game with a Backbone
+
+A lot of game frameworks I've seen either couple the game logic with the sprites and animation very tightly or use game entities as storage for game data. This is akin to building a webapp by storing data in the DOM. Instead, I chose to separate the game logic from its presentation. This seems to have been a good decision; the result is that the logic and GLGE layers are clearly separated.
 
 I chose [Backbone][backbone], a JavaScript Model-View-Controller framework, to build the game logic. Backbone is normally used to build rich web applications but I thought that the framework's `Model` class and pubsub event system would be really useful for the game. (I was right.) Also, I was already familiar with the framework from using it for my day job.
 
@@ -25,6 +39,10 @@ Backbone is normally used to browser applications and is thus coupled with the D
 All of the game logic models inherit from `Backbone.Model`, which provides a system for defining object properties and letting observers subscribe to changes to any or all of the properties. For example, if you had a `Cannon` model with a property of `bullets`, you could bind a callback to whenever the number of bullets in the cannon changed in case you needed to update the ammo count on the screen.
 
 The three models in *Ducks* -- or "actors" or "entities" or whatever you'd like to call them -- are the player's plan, the target reticle controlled by the user, and the ducks that the player needs to collect.
+
+You can view [the entire `logic.js` file on GitHub][logic.js], but I'll discuss the different models below.
+
+(XXX - pic of the ship and target))
 
 The ship, a moving plane, has the properties you'd expect: its position (`x` and `y`) and its velocity (`vx` and `vy`). It also had a few redundant properties, `dir` and `speed`, which made hooking up the view easier. I also created a few constants so that I could tweak the plane's movement more easily.
 
@@ -56,6 +74,8 @@ var Ship = Backbone.Model.extend({
 
 For simplicity I combined the target reticle's coordinates with the `Ship` model. This made things easier but probably deserved to be its own model.
 
+(XXX - pic of ducks model)
+
 Unlike the ship, ducks don't move. The model is very simple:
 
 {% highlight javascript %}
@@ -78,9 +98,70 @@ var DuckCollection = Backbone.Collection.extend({
 });
 {% endhighlight %}
 
-Easy, right? And that's not even the fun part. It's much more exciting to bind
+Easy, right? And that's not even the fun part. It's much more exciting to put these models into action by binding events in a view.
 
-### a view
+### A 3D View
+
+Once the logic has been written, displaying the game is a matter of rendering a 3D scene and placing objects according to the models' data. Luckily, as seen in [part one][part1], creating scenes in GLGE is pretty easy.
+
+With *Ducks* very little of the scene is described in [the XML][scene.xml]. There are animations, the camera definition, and a ground plane with a water texture. The code in [view.js][view.js] does most of the heavy lifting.
+
+{% highlight xml %}
+<?xml version="1.0"?>
+<glge>
+  ...
+
+  <scene id="mainscene" camera="#maincamera"
+         ambient_color="#fff" background_color="#22738a">
+    <light id="mainlight" loc_y="5" type="L_POINT" />
+    <object id="ground" mesh="#groundmesh" material="#water"
+            scaleX="60" scaleY="30" loc_z=".2" />
+  </scene>
+
+</glge>
+{% endhighlight %}
+
+Before the scene is created, the duck, target and plane models are loaded:
+
+{% highlight javascript %}
+var duck = new GLGE.Collada();
+duck.setDocument('assets/duck.dae');
+
+var target = new GLGE.Collada();
+target.setDocument('assets/target.dae');
+
+var ship = new GLGE.Collada();
+ship.setDocument('assets/seymourplane_triangulate.dae');
+{% endhighlight %}
+
+Later on, after all of the assets are loaded, the scene is created with the ship and the target:
+
+{% highlight javascript %}
+// Standard GLGE initialization.
+var renderer = new GLGE.Renderer(canvas[0]);
+scene = doc.getElement('mainscene');
+renderer.setScene(scene);
+
+...
+
+// Initialize the player's ship.
+ship.setLocZ(3);
+ship.setRotX(Math.PI / 2);
+ship.setRotY(Math.PI / 2);
+ship.setScale(0.3);
+ship.setFrameRate(60);
+scene.addChild(ship);
+
+// Initialize the aiming target.
+target.setLocZ(0.4);
+target.setScale(0.001);
+target.setRotX(Math.PI / 2);
+target.setRotY(Math.PI / 2);
+scene.addChild(target);
+{% endhighlight %}
+
+
+
 
 example 1, create a scene, but don't create the ducks just yet
 
