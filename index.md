@@ -6,6 +6,12 @@ title: Welcome
 <h2>Welcome</h2>
 
 <p>
+<strong><em>
+Why only one blog post? I started <a href="http://artillery.com">a company...</a>
+</em></strong>
+</p>
+
+<p>
   I'm Ian. I build things.  
   You can find me on
   <a href="https://github.com/statico">GitHub</a>,
