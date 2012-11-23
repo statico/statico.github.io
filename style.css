@@ -45,10 +45,14 @@ h1, h2, h3 {
 article {
   margin-bottom: 30px;
   line-height: 1.5;
-  background: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border: 1px solid #dddddd;
-  background: -webkit-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 99%); }
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background: white;
+  background: -moz-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
+  background: -webkit-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
+  background: -o-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
+  background: -ms-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
+  background: linear-gradient(to right, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%); }
   article img:first-child {
     border-radius: 2px;
     display: block;

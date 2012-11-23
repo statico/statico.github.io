@@ -60,11 +60,16 @@ article
   margin-bottom: $vgap
   line-height: 1.5
 
-  background: #fff
-  box-shadow: 0 0 5px rgba(black, 0.2)
   border: 1px solid #ddd
-  $shading: rgba(245, 245, 245, 1)
-  background: -webkit-linear-gradient(left, $shading 1%, white 4%, white 50%, white 96%, $shading 99%)
+  box-shadow: 0 0 5px rgba(black, 0.2)
+
+  $s: rgba(245, 245, 245, 1)
+  background: #fff
+  background: -moz-linear-gradient(left, $s 1%, white 4%, white 50%, white 96%, $s 100%)
+  background: -webkit-linear-gradient(left, $s 1%, white 4%, white 50%, white 96%, $s 100%)
+  background: -o-linear-gradient(left, $s 1%, white 4%, white 50%, white 96%, $s 100%)
+  background: -ms-linear-gradient(left, $s 1%, white 4%, white 50%, white 96%, $s 100%)
+  background: linear-gradient(to right, $s 1%, white 4%, white 50%, white 96%, $s 100%)
 
   img:first-child
     border-radius: 2px
