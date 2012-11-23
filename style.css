@@ -2,10 +2,6 @@
  *
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
  */
-html, body {
-  margin: 0;
-  padding: 0; }
-
 body {
   background: #eeeeee;
   color: #333333;
@@ -15,12 +11,6 @@ body {
   font-variant-ligatures: common-ligatures;
   hyphens: auto; }
 
-h1, h2, h3 {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-  margin-top: 0;
-  line-height: 1; }
-
 a:link, a:visited {
   color: #4f79b8;
   text-decoration: none; }
@@ -28,66 +18,31 @@ a:hover, a:active {
   color: #2e65d2;
   text-decoration: underline; }
 
-header, footer, article, section {
-  width: 750px;
-  margin: 0 auto;
-  clear: both; }
-
-header * {
-  margin: 0; }
 header a:link, header a:visited {
   text-decoration: none;
   color: #333333; }
 header a:hover, header a:active {
   color: #2e65d2; }
-header .inner {
-  padding: 30px 40px 0; }
-  header .inner > * {
-    vertical-align: bottom;
-    display: inline-block;
-    margin-bottom: 30px; }
-header .icon {
-  width: 115px; }
-  header .icon img {
-    height: 95px;
-    opacity: 0.8; }
-header .title {
-  width: 535px; }
-  header .title h1 {
-    line-height: 1.2;
-    font-size: 280%; }
-  header .title span {
-    display: block; }
-    header .title span:first-child {
-      font-size: 60%; }
+header h1 {
+  line-height: 1.2;
+  font-size: 280%; }
+header span {
+  display: block; }
+  header span:first-child {
+    font-size: 60%; }
+
+h1, h2, h3 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300; }
 
 article {
+  padding: 30px 40px;
   margin-bottom: 30px;
   line-height: 1.5;
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   border: 1px solid #dddddd;
-  background: -webkit-linear-gradient(left, #f5f5f5 1%, white 4%, white 50%, white 96%, #f5f5f5 99%); }
-  article .inner {
-    padding: 30px 40px; }
-    article .inner > *:last-child {
-      margin-bottom: 0; }
-  article h2 {
-    margin-bottom: 30px; }
-  article h3 {
-    margin: 30px 0; }
-  article .meta {
-    float: right;
-    color: #777777;
-    margin-top: 0;
-    font-size: 80%;
-    line-height: 1.2; }
-  article code, article .highlight {
-    font-family: Menlo, Monaco, monospace;
-    font-size: 13px; }
-  article .highlight {
-    line-height: 1.4;
-    margin: 0 40px; }
+  background: -webkit-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 99%); }
   article img:first-child {
     border-radius: 2px;
     display: block;
@@ -102,8 +57,21 @@ footer {
   font-size: 80%;
   margin-bottom: 30px; }
 
-.no-margin {
-  margin: 0; }
+.meta {
+  color: #777777;
+  font-size: 80%; }
+
+code, .highlight {
+  color: #595959; }
+
+pre {
+  background: transparent;
+  padding: 0;
+  border-width: 0;
+  line-height: 1.4 !important; }
+
+.highlight {
+  margin: 0 40px; }
 
 .caption {
   text-align: center;
@@ -119,7 +87,7 @@ footer {
 .highlight .xml .err {
   border-width: 0; }
 
-/* PYGMENTS */
+/* PYGMENTS {{{ 1 */
 .hll {
   background-color: #ffffcc; }
 

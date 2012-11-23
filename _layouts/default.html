@@ -5,10 +5,11 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
     <meta name="author" content="{{ site.author.name }}" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
     <link rel="canonical" href="{{ site.production_url }}" />
     <link rel="shortcut icon" href="/favicon.ico" />
+
 
     <title>
       {% if page.title %}{{ page.title }} - {% endif %}
@@ -16,7 +17,9 @@
     </title>
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css" />
-    <link href="/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,21 +27,21 @@
 
   </head>
   <body>
+  <div class="container">
 
     <header>
-      <div class="inner">
-
-        <div class="icon">
-          <a href="/"><img src="/ian.svg" /></a>
+      <div class="row">
+        <div class="span2">
+          <a href="/"><img src="/ian.svg" alt="" class="icon" /></a>
         </div>
-
-        <a href="/" class="title">
+        <div class="span10">
           <h1>
-            <span>Ian Langworth’s</span>
-            <span>Things of Variable Interest</span>
+            <a href="/">
+              <span>Ian Langworth’s</span>
+              <span>Things of Variable Interest</span>
+            </a>
           </h1>
-        </a>
-
+        </div>
       </div>
     </header>
 
@@ -48,6 +51,7 @@
       © 2012 Ian Langworth. Licensed under a <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
     </footer>
 
+  </div>
   </body>
 
   <script>

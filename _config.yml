@@ -4,8 +4,8 @@ pygments: true
 var:
   rss_path: /atom.xml
 
-production_url: http://statico.github.com
-title: Ian Langworth's Things of Variable Interest
+production_url: "http://statico.github.com"
+title: "Ian Langworth's Things of Variable Interest"
 
 author:
   name: Ian Langworth

@@ -4,19 +4,15 @@
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
  */
 
-$width: 750px
-$hgap: 40px
-$vgap: $hgap * .75
 
 $fg: #333
 $bg: #eee
 $font-size: 16px
+$hgap: 40px
+$vgap: $hgap * .75
 $link: #4f79b8
 $link-hover: #2e65d2
 
-html, body
-  margin: 0
-  padding: 0
 
 body
   background: $bg
@@ -27,12 +23,6 @@ body
   font-variant-ligatures: common-ligatures
   hyphens: auto
 
-h1, h2, h3
-  font-family: 'Open Sans', sans-serif
-  font-weight: 300
-  margin-top: 0
-  line-height: 1
-
 a
   &:link, &:visited
     color: $link
@@ -41,78 +31,35 @@ a
     color: $link-hover
     text-decoration: underline
 
-header, footer, article, section
-  width: $width
-  margin: 0 auto
-  clear: both
-
 header
-  *
-    margin: 0
   a
     &:link, &:visited
       text-decoration: none
       color: $fg
     &:hover, &:active
       color: $link-hover
+  h1
+    line-height: 1.2
+    font-size: 280%
+  span
+    display: block
+    &:first-child
+      font-size: 60%
 
-  $icon-width: 115px
-  $title-width: $width - ($hgap * 2) - $icon-width - 20px
-
-  .inner
-    padding: $vgap $hgap 0
-    & > *
-      vertical-align: bottom
-      display: inline-block
-      margin-bottom: $vgap
-
-  .icon
-    width: $icon-width
-    img
-      height: 95px
-      opacity: .8
-
-  .title
-    width: $title-width
-    h1
-      line-height: 1.2
-      font-size: 280%
-    span
-      display: block
-      &:first-child
-        font-size: 60%
+h1, h2, h3
+  font-family: 'Open Sans', sans-serif
+  font-weight: 300
 
 article
-  .inner
-    padding: $vgap $hgap
-    & > *:last-child
-      margin-bottom: 0
+  padding: $vgap $hgap
   margin-bottom: $vgap
   line-height: 1.5
+
   background: #fff
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
+  box-shadow: 0 0 5px rgba(black, 0.3)
   border: 1px solid #ddd
-
-  background: -webkit-linear-gradient(left, rgba(245, 245, 245, 1) 1%, white 4%, white 50%, white 96%, rgba(245, 245, 245, 1) 99%)
-
-  h2
-    margin-bottom: $vgap
-  h3
-    margin: $vgap 0
-  .meta
-    float: right
-    color: $fg + #444
-    margin-top: 0
-    font-size: 80%
-    line-height: 1.2
-
-  code, .highlight
-    font-family: Menlo, Monaco, monospace
-    font-size: 13px
-
-  .highlight
-    line-height: 1.4
-    margin: 0 40px
+  $shading: rgba(245, 245, 245, 1)
+  background: -webkit-linear-gradient(left, $shading 1%, white 4%, white 50%, white 96%, $shading 99%)
 
   img:first-child
     border-radius: 2px
@@ -129,8 +76,22 @@ footer
   font-size: 80%
   margin-bottom: $vgap
 
-.no-margin
-  margin: 0
+.meta
+  color: $fg + #444
+  font-size: 80%
+
+code, .highlight
+  color: lighten($fg, 15%)
+
+pre
+  background: transparent
+  padding: 0
+  border-width: 0
+  line-height: 1.4 !important
+
+.highlight
+  margin: 0 40px
+
 .caption
   text-align: center
   font-style: italic
@@ -139,7 +100,7 @@ footer
 #dsq-content
   font-size: $font-size !important
 
-// This trick kinda works. See http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/
+// This trick kinda works. See http://bit.ly/iVeOL
 .reverse
   unicode-bidi: bidi-override
   direction: rtl
@@ -148,7 +109,7 @@ footer
 .highlight .xml .err
   border-width: 0
 
-/* PYGMENTS */
+/* PYGMENTS {{{ 1*/
 .hll
   background-color: #ffffcc
 .c

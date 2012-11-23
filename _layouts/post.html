@@ -3,24 +3,19 @@ layout: default
 ---
 
 <article>
-  <div class="inner">
 
-    <div class="meta">
-      by Ian Langworth <br/>
-      {{ page.date | date_to_long_string }}
-    </div>
+  <h2>{{ page.title }}</h2>
+  <p class="meta">
+    by Ian Langworth -
+    {{ page.date | date_to_long_string }}
+  </p
 
-    <h2>{{ page.title }}</h2>
+  {{ content }}
 
-    {{ content }}
+  <p>☠</p>
 
-    <p class="no-margin">☠</p>
-
-  </div>
 </article>
 
 <section>
-  <div class="inner">
-    {% include disqus.html %}
-  </div>
+  {% include disqus.html %}
 </section>
