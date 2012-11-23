@@ -27,11 +27,26 @@
 
   </head>
   <body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top visible-phone">
+    <div class="navbar-inner">
+      <a class="brand" href="/">
+        <span>Ian Langworth’s</span>
+        <span>Things of Variable Interest</span>
+      </a>
+      {% if page.url != "/index.html" %}
+      <a href="/" class="btn btn-navbar pull-right">
+        <i class="icon-white icon-home"></i>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+
   <div class="container">
 
-    <header>
+    <header class="hidden-phone">
       <div class="row-fluid">
-        <div class="span2">
+        <div class="span2 left">
           <a href="/"><img src="/ian.svg" alt="" class="icon" /></a>
         </div>
         <div class="span10">

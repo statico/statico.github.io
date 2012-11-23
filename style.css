@@ -27,12 +27,15 @@ h1 a:hover, h1 a:active, h2 a:hover, h2 a:active {
 header, article, section, footer {
   padding: 30px 40px; }
 
-header h1 {
+.navbar {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+header h1, .navbar h1 {
   line-height: 1.2;
   font-size: 280%; }
-header span {
+header span, .navbar span {
   display: block; }
-  header span:first-child {
+  header span:first-child, .navbar span:first-child {
     font-size: 60%; }
 
 h1, h2, h3 {
@@ -56,12 +59,19 @@ footer {
   text-align: center;
   font-size: 80%; }
 
+@media (max-width: 767px) {
+  header, article, section, footer {
+    padding: 1em; }
+
+  article {
+    background: white; } }
 .meta {
   color: #777777;
   font-size: 80%; }
 
 img.icon {
-  width: 100%; }
+  width: 100%;
+  max-height: 100px; }
 
 code, .highlight {
   color: #595959; }
@@ -78,6 +88,9 @@ pre {
 .caption {
   text-align: center;
   font-style: italic; }
+
+.left {
+  text-align: left; }
 
 #dsq-content {
   font-size: 16px !important; }

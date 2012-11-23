@@ -4,7 +4,6 @@
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
  */
 
-
 $fg: #333
 $bg: #eee
 $font-size: 16px
@@ -12,7 +11,6 @@ $hgap: 40px
 $vgap: $hgap * .75
 $link: #4f79b8
 $link-hover: #2e65d2
-
 
 body
   background: $bg
@@ -42,7 +40,10 @@ h1, h2
 header, article, section, footer
   padding: $vgap $hgap
 
-header
+.navbar
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+
+header, .navbar
   h1
     line-height: 1.2
     font-size: 280%
@@ -75,12 +76,20 @@ footer
   text-align: center
   font-size: 80%
 
+// Phone
+@media (max-width: 767px)
+  header, article, section, footer
+    padding: 1em
+  article
+    background: white
+
 .meta
   color: $fg + #444
   font-size: 80%
 
 img.icon
   width: 100%
+  max-height: 100px
 
 code, .highlight
   color: lighten($fg, 15%)
@@ -97,6 +106,9 @@ pre
 .caption
   text-align: center
   font-style: italic
+
+.left
+  text-align: left
 
 // Disqus
 #dsq-content
