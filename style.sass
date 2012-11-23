@@ -31,13 +31,18 @@ a
     color: $link-hover
     text-decoration: underline
 
-header
+h1, h2
   a
     &:link, &:visited
       text-decoration: none
       color: $fg
     &:hover, &:active
       color: $link-hover
+
+header, article, section, footer
+  padding: $vgap $hgap
+
+header
   h1
     line-height: 1.2
     font-size: 280%
@@ -51,12 +56,11 @@ h1, h2, h3
   font-weight: 300
 
 article
-  padding: $vgap $hgap
   margin-bottom: $vgap
   line-height: 1.5
 
   background: #fff
-  box-shadow: 0 0 5px rgba(black, 0.3)
+  box-shadow: 0 0 5px rgba(black, 0.2)
   border: 1px solid #ddd
   $shading: rgba(245, 245, 245, 1)
   background: -webkit-linear-gradient(left, $shading 1%, white 4%, white 50%, white 96%, $shading 99%)
@@ -66,19 +70,17 @@ article
     display: block
     margin: $vgap auto
 
-section
-  .inner
-    padding: 0 $hgap $vgap
-
 footer
   line-height: 1.5
   text-align: center
   font-size: 80%
-  margin-bottom: $vgap
 
 .meta
   color: $fg + #444
   font-size: 80%
+
+img.icon
+  width: 100%
 
 code, .highlight
   color: lighten($fg, 15%)

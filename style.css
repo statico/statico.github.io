@@ -18,11 +18,15 @@ a:hover, a:active {
   color: #2e65d2;
   text-decoration: underline; }
 
-header a:link, header a:visited {
+h1 a:link, h1 a:visited, h2 a:link, h2 a:visited {
   text-decoration: none;
   color: #333333; }
-header a:hover, header a:active {
+h1 a:hover, h1 a:active, h2 a:hover, h2 a:active {
   color: #2e65d2; }
+
+header, article, section, footer {
+  padding: 30px 40px; }
+
 header h1 {
   line-height: 1.2;
   font-size: 280%; }
@@ -36,11 +40,10 @@ h1, h2, h3 {
   font-weight: 300; }
 
 article {
-  padding: 30px 40px;
   margin-bottom: 30px;
   line-height: 1.5;
   background: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border: 1px solid #dddddd;
   background: -webkit-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 99%); }
   article img:first-child {
@@ -48,18 +51,17 @@ article {
     display: block;
     margin: 30px auto; }
 
-section .inner {
-  padding: 0 40px 30px; }
-
 footer {
   line-height: 1.5;
   text-align: center;
-  font-size: 80%;
-  margin-bottom: 30px; }
+  font-size: 80%; }
 
 .meta {
   color: #777777;
   font-size: 80%; }
+
+img.icon {
+  width: 100%; }
 
 code, .highlight {
   color: #595959; }
