@@ -6,29 +6,30 @@ title: Welcome
 <h2>Welcome</h2>
 
 <p>
-<strong><em>
-Why only one blog post? I started <a href="http://artillery.com">a company...</a>
-</em></strong>
-</p>
-
-<p>
   I'm Ian. I build things.  
-  You can find me on
-  <a href="https://github.com/statico">GitHub</a>,
-  <a href="http://twitter.com/statico">Twitter</a>,
-  <a href="http://www.linkedin.com/in/ianlangworth">LinkedIn</a>,
-  and <a href="http://flickr.com/photos/statico">Flickr</a>.
+  I co-founded <a href="http://artillery.com">Artillery</a>.
   Email me at <code class="reverse">moc.htrowgnal@nai</code>.
 </p>
 
-<ul class="posts">
+<table class="table table-bordered">
+  <tr>
+    <th>Date</th>
+    <th>Title</th>
+  </tr>
   {% for post in site.posts %}
     {% if post.draft != true %}
-      <li>
-        <span>{{ post.date | date_to_string }}</span> &raquo;
-        <a href="{{ post.url }}">{{ post.title }}</a>
-      </li>
+      <tr>
+        <td>{{ post.date | date_to_string }}</td>
+        <td><a href="{{ post.url }}">{{ post.title }}</a></td>
+      </tr>
     {% endif %}
   {% endfor %}
-</ul>
+</table>
+
+<p>
+  See also:
+  <a href="https://github.com/statico">GitHub</a>,
+  <a href="http://twitter.com/statico">Twitter</a>,
+  <a href="http://www.linkedin.com/in/ianlangworth">LinkedIn</a>
+</p>
 
