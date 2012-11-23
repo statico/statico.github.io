@@ -42,10 +42,11 @@ h1, h2, h3 {
   font-family: "Open Sans", sans-serif;
   font-weight: 300; }
 
-article {
+article, section {
   margin-bottom: 30px;
   line-height: 1.5;
   border: 1px solid #dddddd;
+  border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   background: white;
   background: -moz-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
@@ -53,10 +54,11 @@ article {
   background: -o-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
   background: -ms-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
   background: linear-gradient(to right, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%); }
-  article img:first-child {
-    border-radius: 2px;
-    display: block;
-    margin: 30px auto; }
+
+article img:first-child {
+  border-radius: 2px;
+  display: block;
+  margin: 30px auto; }
 
 footer {
   line-height: 1.5;
