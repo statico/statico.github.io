@@ -6,7 +6,7 @@
 
 @import "bootstrap/css/bootstrap.css"
 @import "bootstrap/css/bootstrap-responsive.css"
-@import "//fonts.googleapis.com/css?family=Open+Sans:300"
+@import "//fonts.googleapis.com/css?family=Open+Sans:500"
 
 $fg: #333
 $bg: #eee
@@ -15,6 +15,11 @@ $hgap: 40px
 $vgap: $hgap * .75
 $link: #4f79b8
 $link-hover: #2e65d2
+
+// Bootstrap is too wide
+@media (min-width: 768px)
+  .container
+    width: 720px
 
 body
   background: $bg url(bg.png)
@@ -58,7 +63,7 @@ header, .navbar
 
 h1, h2, h3
   font-family: 'Open Sans', sans-serif
-  font-weight: 300
+  font-weight: 500
 
 article, section
   margin-bottom: $vgap
@@ -77,10 +82,13 @@ article, section
   background: linear-gradient(to right, $s 1%, white 4%, white 50%, white 96%, $s 100%)
 
 article
+  h2, h3
+    margin-top: 20px
   img:first-child
     border-radius: 2px
     display: block
     margin: $vgap auto
+    max-width: 65%
 
 footer
   line-height: 1.5
@@ -106,14 +114,34 @@ footer
 img.icon
   width: 100%
 
+kbd
+  display: inline-block
+  margin: 0 0.1em
+  padding: .1em .5em
+  border: 1px solid #ccc
+  border-radius: 3px
+  background: #eee
+  font-size: 83%
+  box-shadow: 0 1px 0 rgba(black, .2), 0 0 0 white inset
+  text-shadow: 0 1px 0 white
+  white-space: nowrap
+  line-height: 1.3
+
 code, .highlight
   color: lighten($fg, 15%)
+  background: transparent
+  border: none
+  margin: 0
 
 pre
   background: transparent
   padding: 0
+  margin: 0 0 1em
   border-width: 0
   line-height: 1.4 !important
+
+li
+  margin: .5em
 
 .highlight
   margin: 0 40px
