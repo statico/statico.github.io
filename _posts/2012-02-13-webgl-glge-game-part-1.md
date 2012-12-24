@@ -209,3 +209,4 @@ In part 2 of this series I'll cover more details of GLGE in the context of the g
   [tweening]: http://en.wikipedia.org/wiki/Tweening
   [glgegithub]: https://github.com/supereggbert/GLGE
   [collada]: http://collada.org
+  [backbone]: http://backbonejs.org/
