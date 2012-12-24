@@ -4,6 +4,10 @@
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
  */
 
+@import "bootstrap/css/bootstrap.css"
+@import "bootstrap/css/bootstrap-responsive.css"
+@import "//fonts.googleapis.com/css?family=Open+Sans:300"
+
 $fg: #333
 $bg: #eee
 $font-size: 16px
@@ -13,7 +17,7 @@ $link: #4f79b8
 $link-hover: #2e65d2
 
 body
-  background: $bg
+  background: $bg url(bg.png)
   color: $fg
   font-family: "Georgia", "New Century Schoolbook", "Nimbus Roman No9 L", serif
   font-size: $font-size
@@ -85,9 +89,14 @@ footer
 
 // Phone
 @media (max-width: 767px)
+  body
+    font-family: sans-serif !important
   header, article, section, footer
-    padding: 1em
-  article
+    padding: 1em 0
+    border: none
+  article, section
+    box-shadow: none
+  body, article
     background: white
 
 .meta

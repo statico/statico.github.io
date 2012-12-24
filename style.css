@@ -1,9 +1,12 @@
+@import url(bootstrap/css/bootstrap.css);
+@import url(bootstrap/css/bootstrap-responsive.css);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300);
 /* Style for statico.github.com.
  *
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
  */
 body {
-  background: #eeeeee;
+  background: #eeeeee url(bg.png);
   color: #333333;
   font-family: "Georgia", "New Century Schoolbook", "Nimbus Roman No9 L", serif;
   font-size: 16px;
@@ -66,10 +69,17 @@ footer {
   font-size: 80%; }
 
 @media (max-width: 767px) {
-  header, article, section, footer {
-    padding: 1em; }
+  body {
+    font-family: sans-serif !important; }
 
-  article {
+  header, article, section, footer {
+    padding: 1em 0;
+    border: none; }
+
+  article, section {
+    box-shadow: none; }
+
+  body, article {
     background: white; } }
 .meta {
   color: #777777;
