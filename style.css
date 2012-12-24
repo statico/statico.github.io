@@ -1,6 +1,6 @@
 @import url(bootstrap/css/bootstrap.css);
 @import url(bootstrap/css/bootstrap-responsive.css);
-@import url(//fonts.googleapis.com/css?family=Fjalla+One);
+@import url(//fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300);
 /* Style for statico.github.com.
  *
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
@@ -38,7 +38,9 @@ header, article, section, footer {
 
 header h1, .navbar h1 {
   line-height: 1.2;
-  font-size: 280%; }
+  font-size: 280%;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300; }
 header span, .navbar span {
   display: block; }
   header span:first-child, .navbar span:first-child {
