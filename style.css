@@ -112,6 +112,12 @@ code, .highlight {
   border: none;
   margin: 0; }
 
+a code {
+  color: #4f79b8 !important; }
+
+a:hover code {
+  color: #2e65d2 !important; }
+
 pre {
   background: transparent;
   padding: 0;
