@@ -105,6 +105,10 @@ footer {
   color: #777777;
   font-size: 80%; }
 
+.warning {
+  color: red;
+  font-weight: bold; }
+
 img.icon {
   width: 100%; }
 

@@ -10,6 +10,9 @@ layout: default
   <p class="meta">
     by Ian Langworth -
     {{ page.date | date_to_long_string }}
+    {% if page.draft %}
+      - <span class="warning">NOT YET PUBLISHED</span>
+    {% endif %}
   </p
 
   {{ content }}
@@ -19,5 +22,9 @@ layout: default
 </article>
 
 <section>
-  {% include disqus.html %}
+  {% if page.draft %}
+    <span class="meta">(Comments disabled - draft post)</span>
+  {% else %}
+    {% include disqus.html %}
+  {% endif %}
 </section>
