@@ -195,7 +195,7 @@ This should have give you a taste of how you can use GLGE to build a basic 3D sc
 In part 2 of this series I'll cover more details of GLGE in the context of the game as well as how I used [Backbone][backbone] to build game logic. Stay tuned.
 
 
-  [ducksgame]: http://statico.github.com/webgl-demos/ducks/
+  [ducksgame]: http://statico.github.io/webgl-demos/ducks/
   [duckssource]: http://github.com/statico/webgl-demos/tree/master/ducks/
   [glge]: http://www.glge.org/
   [api]: http://www.glge.org/api-docs/
@@ -204,7 +204,7 @@ In part 2 of this series I'll cover more details of GLGE in the context of the g
   [raf]: http://www.html5rocks.com/en/tutorials/speed/html5/#toc-request-ani-frame
   [fourducks]: http://statico.github.com/webgl-demos/fourducks/
   [fourducks-source]: https://github.com/statico/webgl-demos/tree/master/fourducks
-  [fourducks-anim]: http://statico.github.com/webgl-demos/fourducks-anim/
+  [fourducks-anim]: http://statico.github.io/webgl-demos/fourducks-anim/
   [friendrescue]: https://github.com/statico/friend-rescue
   [tweening]: http://en.wikipedia.org/wiki/Tweening
   [glgegithub]: https://github.com/supereggbert/GLGE
