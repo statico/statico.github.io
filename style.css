@@ -1,10 +1,11 @@
-@import url(bootstrap/css/bootstrap.css);
-@import url(bootstrap/css/bootstrap-responsive.css);
-@import url(//fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300);
-/* Style for statico.github.io.
+/*!
+ * Style for statico.github.com.
  *
  * Center text style is modeled after the ReadNow Instapaper client: http://mischneider.net/readnowapp/
  */
+@import url(bootstrap/css/bootstrap.css);
+@import url(bootstrap/css/bootstrap-responsive.css);
+@import url(//fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300);
 @media (min-width: 768px) {
   .container {
     width: 720px; } }
@@ -53,19 +54,12 @@ article, section {
   margin-bottom: 30px;
   line-height: 1.5;
   border: 1px solid #dddddd;
-  border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  background: white;
-  background: -moz-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
-  background: -webkit-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
-  background: -o-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
-  background: -ms-linear-gradient(left, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%);
-  background: linear-gradient(to right, whitesmoke 1%, white 4%, white 50%, white 96%, whitesmoke 100%); }
+  background: #fefefe; }
 
 article h2, article h3 {
   margin-top: 20px; }
 article img:first-child {
-  border-radius: 2px;
   display: block;
   margin: 30px auto;
   max-width: 65%; }
@@ -118,7 +112,7 @@ kbd {
   padding: 0.1em 0.5em;
   border: 1px solid #cccccc;
   border-radius: 3px;
-  background: #eeeeee;
+  background: #efefef;
   font-size: 83%;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 white inset;
   text-shadow: 0 1px 0 white;
