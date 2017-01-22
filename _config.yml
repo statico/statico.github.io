@@ -1,10 +1,13 @@
 permalink: /:title.html
+markdown: kramdown
 highlighter: rouge
+excerpt_separator: "\n\n"
 var:
   rss_path: /atom.xml
 
-production_url: "http://statico.github.io"
 title: "Ian Langworth's Things of Variable Interest"
+production_url: "https://statico.github.io"
+url: "https://statico.github.io"
 
 author:
   name: Ian Langworth
