@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Building a WebGL game with GLGE, Part 1
-disqus_identifier: building_a_webgl_game_with_glge_part_1_ian_langworths_things_of_variable_interest
 ---
 
 [![ducks](images/ducks-splash.png)][ducksgame]
