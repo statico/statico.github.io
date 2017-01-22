@@ -1,6 +1,5 @@
 permalink: /:title.html
-auto: true
-pygments: true
+highlighter: rouge
 var:
   rss_path: /atom.xml
 
@@ -11,5 +10,3 @@ author:
   name: Ian Langworth
   github: statico
   twitter: statico
-
-exclude: .rbenv-version
