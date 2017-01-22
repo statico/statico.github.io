@@ -2,7 +2,7 @@
 <script>
 var disqus_config = function () {
   this.page.url = "{{site.url}}{{page.url}}";
-  this.page.identifier = "{% if page.disqus_identifier %}{{ page.disqus_identifier}}{% else %}{{ site.url }}{{ page.url }}{% endif %}";
+  this.page.identifier = "{% if page.disqus_identifier %}{{ page.disqus_identifier}}{% else %}{{ site.old_url }}{{ page.url }}{% endif %}";
 };
 (function() {
   var d = document, s = d.createElement('script');

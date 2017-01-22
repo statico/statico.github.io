@@ -8,6 +8,7 @@ var:
 title: "Ian Langworth's Things of Variable Interest"
 production_url: "https://statico.github.io"
 url: "https://statico.github.io"
+old_url: "http://statico.github.io" # disqus migration crap
 
 author:
   name: Ian Langworth
