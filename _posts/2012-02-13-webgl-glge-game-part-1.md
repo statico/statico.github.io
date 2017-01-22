@@ -195,8 +195,8 @@ This should have give you a taste of how you can use GLGE to build a basic 3D sc
 In part 2 of this series I'll cover more details of GLGE in the context of the game as well as how I used [Backbone][backbone] to build game logic. Stay tuned.
 
 
-  [ducksgame]: http://statico.github.io/webgl-demos/ducks/
-  [duckssource]: http://github.com/statico/webgl-demos/tree/master/ducks/
+  [ducksgame]: https://statico.github.io/webgl-demos/ducks/
+  [duckssource]: https://github.com/statico/webgl-demos/tree/master/ducks/
   [glge]: http://www.glge.org/
   [api]: http://www.glge.org/api-docs/
   [glgeexamples]: https://github.com/supereggbert/GLGE/tree/master/examples

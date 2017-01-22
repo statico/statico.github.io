@@ -197,4 +197,4 @@ create a menu - big advantage of webgl/html5 is that you can use html to make th
 
 (XXX - menu XML and css)
 
-  [underscore-collections]: http://documentcloud.github.com/underscore/#collections 
+  [underscore-collections]: http://underscorejs.org/#collections

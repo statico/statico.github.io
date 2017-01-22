@@ -7,7 +7,7 @@ title: Welcome
 
 <p>
   I'm Ian. I build things.  
-  I co-founded <a href="http://artillery.com">Artillery</a>.
+  I co-founded <a href="https://artillery.com">Artillery</a>.
   Email me at <code class="reverse">moc.htrowgnal@nai</code>.
 </p>
 
@@ -29,7 +29,7 @@ title: Welcome
 <p>
   See also:
   <a href="https://github.com/statico">GitHub</a>,
-  <a href="http://twitter.com/statico">Twitter</a>,
-  <a href="http://www.linkedin.com/in/ianlangworth">LinkedIn</a>
+  <a href="https://twitter.com/statico">Twitter</a>,
+  <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>
 </p>
 
