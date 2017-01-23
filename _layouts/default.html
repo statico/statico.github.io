@@ -1,27 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head lang="en-us">
-
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
     <meta name="author" content="{{ site.author.name }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
-    <link rel="canonical" href="{{ site.production_url }}" />
     <link rel="shortcut icon" href="/favicon.ico" />
-
-
-    <title>
-      {% if page.title %}{{ page.title }} - {% endif %}
-      {{ site.title }}
-    </title>
-
     <link href="/style.css" rel="stylesheet" />
-
-    <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    {% seo %}
   </head>
   <body>
 
@@ -67,8 +55,5 @@
   </body>
 
   {% include analytics.html %}
-
   <script src="//cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
-
 </html>
-

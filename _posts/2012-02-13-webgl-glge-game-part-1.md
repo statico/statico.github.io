@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Building a WebGL game with GLGE, Part 1
+description: This is a three-part monologue on how I built a WebGL game with very little experience in programming 2D graphics. In four days I was able to turn an idea into a game with cute ducks that my friends' 7-year-old daughter enjoyed.
+image: /images/ducks-splash.png
 ---
 
 [![ducks](images/ducks-splash.png)][ducksgame]
