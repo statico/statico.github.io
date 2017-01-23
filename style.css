@@ -5,13 +5,13 @@
  */
 @import url(bootstrap/css/bootstrap.css);
 @import url(bootstrap/css/bootstrap-responsive.css);
-@import url(//fonts.googleapis.com/css?family=Fjalla+One|Open+Sans:300);
+@import "//fonts.googleapis.com/css?family=Lato:700|Open+Sans:300";
 @media (min-width: 768px) {
   .container {
     width: 720px; } }
 body {
-  background: #eeeeee url(bg.png);
-  color: #333333;
+  background: #eee url(bg.png);
+  color: #333;
   font-family: "Georgia", "New Century Schoolbook", "Nimbus Roman No9 L", serif;
   font-size: 16px;
   text-rendering: optimizeLegibility;
@@ -27,7 +27,7 @@ a:hover, a:active {
 
 h1 a:link, h1 a:visited, h2 a:link, h2 a:visited {
   text-decoration: none;
-  color: #333333; }
+  color: #333; }
 h1 a:hover, h1 a:active, h2 a:hover, h2 a:active {
   color: #2e65d2; }
 
@@ -48,12 +48,13 @@ header span, .navbar span {
     font-size: 60%; }
 
 h1, h2, h3 {
-  font-family: "Fjalla One", sans-serif; }
+  font-family: "Lato", sans-serif;
+  font-weight: 700; }
 
 article, section {
   margin-bottom: 30px;
   line-height: 1.5;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   background: #fefefe; }
 
@@ -110,7 +111,7 @@ kbd {
   display: inline-block;
   margin: 0 0.1em;
   padding: 0.1em 0.5em;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   border-radius: 3px;
   background: #efefef;
   font-size: 83%;
@@ -170,10 +171,10 @@ li {
   font-style: italic; }
 
 .err {
-  border: 1px solid red; }
+  border: 1px solid #FF0000; }
 
 .k {
-  color: green;
+  color: #008000;
   font-weight: bold; }
 
 .o {
@@ -184,108 +185,108 @@ li {
   font-style: italic; }
 
 .cp {
-  color: #bc7a00; }
+  color: #BC7A00; }
 
 .c1, .cs {
   color: #408080;
   font-style: italic; }
 
 .gd {
-  color: #a00000; }
+  color: #A00000; }
 
 .ge {
   font-style: italic; }
 
 .gr {
-  color: red; }
+  color: #FF0000; }
 
 .gh {
-  color: navy;
+  color: #000080;
   font-weight: bold; }
 
 .gi {
-  color: #00a000; }
+  color: #00A000; }
 
 .go {
-  color: gray; }
+  color: #808080; }
 
 .gp {
-  color: navy;
+  color: #000080;
   font-weight: bold; }
 
 .gs {
   font-weight: bold; }
 
 .gu {
-  color: purple;
+  color: #800080;
   font-weight: bold; }
 
 .gt {
-  color: #0040d0; }
+  color: #0040D0; }
 
 .kc, .kd, .kn {
-  color: green;
+  color: #008000;
   font-weight: bold; }
 
 .kp {
-  color: green; }
+  color: #008000; }
 
 .kr {
-  color: green;
+  color: #008000;
   font-weight: bold; }
 
 .kt {
-  color: #b00040; }
+  color: #B00040; }
 
 .m {
   color: #666666; }
 
 .s {
-  color: #ba2121; }
+  color: #BA2121; }
 
 .na {
-  color: #7d9029; }
+  color: #7D9029; }
 
 .nb {
-  color: green; }
+  color: #008000; }
 
 .nc {
-  color: blue;
+  color: #0000FF;
   font-weight: bold; }
 
 .no {
   color: #880000; }
 
 .nd {
-  color: #aa22ff; }
+  color: #AA22FF; }
 
 .ni {
   color: #999999;
   font-weight: bold; }
 
 .ne {
-  color: #d2413a;
+  color: #D2413A;
   font-weight: bold; }
 
 .nf {
-  color: blue; }
+  color: #0000FF; }
 
 .nl {
-  color: #a0a000; }
+  color: #A0A000; }
 
 .nn {
-  color: blue;
+  color: #0000FF;
   font-weight: bold; }
 
 .nt {
-  color: green;
+  color: #008000;
   font-weight: bold; }
 
 .nv {
-  color: #19177c; }
+  color: #19177C; }
 
 .ow {
-  color: #aa22ff;
+  color: #AA22FF;
   font-weight: bold; }
 
 .w {
@@ -295,43 +296,45 @@ li {
   color: #666666; }
 
 .sb, .sc {
-  color: #ba2121; }
+  color: #BA2121; }
 
 .sd {
-  color: #ba2121;
+  color: #BA2121;
   font-style: italic; }
 
 .s2 {
-  color: #ba2121; }
+  color: #BA2121; }
 
 .se {
-  color: #bb6622;
+  color: #BB6622;
   font-weight: bold; }
 
 .sh {
-  color: #ba2121; }
+  color: #BA2121; }
 
 .si {
-  color: #bb6688;
+  color: #BB6688;
   font-weight: bold; }
 
 .sx {
-  color: green; }
+  color: #008000; }
 
 .sr {
-  color: #bb6688; }
+  color: #BB6688; }
 
 .s1 {
-  color: #ba2121; }
+  color: #BA2121; }
 
 .ss {
-  color: #19177c; }
+  color: #19177C; }
 
 .bp {
-  color: green; }
+  color: #008000; }
 
 .vc, .vg, .vi {
-  color: #19177c; }
+  color: #19177C; }
 
 .il {
   color: #666666; }
+
+/*# sourceMappingURL=style.css.map */
