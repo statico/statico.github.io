@@ -6,8 +6,9 @@ title: Welcome
 <h2>Welcome</h2>
 
 <p>
-  I'm Ian. I build things.  
-  I co-founded <a href="https://artillery.com">Artillery</a>.
+  I'm Ian. I build things.
+  I'm an engineer at <a href="https://looker.com/">Looker</a>.
+  Previously, I co-founded <a href="https://www.crunchbase.com/organization/artillery">Artillery</a>.
   Email me at <code class="reverse">moc.htrowgnal@nai</code>.
 </p>
 
