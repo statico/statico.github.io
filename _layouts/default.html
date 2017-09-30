@@ -9,42 +9,55 @@
 <link rel="icon" href="/favicon.png" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+<style type="text/css">
+{% include style.css %}
+{% include rouge.css %}
+</style>
 
 {% seo %}
+{% include analytics.html %}
 
 </head>
 <body>
 
-<header>
-  <div class="d-md-none navbar navbar-expand navbar-light bg-light flex-column flex mb-2">
+<header class="mb-5">
+  <div class="d-md-none navbar navbar-expand flex-column flex">
     <a href="/" class="navbar-brand mr-2">
       <img src="/ian.svg" width="36" height="42" alt="Ian avatar"/>
     </a>
     <div style="font-size: 0.9rem">
-      Ian Langworth’s <em>Things of Variable Interest</em>
+      <a href="/">
+        Ian Langworth’s <em>Things of Variable Interest</em>
+      </a>
     </div>
   </div>
-  <div class="d-none d-md-block container py-3">
+  <div class="d-none d-md-block container py-4">
     <div class="media">
-      <img src="/ian.svg" alt="Ian avatar" class="d-flex mr-3" width="90" height="104"/>
+      <a href="/">
+        <img src="/ian.svg" alt="Ian avatar" width="90" height="104" class="d-flex mr-4" />
+      </a>
       <h1 class="media-body">
-        Ian Langworth’s<br/>
-        <em>Things of Variable Interest</em>
+        <a href="/">
+          Ian Langworth’s<br/>
+          <em>Things of Variable Interest</em>
+        </a>
       </h1>
     </div>
   </div>
 </header>
 
-<article class="container">
+<div class="container">
 {{ content }}
-</article>
+</div>
 
-<footer>
-  © {{ 'now' | date: "%Y" }} Ian Langworth. Licensed under a <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
+<footer class="container text-center text-secondary">
+  <hr/>
+  <p>
+    © {{ 'now' | date: "%Y" }} Ian Langworth. Licensed under a <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
+  </p>
 </footer>
 
 </body>
 
-{% include analytics.html %}
 <script src="//cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
 </html>
