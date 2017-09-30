@@ -14,6 +14,8 @@ title: Welcome
   <a href="https://github.com/statico">GitHub</a>,
   <a href="https://twitter.com/statico">Twitter</a>,
   <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>.
+  <a href="https://keybase.io/statico">Keybase</a>,
+  <a href="https://github.com/statico/dotfiles">my dotfiles</a>.
 </p>
 
 
