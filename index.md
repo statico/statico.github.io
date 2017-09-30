@@ -10,7 +10,14 @@ title: Welcome
   I'm an engineer at <a href="https://looker.com/">Looker</a>.
   Previously, I co-founded <a href="https://www.crunchbase.com/organization/artillery">Artillery</a>.
   Email me at <code class="reverse">moc.htrowgnal@nai</code>.
+  See also:
+  <a href="https://github.com/statico">GitHub</a>,
+  <a href="https://twitter.com/statico">Twitter</a>,
+  <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>.
+  <a href="https://keybase.io/statico">Keybase</a>,
+  <a href="https://github.com/statico/dotfiles">my dotfiles</a>.
 </p>
+
 
 <table class="table table-bordered">
   <tr>
@@ -26,11 +33,4 @@ title: Welcome
     {% endif %}
   {% endfor %}
 </table>
-
-<p>
-  See also:
-  <a href="https://github.com/statico">GitHub</a>,
-  <a href="https://twitter.com/statico">Twitter</a>,
-  <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>
-</p>
 

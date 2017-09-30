@@ -1,60 +1,66 @@
 <!DOCTYPE html>
-<html>
-  <head lang="en-us">
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
-    <meta name="author" content="{{ site.author.name }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="icon" href="/favicon.png" />
-    <link href="/style.css" rel="stylesheet" />
-    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    {% seo %}
-  </head>
-  <body>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <div class="navbar navbar-inverse navbar-fixed-top visible-phone">
-    <div class="navbar-inner">
-      <a class="brand" href="/">
-        <span>Ian Langworth’s</span>
-        <span>Things of Variable Interest</span>
+<link rel="alternate" type="application/atom+xml" href="/atom.xml" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.png" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css?family=Chivo:400,700,900" rel="stylesheet"/>
+<style type="text/css">
+{% include style.css %}
+{% include rouge.css %}
+</style>
+
+{% seo %}
+{% include analytics.html %}
+
+</head>
+<body>
+
+<header class="mb-4 mb-md-5">
+  <div class="d-md-none navbar navbar-expand flex-column flex">
+    <a href="/" class="navbar-brand mr-2">
+      <img src="/ian.svg" alt="Ian avatar"/>
+    </a>
+    <h1 class="text-center">
+      <a href="/">
+        Ian Langworth’s <em class="d-block">Things of Variable Interest</em>
       </a>
-      {% if page.url != "/index.html" %}
-      <a href="/" class="btn btn-navbar pull-right">
-        <i class="icon-white icon-home"></i>
+    </h1>
+  </div>
+  <div class="d-none d-md-block container py-4">
+    <div class="media">
+      <a href="/">
+        <img src="/ian.svg" alt="Ian avatar" class="d-flex mr-4"/>
       </a>
-      {% endif %}
+      <h1 class="media-body pt-1">
+        <a href="/">
+          Ian Langworth’s<br/>
+          <em>Things of Variable Interest</em>
+        </a>
+      </h1>
     </div>
   </div>
+</header>
 
-  <div class="container">
+<div class="container">
+{{ content }}
+</div>
 
-    <header class="hidden-phone">
-      <div class="row-fluid">
-        <div class="span2 left">
-          <a href="/"><img src="/ian.svg" alt="" class="icon" /></a>
-        </div>
-        <div class="span10">
-          <h1>
-            <a href="/">
-              <span>Ian Langworth’s</span>
-              <span>Things of Variable Interest</span>
-            </a>
-          </h1>
-        </div>
-      </div>
-    </header>
+<footer class="container text-center text-secondary">
+  <hr/>
+  <p>
+    © {{ 'now' | date: "%Y" }}
+    <a href="https://langworth.com">Ian Langworth</a>.
+    Licensed under a <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
+  </p>
+</footer>
 
-    {{ content }}
+</body>
 
-    <footer>
-      © {{ 'now' | date: "%Y" }} Ian Langworth. Licensed under a <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
-    </footer>
-
-  </div>
-  </body>
-
-  {% include analytics.html %}
-  <script src="//cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
+<script src="//cdn.webglstats.com/stat.js" defer="defer" async="async"></script>
 </html>
