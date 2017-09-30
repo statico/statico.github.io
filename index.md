@@ -18,19 +18,16 @@ title: Welcome
   <a href="https://github.com/statico/dotfiles">my dotfiles</a>.
 </p>
 
-
-<table class="table table-bordered">
-  <tr>
-    <th>Date</th>
-    <th>Title</th>
-  </tr>
+<ul class="my-4">
   {% for post in site.posts %}
     {% if post.draft != true %}
-      <tr>
-        <td>{{ post.date | date_to_string }}</td>
-        <td><a href="{{ post.url }}">{{ post.title }}</a></td>
-      </tr>
+      <li class="my-3">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        ({{ post.date | date_to_string }})
+      </li>
     {% endif %}
   {% endfor %}
-</table>
+</ul>
+
+
 
