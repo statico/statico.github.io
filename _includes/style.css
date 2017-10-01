@@ -11,7 +11,7 @@ header a:hover { text-decoration: none }
 .navbar svg { fill: currentColor }
 h2 a { color: #212529 }
 kbd { font-size: 80%; margin-left: 0.1rem; margin-right: 0.1rem; border: 1px solid #757575; border-radius: 2px; color: #757575; background: transparent; white-space: nowrap }
-code { color: #d84315 }
+code { color: #c33c13 }
 pre, code, pre code { font-size: 90% }
 pre, pre code { line-height: 1.3 }
 article img:first-child { display: block; margin: 1.5rem auto; max-width: 85% }
