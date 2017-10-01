@@ -19,6 +19,7 @@ figure { margin: 1.5rem auto }
 figure img { margin: 0 auto !important }
 figcaption { margin: .5rem auto 0; text-align: center; font-style: italic }
 .highlight { margin-left: 2rem; margin-right: 2rem }
+.highlight .err { background: transparent }
 .navbar h1 { font-size: 1rem }
 header img { width: 42px; height: 42px }
 footer a { color: #868e96 }

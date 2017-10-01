@@ -43,7 +43,7 @@ Creating a scene with XML is pretty easy, so let's do that. Imagine a simple sce
 
 Here's how that scene could be described in GLGE XML:
 
-{% highlight xml %}
+```xml
 <?xml version="1.0"?>
 <glge>
 
@@ -66,7 +66,7 @@ Here's how that scene could be described in GLGE XML:
   </scene>
 
 </glge>
-{% endhighlight %}
+```
 
 Straightforward, right? First, declare a camera positioned 20 units up on the Z axis -- by default the camera looks straight down the Z axis. Next, declare a scene which contains a simple light source and puts four ducks on the ground.
 
@@ -78,7 +78,7 @@ XML for the scenes can be saved in a separate file, but when starting out with G
 
 Here's a minimal HTML5 page which will render the scene:
 
-{% highlight html %}
+```xml
 <!doctype html>
 <html>
   <body>
@@ -109,7 +109,7 @@ Here's a minimal HTML5 page which will render the scene:
 
   </body>
 </html>
-{% endhighlight %}
+```
 
 The script begins by creating a new `GLGE.Document`, which represents the scene. Setting the `onLoad` property lets you execute code once the document has been loaded, which is akin to `document.onload` in browsers. The handler creates a new `GLGE.Renderer` objects bound to the `<canvas>` element and initializes it with the `<scene id="mainscene">` defined in the XML. A simple loop calls `render()`, which abstracts away the mountains of WebGL primitives required to push polygons to your graphics hardware. For simplicity I used JavaScript's built-in `setInterval()`, but a better solution would be to use [window.requestAnimationFrame][raf].
 
@@ -123,7 +123,7 @@ Animations in GLGE are easy to use and are similar to CSS3 animations: specify a
 
 Let's have the ducks bob back and forth as if they're floating in water. A simple bob back-and-forth is a little boring; anyone who's ever tried to balance on a raft in an lake knows that movement isn't limited to a single axis. In addition to the lateral wobble the ducks should also bob forward and backward a little. In GLGE XML, this type of animation can be declared like this:
 
-{% highlight xml %}
+```xml
 <animation_vector id="bob" frames="60">
 
   <animation_curve channel="DRotX">
@@ -143,18 +143,18 @@ Let's have the ducks bob back and forth as if they're floating in water. A simpl
   </animation_curve>
 
 </animation_vector>
-{% endhighlight %}
+```
 
 This declares a sixty-frame animation with the ID of `bob`. It contains two subelements which each specify an object property to manipulate and a line along which the property's values will be set over the course of the animation. The properties here are `DRotX` and `DRotY` which, set the object's rotation along the X and Y axes relative to its starting rotation (the values of the `rot_x` and `rot_y` attributes in XML).
 
 When attaching animations to objects in the scene you simply need to refer to the ID in CSS-selector-like syntax:
 
-{% highlight xml %}
+```xml
 <collada document="duck.dae" animation="#bob" ... />
 <collada document="duck.dae" animation="#bob" ... />
 <collada document="duck.dae" animation="#bob" ... />
 <collada document="duck.dae" animation="#bob" ... />
-{% endhighlight %}
+```
 
 And there you have it -- bobbing ducks!
 
@@ -168,23 +168,23 @@ Regardless of how you created the scene you'll need JavaScript to manipulate it.
 
 First, we can modify the XML to give each duck a unique ID, which will make retrieval using `doc.getElement()` easy. (Alternatively we could use `doc.getChildren()` and traverse the scene graph, but that's kind of overkill for this demonstration.)
 
-{% highlight xml %}
+```xml
 <collada id="duck1" document="duck.dae" animation="#bob" ... />
 <collada id="duck2" document="duck.dae" animation="#bob" ... />
 <collada id="duck3" document="duck.dae" animation="#bob" ... />
 <collada id="duck4" document="duck.dae" animation="#bob" ... />
-{% endhighlight %}
+```
 
 One way to do the animation would be to create four different `<animation_vector>`s, but that's not very scalable if you have a hundred ducks on the screen. An easier way is to adjust the animation's current frame by setting the object's `animationStart` property, which is a timestamp of the start of the animation. Adding some amount of random offset to the timestamp will adjust the current frame of animation:
 
-{% highlight javascript %}
+```javascript
 // Animate each duck individually.
 var i, duck;
 for (i = 1; i <= 4; i++) {
     duck = doc.getElement('duck' + i);
     duck.animationStart += Math.floor(Math.random() * 1000);
 }
-{% endhighlight %}
+```
 
 And there you have it - four ducks moving independently! (See the [live demo][fourducks-anim].)
 
