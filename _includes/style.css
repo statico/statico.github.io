@@ -1,4 +1,4 @@
-body { color: #212529 }
+body { color: #212529; font-family: 'PT Serif', serif; font-size: 20px; line-height: 30px }
 .reverse { unicode-bidi: bidi-override; direction: rtl }
 h1, h2, h3, h4 { font-family: 'Chivo', sans-serif }
 h1, h2 { text-transform: uppercase }
@@ -9,7 +9,7 @@ header a, header a:hover { color: #fff }
 header a:hover { text-decoration: none }
 .navbar svg { fill: currentColor }
 h2 a { color: #212529 }
-kbd { margin-left: 0.1rem; margin-right: 0.1rem; border: 1px solid #757575; border-radius: 2px; color: #757575; background: transparent }
+kbd { margin-left: 0.1rem; margin-right: 0.1rem; border: 1px solid #757575; border-radius: 2px; color: #757575; background: transparent; white-space: nowrap }
 article img:first-child { display: block; margin: 1.5rem auto; max-width: 85% }
 figure { margin: 1.5rem auto }
 figure img { margin: 0 auto !important }
@@ -22,6 +22,9 @@ header img { width: 42px; height: 42px }
   header img { width: 64px; height: 64px }
 }
 @media (min-width: 768px) {
-  article h2, article h3, article h4 { margin-top: 3rem }
+  article h2, article h3, article h4 { margin-top: 2rem }
   header img { width: 104px; height: 104px }
+}
+@media (min-width: 992px) {
+  .container { max-width: 720px }
 }
