@@ -18,15 +18,33 @@ title: Welcome
   and <a href="https://langworth.com">langworth.com</a>.
 </p>
 
+<h4>On this blog:</h4>
+
 <ul class="my-4">
   {% for post in site.posts %}
     {% if post.draft != true %}
       <li class="my-3">
         <a href="{{ post.url }}">{{ post.title }}</a>
-        <span class="text-secondary">({{ post.date | date_to_string }})</span>
+        <span class="text-secondary">- {{ post.date | date_to_string }}</span>
       </li>
     {% endif %}
   {% endfor %}
+</ul>
+
+<h4>Published elsewhere:</h4>
+
+<ul class="my-4">
+
+<li class="my-3">
+<a href="http://firstround.com/review/How-to-Go-From-Google-Engineer-to-First-Time-CTO/">How to Go From Google Engineer to First-Time CTO</a>
+<br/><span class="text-secondary">First Round Review, 2015</span>
+</li>
+
+<li class="my-3">
+<a href="http://shop.oreilly.com/product/9780596100926.do">Perl Testing: A Developer's Notebook</a>
+<br/><span class="text-secondary">O'Reilly Media, 2005</span>
+</li>
+
 </ul>
 
 
