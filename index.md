@@ -25,7 +25,7 @@ title: Welcome
     {% if post.draft != true %}
       <li class="my-3">
         <a href="{{ post.url }}">{{ post.title }}</a>
-        <span class="text-secondary">- {{ post.date | date_to_string }}</span>
+        <br/><span class="text-secondary">{{ post.date | date_to_string }}</span>
       </li>
     {% endif %}
   {% endfor %}
