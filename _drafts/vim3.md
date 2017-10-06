@@ -3,36 +3,34 @@ draft: true
 layout: post
 title: Vim After 15 Years
 description: XXX
-image: /images/vim/screen.png
+image: /images/vim/vim3.png
 ---
 
-It's been about four years since my earlier [Vim After 11 Years](XXX), and since I've been writing a lot of code with Vim lately, I figured that it's about time for an update.
+It's been about four years since my earlier [Vim After 11 Years](XXX) post, which was well-received. I've been writing a lot of more code with Vim lately and I figured that it was about time for an update.
 
-My core configuration hasn't changed much. However, the last few years have seen an advent of new plugins, new Vim features (like asynchronous operations), and a new website to let us explore new plugins.
+Since my previous post my core configuration hasn't changed much. However, the last few years have seen impressive growth in the Vim community. There have been an advent of new plugins, new Vim features (like asynchronous operations), and a new website to let us explore new plugins.
+
+<figure>
+<img src="images/vim/vim3.png"/>
+<figcaption>A recent Vim session</figcaption>
+</figure>
+
 
 ## On Plugins
 
-There always seems to be a backlash against using Vim with a slew of plugins.
-Part of this is reasonable speculation -- any system which allows users to add
-unordered extensions which patch the core system unsympathetically can easily
-become a shit show. Just look at WordPress, or XXX, or even Mac OS Classic if
-you were there 20 years ago. Extensions become patches on top of patches,
-there's no formal system for declaring dependencies, and debugging
-incompatibilities becomes the norm. Vim plugins aren't that bad -- debugging an interaction between X and Y usually involves googling "vim X with Y" -- and it's certainly not as bad a situation as binary-searching your way through conflicts like with [Conflict Catcher](XXX) on Mac OS Classic.
+There always seems to be a backlash against using Vim with lots of plugins.  Part of this is understandable suspicion -- any system which allows users to add unordered extensions to patch itself without hesitation can easily become a mess. Just look at WordPress. Or, if you were around 20 years ago, try remembering extensions in Mac OS Classic, which were patches on top of patches. With these systems there's no formal way to declare dependencies and debugging incompatibilities becomes the norm.
 
-Another resistance towards plugins is the resistance towards straying away from the core set of Vim functionality, such as movement. If you use Vim, you're now in the subset of people who demand that editing text be fast and efficient. If you use a Vim movement plugin like [EasyMotion](XXX) or [vim-sleuth](XXX), you probably have the opinion that the tool you're using is more efficient than vanilla Vim, whose users in turn think that their use of Vim is more efficient than whatever text editors they larger group of people are using.
+Vim plugins aren't that bad. Debugging an interaction between plugins _X_ and _Y_ usually involves googling "vim X with Y." It's certainly not as bad as binary-searching your way through extension conflicts like [Conflict Catcher](https://tidbits.com/article/1496) used do on Mac OS Classic.
 
-Yet plugins have always been a part of Vim, despite the lackluster programming language VimScript that's behind it. And with the recent improvements to Vim and VimScript, such as [asynchronous operations](XXX) and [modern types](XXX), the plugin ecosystem is thriving. A new plugin site, [VimAwesome](XXX), has finally cropped up to supplant the anachronistic [www.vim.org](XXX), and it allows you to peruse popular plugins.
+Further resistance towards plugins seems to a kind of purist animosity against straying away from some _core set_ of Vim functionality. However, if you use Vim, you're already in a subset of people who demand that editing text be fast and efficient, so this is like a group of savants arguing about which of them is more eccentric. If you use one of the movement plugins like [EasyMotion](https://vimawesome.com/plugin/easymotion) or [vim-sneak](https://vimawesome.com/plugin/vim-sneak) then probably agree that the tool you're using is more efficient than vanilla Vim, and those users think that using Vim is more efficient than the other text editors the larger set of people in the world are using. And so on.
 
-My opinion on plugins is thus: If a plugin provides useful functionality that I wish were built into Vim, it's worth installing. Otherwise, keep the number of plugins at a minimum to avoid interaction problems and slow load times of the application and files. Thus, the plugins you see listed here are the result of 
+Plugins have always been a part of Vim. With the recent improvements to Vim and VimL, such as [asynchronous process control](https://vimhelp.appspot.com/channel.txt.html) and [useful types](https://vimhelp.appspot.com/version7.txt.html#new-7), the plugin ecosystem is thriving. A new plugin site, [VimAwesome](https://vimawesome.com/), shows the most popular plugins as well, lets your browse and search, and has well-formatted documentation and install instructions using the myriad of plugin managers that now exist.
 
-## FZF (Fuzzy Finder)
+My opinion on plugins is thus: If a plugin provides useful functionality that I wish were built into Vim, it's worth installing. Otherwise, I try to keep the number of plugins at a minimum to avoid interaction problems and maintain crisp performance when starting Vim and viewing files. Thus, the plugins and configuration I list here are more about efficiency and getting stuff done instead of difference for the sake of difference.
 
-After TextMate made us understand that the quickest way from firing neurons to opening a file is to use an interactive fuzzy search. So us Vim people used [Command-T](XXX) for a while but nobody liked the Ruby dependency, so we all started using [Ctrl-P](XXX). But the new hotness is [FZF](XXX), and for good reason.
+## fzf
 
-FZF is _astoundingly_ fast. In the codebase that I'm currently working on, Ctrl-P is laggy with fuzzy file search and nearly unusable with fuzzy tag search. FZF is nearly instant. Ctrl-P had to be configured with a long [`wildignore`](XXX) block, but FZF inherits your
-
-TextMate and Sublime Text have taught us that the fastest way to go from firing neurons to viewing a file is by _fuzzy finding_, or rather, typing part of a filename or path to open a file, even if the characters aren't adjacent or you making a spelling error. This is such a useful technique that most editors now implement it. For a long time the best solution for Vim was the Ctrl-P plugin, but a new tool, FZF, is much faster, and thus moreforgiving.
+TextMate and Sublime Text taught us that the fastest way to go from firing neurons to viewing a file is by _fuzzy finding_, or rather, typing part of a filename or path to open a file, even if the characters aren't adjacent or you making a spelling error. This is such a useful technique that most editors now implement it. For a long time the best solution for Vim was the Ctrl-P plugin, but a new tool, FZF, is much faster, and thus moreforgiving.
 
 Footnote: While FZF and Ctrl-P and other editors support partial/fuzzy searching for pathnames, I'm really hoping for someone to implement a first-character search for Vim. For example, if you're an Intelli-J IDEA user and you want to open the class FooFactoryGeneratorBean, all you have to do is hit a key and type <kbd>FFGB</kbd> and FooFactoryGeneratorBean will be highlighted immediately. This would be useful for tag searching since class names are often camel case regardless of language. Or at least treat characters before underscores get treated as the first character, so typing something like <kbd>fbbq</kbd> would highlight a file like `lib/core/foo_bar_baz_quux.js`. Just some ideas.
 
@@ -93,6 +91,8 @@ I mentioned in my earlier posts about how I'm not a heavy MacVim user. I've only
 1. I wanted the _true_ Solarized color scheme, and not the [slightly-off color scheme created when Solarized is stepped-down to 256 colors](XXX) (Gosh! The agony!) (But seriously, the terminal-based Solarized schemes are just fine.)
 
 A few months ago I saw a (random tweet)(XXX) where a Vim user showed off using tmux to create a kind of IDE-with-REPL solution. I felt inspired, so I started using tmux again after years of avoiding it, and I've been pleasantly surprised. **As of now, tmux is now my nearly-fulls-screen working environment, and Vim usually takes up one of the tmux panes.** Or it will take up a whole pane temporarily when I press <kbd>Ctrl-t</kbd><kbd>z</kbd> to "zoom" a pane temporarily.
+
+XXX Faster and shows underscores
 
 Side note: Why did I avoid tmux for so long? When it was new in 2010 or so, I experienced a few crashes on Linux and Mac OS X, and compared to the incumbent GNU Screen multiplexer, I felt that that was unacceptable. I also experienced massive input lag when typing into Vim via tmux. Both of these were unnaceptable. But as of 2017, I haven't had a crash, nor do I notice any input latency, so it looks like those bugs have been fixed. (Thanks!)
 
@@ -197,6 +197,8 @@ Why is Sublime Text my first recommendation? Because learning Vim just adds extr
 I have a few more caveates, however. For Java, the leader is probably IntelliJ IDEA. Ten years ago it required a commercial license, but the free [Community Edition](XXX) is now available to anybody, and has the features a modern Java or Kotlin developer wants and needs, like Maven build support and Git integration. The real reasons to use IntelliJ with these languages is its amazing refactoring support, intelligent completion, [function signature annotations](XXX), smart indexing and searching (yes, way better than ctags), and its interactive debugger. In fact, when writing Ruby with JRuby, if I need to debug anything more than a simple `puts` will give me, I fire up IntelliJ and use the debugger. Besides, the free [IdeaVIM](XXX) plugin gives you Vim keybindings if you want them, and it works reasonably well.
 
 XXX pic of intelli-J
+
+Finally, [NeoVim](XXX) has caught my attention, but I'm far from making the switch. The big thing it advertised when it first came out was asynchronous function support, which has since been added in Vim 8. Other than that, I don't see a real advantage of using it over vanilla Vim, but I'm interested in seeing where it goes and who ends up using it.
 
 ## concluseion
 
