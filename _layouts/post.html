@@ -10,7 +10,7 @@ layout: default
   <p class="text-secondary">
     {{ page.date | date_to_long_string }}
     {% if page.draft %}
-      - <span class="text-danger">NOT YET PUBLISHED</span>
+      - <span class="text-danger">NOT YET PUBLISHED - DRAFT MODE</span>
     {% endif %}
   </p>
 
@@ -24,7 +24,7 @@ layout: default
 
 <section>
   {% if page.draft %}
-    <span class="text-danger">(Comments disabled - draft post)</span>
+    <span class="text-danger">COMMENTS DISABLED - DRAFT MODE</span>
   {% else %}
     {% include disqus.html %}
   {% endif %}
