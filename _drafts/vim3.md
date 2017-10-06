@@ -146,15 +146,63 @@ XXX image of lightline
 
 If you're using Git, a few plugins are important.
 
-[gitgutter](XXX) is a plugin that shows you the current git change status on a line-wise basis, like most editors do nowadays. I modified the defaults, which use distracting `+` and `-` characters, to simply show me a colored dot (`·`) for each line change. XXXXXXXXXXXXXXXX HERE
+[gitgutter](XXX) is a plugin that shows you the current git change status on a line-wise basis, like most editors do nowadays. I modified the defaults, which use distracting `+` and `-` characters, to simply show me a colored dot (`·`) for each line change, which I think looks a lot cleaner.
 
-[vim-fugitive](XXX) is currently the single 
+[vim-fugitive](XXX) is currently the single most popular Git plugin for Vim and has lots of capability. I rarely use anything other than `:Gblame`, but it's got a lot of other nice things you'd expect from in-editor Git tools.
+
+[git-rhubarb](XXX) provides support for GitHub, and most importantly, a `:Gbrowse` command which opens the current file with optional line selection in the browser on GitHub. This is extremely useful because GitHub now inlines links to commits and line numbers are snippets from within issues and pull requests. So all you have to is select a few lines with <kbd>Shift-v</kbd>, run `:Gbrowse`, copy the URL that opens, and paste it into a GitHub comment to get something like this:
+
+XXX pic of inline code snippet in GitHub issue.
+
+[rootignore](XXX) deserves a metion because it populates your `wildignore` setting with the contents of `.gitignore`, among other things. This is useful for the many things that use the `wildignore` setting, such as [NERDTree](XXX) file listings, Ctrl-P, and Vim itself when choosing what files to edit.
 
 ## buffers not tabs - bufkill, eunuch
 
+I'm a staunch user of buffers, and I've never found the use of tabs. All tabs do is create an additional way of hiding context from visibility and it requires you to memorize another keybinding or command to get at them. If you're using tmux, it's a lot easier to open Vim in another pane. And if you're making good use of buffers, it's easy to get at the file you're thinking of with a few keystrokes using FZF as described above.
+
+If you don't really use buffers, it's easy to understand: Once you start Vim, any file you open or create becomes a named buffer. You can view them using the `:buffers` command, and navigate to one of them using `:buf <name>`, where `<name>` is any part of the filename of the buffer. They also have numbers, which `:buffers` shows you, and you can refer to them that way. If you start Vim from the command line with multiple files as command line arguments, each file will already be open in a buffer for easy access. If you've installed [vim-unimpaired](XXX), you can use the <kbd>[</kbd><kbd>b</kbd> and <kbd>]</kbd><kbd>b</kbd> keybindings to navigate between them easily. As I mentioend above, I've sped this process up considerably by binding the <kbd>;</kbd> key to the FZF `:Buffers` command so that a single keystroke brings up a buffer list with fuzzy-finding. A few more keystrokes, then <kbd>Enter</kbd>, and I'm there.
+
+Sometimes you add a buffer and want to get rid of it. Maybe you opened a similarly named test file instead of the main class, or maybe you hit `:e foo` and then <kbd>Enter</kbd> too quickly and created a new bfufer iwith a file that doesn't really exist. In this case, the `:bd` command (short for `:bdelete` or _buffer delete_) can be used to delete the buffer and remove it from the list. 
+
+However, `:bd` will close the Vim split if you use it on the currenttly visible buffer, so a great plugin is [bufkill](XXX), which lets you kill buffers and keep the split open, reverting to the previously edited buffer in its place. This is so useful that I bound it to <kbd>Meta-w</kbd> so I have a single-keystroke way of deleting a buffer from my list of open buffers.
+
+Speaking of buffer management, sometimes you need to do something external to a file, such as rename it or chmod it, but the open buffer in Vim gets out of sync. NERDTree helps with this by letting you navigate to the current open file using `:CD` (XXXX true?), highlighting it, hitting <kbd>m</kbd> to modify it, and then choosing an action like rename. However, a much more convenitnet plugin is [vim-eunuch](XXX), which gives you a host of commands to modify files but keep the buffers in sync: `:Chmod` chmods the current file, `:Rename` renames the file in its parent direcotry, `:Move` moves it to a new path completely. There are a [few more](XXX) commands but those are the most useful to me.
+
 ## polyglot - vim-markdown
+
+A plugin that a [friend](XXX) turned me onto is [vim-polyglot](XXX), which singlehandedly replaces over 150 (XXX verify) different language plugins by installing them as a single plugin. This is a nice convenience, especially since the author of the plugin keeps its dependencies up to date. The plugins chosen when there are multipel to choose from, such as the case with JavaScript, seems to be the most popular and widely-accepted choice.
+
+The only problem with vim-polyglot so far is a problem inherant to Vim's loose plugin architecture: ordering. I already found [one bad interaction](XXX) when trying to use the [vim-css-jsx](XXX) plugin, and my solution was to [reanme the plugin when installing it](XXX) so that it loads before vim-polyglot. I'm not proud of that solution, but so far it appears to be the only plugin ordering problem I've encountered.
 
 ## other plugins: commentary, endwise+closetag, fugtivie, repeat, sleuth
 
+Commenting out code is a common activity, so it makes sense to use a plugin that is smart enough to comment lines or blocsk of code in multipel lanaguges. Usually you can get away with something like `:s/^/#` if you're in a language that uses hashes to comment out lines, but if you use the [vim-commentary](XXX) plugin, commenting is a simple <kbd>g</kbd><kbd>c</kbd> away, regardless of language. The same key combination also uncomments the selected lines if they're already commented. Of course, if some lines are commented and others aren't, it doesn't work the smartes, but that's hard logic to figure out.
+
+ANother common activity is inserting end-block statements, like `end` if you're writing Ruby, or `fi` if you're writing shell, or `endfunction` if you're hacking on VimL. I've been mostly content by doing this by hand for over a decade, but the [endwise](XXX) plugin has really turned me on to the auto-insertion of these keywords. I already use the bastardly-essential [closetag](XXX) plugin to complete HTML and XML tags in any kind of file, so using endwise felt like a natuarl extenstion.
+
+Many of us already use [vim-surround](XXX), which adds keybindings to add, remove, and change the surrounding characters of any bit of text, such as changing single quotes to double quotes or brackets to parentheses. Unfortunately, by default, the <kbd>.</kbd> key doesn't repeate these substitiutions, but the [repeat](XXX) plugin makes that work. Need to change quotes in _multiple_ strings? Do the <kbd>c</kbd><kbd>S</kbd><kbd>'</kbd><kbd>"</kbd> or similar combination once, then use the familiar <kbd>.</kbd> key to repeate the substitiution anywhere else.
+
+In the original post I mentioned my [tab and space fixing macros](XXX) which are handy when dealing with codebases that aren't your own and use differnent settings for tabs and spaces. What's really useful, however, is the [vim-sleuth](XXX) plugin, which automatically scans files when they're opened and tries to figure out the indentation settings used. It works 90% of the time, and pretyt much removes the most uses of the macros I set up. I especially don't need to insert [Vim modelines](XXX) at the tops of files anymore.
+
 ## about editors - vs code / intellij / vim + incsearch from emacs
+
+It's worth talking about editors for a moment. Yes, I'm fully aware of the holy war nature of these arguments, but I feel that this decade we can at least agree on the right tool for the right job. We've never had such a swath of tools to get anything done -- editors, languages, frameworks, serializaztion formats -- so I think we're all a bit better about respecting other choices. (Is he kidding? That's an excercise for the reader.)
+
+I've encountered a few handfuls of people over the years that are getting into programming, and inveitably they ask which text editor to use for writing code. My response is easy and immeidate: Just use Sublime Text. It's a great editor, it's got a great plugin community with up-to-date syntax highlighting, and it works well on macOS, Windows, and Linux.
+
+XXX pic of sublime text
+
+Why is Sublime Text my first recommendation? Because learning Vim just adds extra overhead. If you're learning programming, a pedantic and brain-abraisve trade by default, learning the strange and seemiingly-arcane cvombination _just to enter and edit text on the screen_ can be maddening. Sublime Text words like word processors for normal humans and is instantly useable.
+
+I have a few more caveates, however. For Java, the leader is probably IntelliJ IDEA. Ten years ago it required a commercial license, but the free [Community Edition](XXX) is now available to anybody, and has the features a modern Java or Kotlin developer wants and needs, like Maven build support and Git integration. The real reasons to use IntelliJ with these languages is its amazing refactoring support, intelligent completion, [function signature annotations](XXX), smart indexing and searching (yes, way better than ctags), and its interactive debugger. In fact, when writing Ruby with JRuby, if I need to debug anything more than a simple `puts` will give me, I fire up IntelliJ and use the debugger. Besides, the free [IdeaVIM](XXX) plugin gives you Vim keybindings if you want them, and it works reasonably well.
+
+XXX pic of intelli-J
+
+## concluseion
+
+I hope this has been useful to you. Vim has been a major part of my prgoramming life, and it's probably responsible for the successful partrs of my career -- maybe even the unsuccessful parts where I wasted too much time.
+
+I'm well past 30 years old now, which makes me about 150 in programmer years, and my focus now is on _getting stuff done_ instead of mucking about with my tools. But Vim is one of those tools where doing a little work and a little research, such as browsing [VimAwesome.com](XXX) or reading a few lines in a help page, can dramatically improve your effectiveness. In the most eggregious cases, when your brain needs a break from programming, it's usually pretty easy to think, "Hey, what's one thing that's really bugged me in Vim while I was doing X," and fine a solution for it quicikly.
+
+I hope that this has been useful. Also check out my earlier posts, [Vim After 11 Years](XXX) and [Everything I Missed in _Vim After 11 Yeras_](XXX). Let me know what you think in the comments.
 
