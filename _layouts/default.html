@@ -17,6 +17,10 @@
 {% seo %}
 {% include analytics.html %}
 
+{% if page.draft %}
+  <meta name="robots" content="noindex, nofollow"/>
+{% endif %}
+
 </head>
 <body>
 
@@ -45,6 +49,15 @@
     </div>
   </div>
 </header>
+
+{% if page.draft %}
+  <div class="bg-danger text-center text-light py-3">
+    <div class="container">
+      <strong>This post is a draft!</strong><br/>
+      I haven't finished editing it or anything. Please don't share it with anyone.
+    </div>
+  </div>
+{% endif %}
 
 <div class="container pb-2">
 {{ content }}
