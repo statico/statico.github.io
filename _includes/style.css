@@ -1,9 +1,11 @@
 body { color: #212529; font-family: 'PT Serif', serif; font-size: 20px; line-height: 30px; border-top: 1rem solid #00796B }
+a { color: #006adb }
 .reverse { unicode-bidi: bidi-override; direction: rtl }
 h1, h2, h3, h4 { font-family: 'Chivo', sans-serif }
 h1, h2 { text-transform: uppercase }
 h1 em { font-weight: 900; font-style: normal }
 h2, h3 { font-weight: 700 }
+h4, h5, h6 { color: #868e96 }
 header { background: #009688; color: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.20) }
 header h1 { font-size: 2.2rem }
 header a, header a:hover { color: #fff }
