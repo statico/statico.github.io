@@ -1,5 +1,5 @@
 body { color: #212529; font-family: 'PT Serif', serif; font-size: 20px; line-height: 30px; border-top: 1rem solid #00796B }
-a { color: #006adb }
+a { color: #0366d6 }
 .reverse { unicode-bidi: bidi-override; direction: rtl }
 h1, h2, h3, h4 { font-family: 'Chivo', sans-serif }
 h1, h2 { text-transform: uppercase }
@@ -23,6 +23,7 @@ figcaption { margin: .5rem auto 0; text-align: center; font-style: italic }
 .highlight { margin-left: 2rem; margin-right: 2rem }
 .highlight .err { background: transparent }
 .navbar h1 { font-size: 1rem }
+.anchorjs-link { color: #212529; text-decoration: none }
 header img { width: 42px; height: 42px }
 footer a { color: #868e96 }
 @media (min-width: 576px) {
