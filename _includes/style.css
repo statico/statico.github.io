@@ -12,7 +12,7 @@ header a, header a:hover { color: #fff }
 header a:hover { text-decoration: none }
 .navbar svg { fill: currentColor }
 h2 a { color: #212529 }
-kbd { font-size: 80%; margin-left: 0.1rem; margin-right: 0.1rem; border: 1px solid #757575; border-radius: 4px; color: #757575; background: transparent; white-space: nowrap }
+kbd { font-size: 80%; margin-left: 0.1rem; margin-right: 0.1rem; border-radius: 2px; color: #212529; background: #e6e6e6; white-space: nowrap; box-shadow: inset 0 -1px 0 rgba(27,31,35,0.12) }
 code { color: #c33c13 }
 pre, code, pre code { font-size: 90% }
 pre, pre code { line-height: 1.3 }
