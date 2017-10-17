@@ -18,7 +18,7 @@ title: Welcome
   and <a href="https://langworth.com">langworth.com</a>.
 </p>
 
-<h4>On this blog:</h4>
+<h3>On this blog:</h3>
 
 <ul class="my-4">
   {% for post in site.posts %}
@@ -31,7 +31,7 @@ title: Welcome
   {% endfor %}
 </ul>
 
-<h4>Published elsewhere:</h4>
+<h3>Published elsewhere:</h3>
 
 <ul class="my-4">
 
