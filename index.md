@@ -7,11 +7,10 @@ title: Welcome
 
 <p>
   I'm Ian. I build things.
-  I'm an engineer at <a href="https://looker.com/">Looker</a>.
   See also:
+  <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>.
   <a href="https://github.com/statico">GitHub</a>,
   <a href="https://twitter.com/statico">Twitter</a>,
-  <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>.
   <a href="https://keybase.io/statico">Keybase</a>,
   <a href="https://github.com/statico/dotfiles">my dotfiles</a>,
   and <a href="https://langworth.com">langworth.com</a>.
