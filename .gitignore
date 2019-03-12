@@ -3,5 +3,6 @@
 .bundle
 .rbenv-version
 .sass-cache
+.jekyll-metadata
 Thumbs.db
 _site/*

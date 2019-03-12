@@ -6,10 +6,10 @@ var:
   rss_path: /atom.xml
 
 title: "Ian Langworth's Things of Variable Interest"
-description: "Thoughts and tutorials from Ian Langworth"
-production_url: "https://statico.github.io"
-url: "https://statico.github.io"
-logo: "/ian.png"
+description: 'Thoughts and tutorials from Ian Langworth'
+production_url: 'https://statico.github.io'
+url: 'https://statico.github.io'
+logo: '/ian.png'
 
 author:
   name: Ian Langworth
@@ -26,11 +26,11 @@ social:
 
 defaults:
   - scope:
-      path: ""
+      path: ''
     values:
       image: /ian.png
 
-gems:
+plugins:
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-sitemap
