@@ -1,8 +1,9 @@
 !.gitkeep
 .DS_Store
 .bundle
+.jekyll-metadata
 .rbenv-version
 .sass-cache
-.jekyll-metadata
+.vscode
 Thumbs.db
 _site/*

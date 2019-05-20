@@ -21,12 +21,10 @@ title: Welcome
 
 <ul class="my-4">
   {% for post in site.posts %}
-    {% if post.draft != true %}
-      <li class="my-3">
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        <br/><span class="text-secondary">{{ post.date | date_to_string }}</span>
-      </li>
-    {% endif %}
+    <li class="my-3">
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <br/><span class="text-secondary">{{ post.date | date_to_string }}</span>
+    </li>
   {% endfor %}
 </ul>
 
@@ -45,6 +43,3 @@ title: Welcome
 </li>
 
 </ul>
-
-
-
