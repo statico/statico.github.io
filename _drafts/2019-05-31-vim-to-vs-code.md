@@ -1,5 +1,4 @@
 ---
-draft: true
 layout: post
 title: From Vim to VS Code After
 description: My earlier posts about using Vim were well received and it's about time for an update. I've been doing a lot more work with Vim lately and have spent some time configuring my workflow for peak efficiency, so here's a snapshot of my current state.
