@@ -1,268 +1,31 @@
 ---
 layout: post
-title: From Vim to VS Code After
-description: My earlier posts about using Vim were well received and it's about time for an update. I've been doing a lot more work with Vim lately and have spent some time configuring my workflow for peak efficiency, so here's a snapshot of my current state.
-image: /images/vim/vim3.png
+title: "From Vim to VS Code After 17 Years"
+description: Vim served as my primary text editor for almost two decades. But now, Microsoft's Visual Studio Code has progressed to being more functional and faster. I've switched and I haven't looked back. Mostly.
+image: /images/vim/todo.png
 ---
 
-My earlier posts ([1](/vim.html), [2](/vim2.html)) about using Vim were well received and it's about time for an update. Vim 8 added a lot of much-needed functionality, and new community sites like [VimAwesome](https://vimawesome.com/) have made plugin discovery and evaluation easier. I've been doing a lot more work with Vim lately and have spent some time configuring my workflow for _peak efficiency_, so here's a snapshot of my current state.
-
-TL;DR:
-
-* fzf and fzf.vim for finding files
-* ack.vim and `ag` for searching files
-* Vim + tmux is the key to victory 🔑
-* ALE is the new Syntastic because it's asynchronous
-* ...and lots more. Keep reading.
+Over the last few years I've documented how I've used Vim (and MacVim) in my day-to-day use. A lot of people seemed to find those articles extremely useful and were overjoyed to see a "modern, recent" Vim setup. I'm glad to have created helpful, educational content to make people more productive.
 
 <figure>
-<a href="/images/vim/vim3.png"><img src="/images/vim/vim3.png"/></a>
-<figcaption>A recent Vim session</figcaption>
+<a href="/images/vscode-prose.png"><img src="/images/vscode-prose.png"/></a>
+<figcaption>A recent VS Code session</figcaption>
 </figure>
 
-As always, my [dotfiles](https://github.com/statico/dotfiles/) and [vimrc](https://github.com/statico/dotfiles/blob/master/.vim/vimrc) are available publicly. I also have a separate [install script](https://github.com/statico/dotfiles/blob/master/.vim/update.sh) for updating and installing Vim plugins.
+However, after more than 17 years since adopting Vim as my primary productivity tool, I'm compelled to give that title to Microsoft's Visual Studio Code development environment. This wasn't an easy decision, and I had a few false starts prior to my full-time adoption last year. But VS Code has now progressed to the point where, if budding software engineers ask, "What editor should I use?" then my response will be VS Code.
 
-### fzf
+TL;DR of why I've switched to VS Code:
 
-TextMate and Sublime Text showed us that the fastest way to find a file is by _fuzzy finding_, which means typing parts of a filename or path or tag or whatever you're looking for, sometimes even if the characters aren't adjacent or you making a spelling error. Fuzzy-finding is so useful that it's become a standard feature on modern text editors.
+* Vim emulation is good enough. 🤷
+* Everything just works with zero to minimal configuration.
+* It's absurdly fast, has a great UI, and is easily customizable.
+* It works on macOS and Linux.
+* The ability to fuzzy-search commands and configuration options is something no person should live without.
 
-For years [Ctrl-P](https://vimawesome.com/plugin/ctrlp-vim-everything-has-changed) has been the reigning fuzzy-finding champ, but a new tool, [fzf](https://github.com/junegunn/fzf), is faster and more forgiving when trying to find one file or tag among thousands. Ctrl-P used to do okay on a 30,000-file codebase on my 2013-era MacBook Pro but started to slow down during a search on an enormous tags file to the point of being unusable. fzf, however, shows no speed difference between files or tags -- it's blazingly fast either way.
 
-<figure>
-<video loop muted controls poster="/images/vim/vim3-fzf.jpg" src="/images/vim/vim3-fzf.mp4"/></video>
-</figure>
-
-Getting started with fzf is easy. Simply follow the [installation instructions](https://github.com/junegunn/fzf#installation) (basically `brew install fzf` on macOS with [Homebrew](https://brew.sh/)) and install the additional [fzf.vim](https://github.com/junegunn/fzf.vim) plugin for badass lightspeed functionality.
-
-fzf comes with a basic Vim plugin but its functionality is minimal, so [fzf.vim](https://github.com/junegunn/fzf.vim) was created to provide all of the functionality you would expect. The most useful commands are `:Buffers`, `:Files`, and `:Tags`, which I've bound to <kbd>;</kbd> and <kbd>,</kbd><kbd>t</kbd> and <kbd>,</kbd><kbd>r</kbd> respectively:
-
-```vim
-nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
-nmap <Leader>r :Tags<CR>
-```
-
-Binding <kbd>;</kbd> is important because I live and breathe buffers. I practically never use tabs -- more on that later -- so it's important that I can switch my focus to something I'm thinking of with as little friction as possible.
-
-When using fzf, make sure to tell it to use `ag`, a `grep`/`ack` replacement called the [Silver Searcher](https://github.com/ggreer/the_silver_searcher). ag will in respect your `.gitignore` and your `.agignore` files so you no longer need to keep a giant `wildignore` string in your `vimrc`. 
-
-fzf works in the shell as well and comes with bindings for Zsh, Bash, and the Fish shell. In Zsh, I can hit <kbd>Ctrl-t</kbd> to instantly fuzzy-find any file in the current directory. And since I've configured fzf to use `ag`, it'll ignore anything excluded by `.gitignore`. It's glorious.
-
-Here's the snippet from my [.zshrc](https://github.com/statico/dotfiles/blob/340c01d0970bc2cd6a27284ddb87774131c00e5c/.zshrc#L812-L829). The `FZF` environment variables are also used when fzf is called from within Vim:
-
-```bash
-# fzf via Homebrew
-if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh
-fi
-
-# fzf via local installation
-if [ -e ~/.fzf ]; then
-  _append_to_path ~/.fzf/bin
-  source ~/.fzf/shell/key-bindings.zsh
-  source ~/.fzf/shell/completion.zsh
-fi
-
-# fzf + ag configuration
-if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS='
-  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-  '
-fi
-```
-
-I was going to write about how the one big drawback to fzf is that it's an external command and doesn't work with MacVim, but now it does! Support has been [recently added](https://github.com/junegunn/fzf.vim/issues/416#issuecomment-327982805) by using [the new native terminals in Vim 8](https://vimhelp.appspot.com/terminal.txt.html). It works well but is much slower than the terminal in large codebases (~1m files).
-
-#### An aside on fuzzy-finding
-
-While FZF and Ctrl-P and other editors support fuzzy searching for pathnames, I'm really hoping that someone will create a first-character search for Vim. In IntelliJ, for example, if you want to open the class `FooFactoryGeneratorBean` you hit <kbd>Cmd-o</kbd> and type <kbd>F</kbd><kbd>F</kbd><kbd>G</kbd><kbd>B</kbd><kbd>Enter</kbd> to open it (the first letter of each part of the class name). This would be great for searching tags since class names are often camel no matter which language you're writing. Maybe it could treat characters before underscores as the first character so typing something like <kbd>f</kbd><kbd>b</kbd><kbd>b</kbd><kbd>q</kbd> would highlight a file like `foo_bar_baz_quux.js`.
-
-### Searching & the QuickFix window
-
-`ag` is the new `ack`, which was the new `grep`. The best way to use `ag` from within Vim seems to be [ack.vim](https://vimawesome.com/plugin/ack-vim), which is misleading since [ag.vim is deprecated](https://github.com/rking/ag.vim/issues/124#issuecomment-227038003), but ack.vim supports both `ack` and `ag`.
-
-ack.vim gives you an `:Ack` command, which takes arguments in the same way as running `ag` from the command line, except that it opens the QuickFix window with the list of search results:
-
-<figure>
-<video loop muted controls poster="/images/vim/vim3-ack.jpg" src="/images/vim/vim3-ack.mp4"/></video>
-</figure>
-
-Note that `:Ack` will jump to the first result in the QuickFix list by default. If you dislike this, use `:Ack!`, or reverse the functionality of the two commands [per the docs](https://github.com/mileszs/ack.vim#i-dont-want-to-jump-to-the-first-result-automatically).
-
-(Somewhat confusingly, `fzf.vim` adds a `:Ag` command, which uses fzf to search with ag interactively. I bound it to <kbd>,</kbd><kbd>a</kbd> to try it out. I haven't found it very useful, but it's kind of cool.)
-
-Once results are in the QuickFix window, the most straightforward way to use it is by moving the cursor there and hitting <kbd>Enter</kbd> to open a result. There are also the `:cnext` and `:cprev` commands to move and up down the results list, and I tried to find a cross-platform keybinding I liked for these for a while, but failed. Then I discovered [vim-unimpaired](https://vimawesome.com/plugin/unimpaired-vim) which adds useful bindings like <kbd>[</kbd><kbd>q</kbd> and <kbd>]</kbd><kbd>q</kbd> for `:cprev` and `:cnext`. vim-unimpaired actually has a lot more bindings for next/previous pairs, like navigating compiler/linter errors and toggling common options like line numbers, that I'd argue should be built into Vim.
-
-Using the QuickFix window for search results so useful that I wrote a few bindings which search for the current word under the cursor. As much as `exhuberant-ctags` tries to find tags in Ruby and CoffeeScript, sometimes you just need to search for the word that you're staring at:
-
-```vim
-nmap <M-k>    :Ack! "\b<cword>\b" <CR>
-nmap <Esc>k   :Ack! "\b<cword>\b" <CR>
-nmap <M-S-k>  :Ggrep! "\b<cword>\b" <CR>
-nmap <Esc>K   :Ggrep! "\b<cword>\b" <CR>
-```
-
-Finally, after I'm done searching and navigating, I usually hit <kbd>\</kbd><kbd>x</kbd> (bound to `:cclose`) to close the QuickFix window. I'll probably need to navigate back to the file I was looking at before starting the search so I usually hit <kbd>Ctrl-o</kbd> a few times, which [jumps backward in the jump list](https://vimhelp.appspot.com/motion.txt.html#CTRL-O) and is kind of like hitting the Back button in a browser. Other times I'll use <kbd>;</kbd> to bring up the buffer list and find the original file there. But now that I'm thinking about it, maybe I'll modify the binding set a [global mark](https://vimhelp.appspot.com/motion.txt.html#%270) in my <kbd>Meta-k</kbd> binding, like `o`, so that <kbd>'</kbd><kbd>O</kbd> will always take me back to where I started.
-
-### Terminals, panes, and multiplexing
-
-I mentioned before that I'm not a frequent gvim/MacVim user. I strongly prefer to work in a terminal, but there are some good reasons to use a standalone Vim application:
-
-1. It's more responsive than Vim inside tmux inside a terminal
-1. It's a better default application than TextEdit to open `.txt` files on macOS and Windows
-1. It doesn't have a problem [clicking past the 220th column](https://stackoverflow.com/q/7000960/102704) in wide editor windows
-1. If you're writing a long blog post with lots of spelling errors and terminal Vim [won't show underlines](https://github.com/fabrizioschiavi/pragmatapro/issues/14), or maybe you prefer the wiggly "undercurl" style lines
-1. You demand to use the _true_ Solarized color scheme instead of the blasphemous scheme created when Solarized is [quantized to 256 colors](http://ethanschoonover.com/solarized/vim-colors-solarized#important-note-for-terminal-users)
-
-Other than the proximity to a command line, a big reason to use Vim in a terminal is [tmux](https://github.com/tmux/tmux/wiki/FAQ) which is popular for remote development but just as useful for local development. As of now, tmux is my daily fullscreen working environment, and Vim usually takes up one of the tmux panes. This lets me use Vim while keeping a few other shells open -- usually a server and one or two other utility panes. Sometimes I'll make Vim temporarily fullscreen with the [zoom keybinding](https://sanctum.geek.nz/arabesque/zooming-tmux-panes/).
-
-The killer feature of tmux is the ability to [send keys](http://minimul.com/increased-developer-productivity-with-tmux-part-5.html) to tmux panes from anywhere. I use tmux and Vim like an IDE -- I can edit in one pane, execute commands in another, and I can keep the server log visible in case there are errors. For example, if I'm working on a REST endpoint, I can re-test the endpoint with `curl` and view the output with [jq](https://stedolan.github.io/jq/) using a few keystrokes, like this:
-
-<figure>
-<video loop muted controls poster="/images/vim/vim3-tmux.jpg" src="/images/vim/vim3-tmux.mp4"/></video>
-</figure>
-
-The regular way to do this would be to make a change in Vim, hit <kbd>:</kbd><kbd>w</kbd><kbd>Enter</kbd> to save, then <kbd>&lt;prefix&gt;</kbd><kbd>h</kbd> to move to the left pane (where `<prefix>` is the tmux prefix keystroke, usually <kbd>Ctrl-a</kbd>), then <kbd>Up</kbd><kbd>Enter</kbd> to repeat the command, and <kbd>&lt;prefix&gt;</kbd><kbd>l</kbd> to go back to Vim. But it's much faster to rig up a Vim keybinding to do all of this:
-
-```vim
-nmap \r :!tmux send-keys -t 0:0.1 C-p C-j <CR><CR>
-```
-
-The above runs `tmux send-keys`, which tells it to send keys to the session, window and pane `0:0.1` where I had run `curl` previously. It then sends <kbd>Ctrl-p</kbd>, which is equivalent to hitting <kbd>Up</kbd>, which pulls the previous command from history, and then <kbd>Enter</kbd> to execute it. I bound it to <kbd>\</kbd><kbd>r</kbd> as in "run" or "repeat." You can read more about using `send-keys` [here](http://minimul.com/increased-developer-productivity-with-tmux-part-5.html) and [here](https://stackoverflow.com/a/19330452/102704).
-
-I've been using this for half a year and it's been a massive productivity boost. However, it's worth mentioning that Vim 8 now supports [in-editor native terminals](https://vimhelp.appspot.com/terminal.txt.html), after some basic use they seem pretty solid. While various plugins have tried to integrate terminals into Vim before with lackluster results, the new native terminals are fast, Unicode-aware, and 256 color-enabled, and there's a new `term_sendkeys()` function that lets you send keystrokes like tmux. This was only added to Vim a few months ago so I need to experiment. Who knows, I might end up using MacVim splits with `:terminal`s instead of tmux.
-
-#### A note on terminals on macOS
-
-I've been using [iTerm2](https://www.iterm2.com/) instead of macOS's default Terminal.app for as long as I can remember. I recently noticed, however, that typing in Vim inside iTerm2 felt sluggish, especially inside tmux. I tried using `urxvt` inside XQuartz to compare and it felt like lightning. Something was clearly adding latency, but I wasn't about to make `urxvt` my primary terminal on macOS because of the clipboard woes, focus issues, and lack of high-DPI support on XQuartz.
-
-A few days after noticing this I read [an article](https://danluu.com/term-latency/) that demonstrated input latency between terminals on macOS and claimed that Terminal.app is now significantly faster than iTerm2. I tried it myself and found that the keystroke latency was somewhere between urxvt and iTerm2, so I've switched to Terminal.app completely. I was using a fancy [custom iTerm2 color theme](https://github.com/mbadolato/iTerm2-Color-Schemes) and was pleased to find a project which has [converted all the themes](https://github.com/lysyi3m/osx-terminal-themes) for Terminal.app.
-
-I miss one thing about iTerm2 vertical splits, and that's the occasional use case where I want different font sizes in different panes. It's easy to do this with iTerm2, or in fact _any_ editor environment where the editing area isn't a single grid with fixed sized cells, but I can live without it for now.
-
-### Writing prose in Vim
-
-Distraction-free writing is popular and for good reason -- it works. There are some nice-looking native and browser-based applications that do this, but I want to do my writing in Vim, so I worked on a solution.
-
-<figure>
-<a href="/images/vim/vim3-prose.png"><img src="/images/vim/vim3-prose.png"/></a>
-</figure>
-
-A great plugin is [goyo.vim](https://vimawesome.com/plugin/goyo-vim), which adds lots of padding to your buffer and hides all the cruft. It recognizes airline/powerline/lightline status bars so those get hidden too -- [well, mostly](https://github.com/itchyny/lightline.vim/issues/83). That plus a few other settings tweaks is something I call **Prose Mode**:
-
-```vim
-function! ProseMode()
-  call goyo#execute(0, [])
-  set spell noci nosi noai nolist noshowmode noshowcmd
-  set complete+=s
-  set bg=light
-  if !has('gui_running')
-    let g:solarized_termcolors=256
-  endif
-  colors solarized
-endfunction
-
-command! ProseMode call ProseMode()
-nmap \p :ProseMode<CR>
-```
-
-This command, which I've bound to <kbd>\</kbd><kbd>p</kbd>, turns on Goyo and gets rid of any funny source-code like indenting when you type parentheses. It also changes the color scheme from my regular dark theme to the light version of Solarized, which is important because it becomes a visual reminder that I'm in "writing mode" and that I shouldn't mess around or get distracted since my goal is to produce words.
-
-The command also makes autocompletion pull words from the thesaurus and dictionary when I hit <kbd>Tab</kbd> in hopes that I'll be able to write faster. It's still a work-in-progress, but it's come in handy now and then.
-
-### Linting
-
-One of best and most sorely-needed additions to Vim has been [asynchronous process control](https://vimhelp.appspot.com/channel.txt.html). Now that Vim can finally run processes in the background, a good new plugin called [ALE](https://vimawesome.com/plugin/ale) is gaining on [Syntastic](https://vimawesome.com/plugin/syntastic) because it runs the linters asynchronously. You no longer have to wait for your linter to finish every time you write a file. I've been writing a lot of Ruby on JRuby lately and the linter takes a while to run, so I had turned Syntastic off because of the delays. With ALE I can now turn linting back on while I edit.
-
-### Lightline, Powerline, Airline, and status bars
-
-I was using Powerline for the last few years and eventually converted to the lighter-weight [Airline](https://vimawesome.com/plugin/vim-airline). But the information and widgets in these status bars are more distracting than useful -- I don't need to know the current file encoding or syntax type -- plus I'm not excited about using [hacked up fonts](https://github.com/powerline/fonts). I switched to [Lightline](https://vimawesome.com/plugin/lightline-vim) and spent [a little effort](https://github.com/statico/dotfiles/blob/202e30b23e5216ffb6526cce66a0ef4fa7070456/.vim/vimrc#L406-L453) to make it minimal and add linter status icons:
-
-<figure>
-<a href="/images/vim/vim3-ale.png"><img src="/images/vim/vim3-ale.png"/></a>
-</figure>
-
-I don't see the need of showing the current git branch name in the status line, especially with a terminal being a keystroke away. I also don't like the idea of putting the git branch in the shell status because it'll become inaccurate if you switch branches from another shell. But, clearly I'm in the minority here, so maybe I'm missing something.
-
-### Git
-
-If you're using Git, a few plugins are important.
-
-[vim-gitgutter](https://vimawesome.com/plugin/vim-gitgutter) is a plugin that shows you markers for any lines that have been added, delete, or modified, like most other editors do nowadays. I changed it to show a colored dot (`·`) for changes instead of the default `-` and `+` characters, which I think looks cleaner.
-
-<figure>
-<a href="/images/vim/vim3-gitgutter.png"><img src="/images/vim/vim3-gitgutter.png"/></a>
-</figure>
-
-[vim-fugitive](https://vimawesome.com/plugin/fugitive-vim) seems to be the most popular Git plugin for Vim and has lots of capability. I have [tons of shell aliases for git](https://github.com/statico/dotfiles/blob/master/.zshrc#L200) so in Vim I rarely use anything other than `:Gblame` and `:Gbrowse`, but it's got a lot of other nice things you'd expect from in-editor Git tools. (If your repo is hosted on GitHub you'll need [vim-rhubarb](https://vimawesome.com/plugin/vim-rhubarb) to get `:Gbrowse` to work.)
-
-`:Gbrowse` is wonderful -- it opens the current file with optional line selection in the browser, assuming your repo is mirrored on GitHub or GitLab or whatever. It's even more useful now that GitHub displays links to specific commits and line numbers as snippets when used in issues and pull requests. All you have to is select a few lines with <kbd>Shift-v</kbd>, do a `:Gbrowse`, copy the URL that opens, and paste it into a GitHub comment to get something like this:
-
-<figure>
-<a href="/images/vim/vim3-github.png"><img src="/images/vim/vim3-github.png"/></a>
-</figure>
-
-I thought I was going to talk about [RootIgnore](https://vimawesome.com/plugin/rootignore) and how it sets the `wildignore` automatically based on your `.gitignore`. This turned out to be a bad idea because tab-completing paths on the Vim command line doesn't work if the path is in `wildignore`. Worse, the built-in `expand()` returns null if the path you ask it to expand is in ignored. It took me a while to figure out that this was causing my `.gitignore`-ed host-specific `.vimlocal` file to not be sourced by my checked-in `.vimrc`.
-
-### Buffers, buffers, buffers
-
-I'm a staunch user of buffers. I've tried using tabs but never found them useful. All tabs do is create an additional way of hiding information and they require you to memorize another keybinding or command to get at them. If you're using tmux, it's simply easier to open Vim in another pane. And if you're making good use of buffers, it's easy to get at the file you're thinking of with a few keystrokes using FZF as described earlier.
-
-If you haven't really used buffers they're easy to understand: Once you start Vim, any file you open or create becomes a named buffer. You can view them using the `:buffers` command, and navigate to one of them using `:buf <name>`, where `<name>` is any part of the filename of the buffer, or the number shown to you with `:buffers`.
-
-If you start Vim from the command line with multiple files as command line arguments then each file will already be open in a buffer for easy access. If you've installed [vim-unimpaired](https://vimawesome.com/plugin/unimpaired-vim) you can use the <kbd>[</kbd><kbd>b</kbd> and <kbd>]</kbd><kbd>b</kbd> keybindings to navigate between them easily.
-
-As I mentioned earlier, I've sped this process up considerably by binding the <kbd>;</kbd> key to the FZF `:Buffers` command so a single keystroke brings up a buffer list with fuzzy-finding. For example, if I open three files on the command line like `vim foo.txt bar.txt quux.txt`, getting to `quux.txt` is simply <kbd>;</kbd><kbd>q</kbd><kbd>Enter</kbd>. (Yes, using `:buf` is close, but fzf shows you a live preview when you have many similarly-named files open.)
-
-Sometimes I create buffers by accident, such as when trying to open a file with `:e` and hitting <kbd>Enter</kbd> too quickly. The `:bd` command can be used to delete the buffer and remove it from the list, but it will also close the Vim window or split if that buffer is open in it. A good solution is to use [bufkill.vim](https://vimawesome.com/plugin/bufkill-vim), which provides `:BD` to delete the current buffer and keep the current window open. I use this often so I've bound it to <kbd>Meta-w</kbd>.
-
-If you need to rename, chmod or delete a file, you can pop over to a terminal and make the change, but then the Vim buffer will be out of sync and show you an annoying "File is no longer available" warning. Instead, you can use [NERDTree](https://github.com/scrooloose/nerdtree) to highlight the current file with `:NERDTreeFind`, hit <kbd>m</kbd> to modify it, and choose an action like move or rename. The solution I prefer is to use [vim-eunuch](https://vimawesome.com/plugin/eunuch-vim), which adds a bunch of commands: `:Chmod` chmods the current file, `:Rename` renames the file in its parent directory, `:Move` can move it to a new path, and `:Delete` will delete the file and the buffer. There are a few more commands but those are the ones I've used the most.
-
-### Miscellaneous other plugins
-
-A [friend](https://github.com/xonecas) turned me onto [vim-polyglot](https://vimawesome.com/plugin/vim-polyglot), which bundles 100+ syntax plugins into a single package and makes them load only on demand. It's kept very up to date, and the author has picked the best syntax plugins to make sure indenting and highlighting works well for the most popular languages.
-
-Commenting out code is a common activity so it makes sense to use a plugin that is smart enough to comment lines or blocks of code in multiple languages. You can usually get away with `:s/^/#` if you're writing code that uses hashes to comment out lines, but I prefer the [vim-commentary](https://vimawesome.com/plugin/commentary-vim) plugin, which makes commenting and uncommenting in any language simple with <kbd>g</kbd><kbd>c</kbd>.
-
-The [vim-surround](https://vimawesome.com/plugin/surround-vim) plugin is so useful that it should probably be built into Vim. It adds keybindings to add, remove, and change the surrounding characters of any bit of text, such as changing single quotes to double quotes or brackets to parentheses. Unfortunately, the <kbd>.</kbd> key doesn't repeat these changes by default, so you need [repeat.vim](https://vimawesome.com/plugin/repeat-vim) to make that happen. For example, to change the quotes used for multiple strings, use the <kbd>c</kbd><kbd>S</kbd><kbd>'</kbd><kbd>"</kbd> or combination once, then use <kbd>.</kbd> to repeat the substitution on the next string.
-
-If you're writing Ruby or any language with end-block keywords then you'll be writing a lot of `end`s. The [endwise](https://vimawesome.com/plugin/endwise-vim) plugin inserts them automatically, which is nice. And if you're writing HTML or XML, you should certainly use [closetag.vim](https://vimawesome.com/plugin/closetag-vim) plugin which closes tags automatically when you type <kbd>&lt;</kbd><kbd>/</kbd>.
-
-In the original Vim post I mentioned some [tab and space fixing macros](/vim.html#other-peoples-code) to deal with codebases that use different tab and space variations. However, [sleuth.vim](https://vimawesome.com/plugin/sleuth-vim) can detect these settings automatically by scanning files when they're opened. It works 90% of the time and makes the macros I set up mostly unnecessary.
-
-### Thoughts on Plugins
-
-With the recent improvements to Vim and VimL, such as [asynchronous process control](https://vimhelp.appspot.com/channel.txt.html) and some [indispensable types](https://vimhelp.appspot.com/version7.txt.html#new-7), the plugin ecosystem is thriving. A new plugin site, [VimAwesome](https://vimawesome.com/), makes finding popular plugins easy and has well-formatted documentation and install instructions.
-
-Some of the responses to my previous posts included occasional backlashes against using Vim with lots of plugins. Part of this is understandable suspicion -- any system which allows users to add unordered extensions to patch any part of itself without constraint can easily become a mess. Just look at WordPress. Or, if you were around 20 years ago, the horrors of Mac OS Classic extensions. There's no way to declare dependencies and debugging interactions between plugins becomes the norm.
-
-Vim plugins aren't too bad, though. Debugging an interaction between plugins _X_ and _Y_ usually involves googling "vim X with Y" and I've only had to do it once or twice. The [one time](https://github.com/alampros/vim-styled-jsx/issues/1) I experienced weirdness I had to binary-search my way through (like [Conflict Catcher](https://tidbits.com/article/1496) used do twenty years) ago and had to rename one plugin so it loaded before another. I'm not proud, but so far it's been the only bad plugin interaction that I've encountered.
-
-Additional resistance towards plugins seems to be some kind of purist animosity against straying away from some _core set_ of Vim functionality. But if you're using Vim, you're already in a subset of people who demand that editing text be fast and efficient, so it's like a group of savants arguing about which is the most eccentric. The set of people that use a movement plugin like [EasyMotion](https://vimawesome.com/plugin/easymotion) or [vim-sneak](https://vimawesome.com/plugin/vim-sneak) will argue that they're more efficient than vanilla Vim users, and vanilla Vim users will argue that they're more efficient than non-Vim users, and so on. The argument will be moot when we can control computers [with our brains](https://www.theverge.com/2017/3/27/15077864/elon-musk-neuralink-brain-computer-interface-ai-cyborgs) anyway.
-
-I've also heard of practical resistance to plugins, such as when a plugin needs a version of Vim with Ruby or Python or who-knows-what compiled in, and maybe the plugin itself needs to be compiled. Vim 7 added a lot of essential language features so a lot of plugins are now pure VimL and don't need an extra language dependency. Combined with [vim-pathogen](https://github.com/tpope/vim-pathogen) which adds everything in `~/.vim/bundle/` to Vim's runtime path, adding plugins should be [as easy as a `git clone`](https://github.com/statico/dotfiles/blob/master/.vim/update.sh). 
-
-My opinion is as follows: If a plugin provides useful functionality that I wish were built into Vim, it's worth installing. Otherwise, I try to keep the number of plugins at a minimum to avoid interaction problems and maintain crisp performance when starting Vim and viewing files. The plugins and configuration I list here are more about efficiency and getting stuff, but only to the point where I don't need to completely rewire my brain.
-
-### Vim isn't the only editor
-
-There are a lot more interesting editors than there were four years ago. [Atom](https://atom.io/) and Microsoft's [Visual Studio Code](https://code.visualstudio.com/) have emerged now that browser-based native applications are practical. [Sublime Text](https://www.sublimetext.com/) continues to be a great application. [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) now has a free Community Edition. All of these have support for Vim-like modes and are worth trying or using in certain situations.
-
-New programmers often ask me which editor to use, and I always suggest starting with Sublime Text. Its interface is familiar, it has a great plugin ecosystem with up-to-date syntax highlighting, and it works well on macOS, Windows, and Linux. If you're learning programming then you don't want to also learn Vim's strange arcane combinations of letters and different editing modes just to move and edit text on the screen. Though some of those people have later picked up Vim and remarked at how supremely fast and powerful they feel.
-
-The best editor for Java is probably IntelliJ IDEA. The [Community Edition](https://www.jetbrains.com/idea/download/) is available for free and has all of the features a modern Java or Kotlin developer probably wants or needs. It's got nice Maven build support, solid Git integration, amazing refactoring support, intelligent completion, [snazzy function parameter hints](https://www.jetbrains.com/help/idea/viewing-method-parameter-information.html), smart indexing and searching that's better than ctags, and its interactive debugger can be essential. In fact, when writing Ruby, if I need to debug anything and need more than one or two `puts` I'll fire up IntelliJ and use the debugger. And if you miss Vim, the free [IdeaVIM](https://plugins.jetbrains.com/plugin/164-ideavim) plugin gives you Vim keybindings and works reasonably well.
-
-I haven't tried Visual Studio Code, but I might give it a go when I start writing TypeScript, as both are developed by Microsoft and work well together. I've seen some GIFs and I've been impressed at its completion, and the things I've read about it are generally positive. A friend of mine claims that the [YouCompleteMe](https://vimawesome.com/plugin/youcompleteme) Vim plugin is _essential_ if you're writing C or C++, and it has TypeScript support, so might try that as well.
-
-[NeoVim](https://neovim.io/) looks interesting, but I don't plan on giving it a try. When it was announced it boasted asynchronous job control and native terminals, but those features have been added to the Vim core. If there's a killer reason for using it, let me know.
 
 ### Conclusion
 
-My focus nowadays is on _getting stuff done_ instead of mucking about with tools. But Vim has always been one of those things where a little work and research pays dividends. Browsing [VimAwesome.com](https://vimawesome.com/) or reading a few lines in a help page can dramatically improve one's effectiveness. Most of the plugin or configuration tweaks I've made are from running into some annoyance and thinking, "There _has_ to be a better way to do this."
+I was discussing this topic on the Reactiflux Discord server, and a fellow community member decided to point out all the ways that Vim has the features I had described. "Just use `XXX-server`," I was told, "and then use `YYY` and `ZZZ` and you'll get all the best parts of VS Code type completion." So I installed those plugins, fired up Vim, and nothing worked. Because I still love Vim, I spent a good 15 minutes fully committed to _trying_ to make it work, but couldn't. This was in the middle of the day during a work day, so I had to stop and get back to work.
 
-I hope that this post has been useful. Let me know what you think in the comments.
+And, dear reader, that leads to one of my most powerful conclusions: I am being paid to get stuff done, not twiddle my text editor. Ten years ago I would have gladly spent half a day configuring Vim to work properly with all of the features I need. But I am no longer in a position where I can say, "Sorry, I didn't get that done because I was configuring my text editor." 
