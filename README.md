@@ -6,6 +6,6 @@ To run:
 
 - `gem install bundler`
 - `bundler install`
-- `bundle exec jekyll serve --incremental`
+- `bundle exec jekyll serve --incremental --drafts`
 
 Then go to http://localhost:4000/

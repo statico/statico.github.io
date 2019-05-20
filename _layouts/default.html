@@ -1,82 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<link rel="alternate" type="application/atom+xml" href="/atom.xml" />
-<link rel="shortcut icon" href="/favicon.ico" /> <link rel="icon" href="/favicon.png" />
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.png" />
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" preload="true"/>
-<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i|Chivo:400,700,900" rel="stylesheet" preload="true"/>
-<style type="text/css">
-{% include rouge.css %}
-{% include style.css %}
-</style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+      preload="true"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i|Chivo:400,700,900"
+      rel="stylesheet"
+      preload="true"
+    />
+    <style type="text/css">
+      {% include rouge.css %}
+      {% include style.css %}
+    </style>
 
-{% seo %}
-{% include analytics.html %}
-
-{% if page.draft %}
-  <meta name="robots" content="noindex, nofollow"/>
-{% endif %}
-
-</head>
-<body>
-
-<header class="mb-4 mb-md-5">
-  <div class="d-md-none navbar navbar-expand flex-column flex">
-    <a href="/" class="navbar-brand mr-2">
-      <img src="/ian.svg" alt="Ian avatar"/>
-    </a>
-    <h1 class="text-center">
-      <a href="/">
-        Ian Langworth’s <em class="d-block">Things of Variable Interest</em>
-      </a>
-    </h1>
-  </div>
-  <div class="d-none d-md-block container py-4">
-    <div class="media">
-      <a href="/">
-        <img src="/ian.svg" alt="Ian avatar" class="d-flex mr-4"/>
-      </a>
-      <h1 class="media-body pt-1">
-        <a href="/">
-          Ian Langworth’s<br/>
-          <em>Things of Variable Interest</em>
+    {% seo %} {% include analytics.html %} {% if page.draft %}
+    <meta name="robots" content="noindex, nofollow" />
+    {% endif %}
+  </head>
+  <body>
+    <header class="mb-4 mb-md-5">
+      <div class="d-md-none navbar navbar-expand flex-column flex">
+        <a href="/" class="navbar-brand mr-2">
+          <img src="/ian.svg" alt="Ian avatar" />
         </a>
-      </h1>
+        <h1 class="text-center">
+          <a href="/">
+            Ian Langworth’s <em class="d-block">Things of Variable Interest</em>
+          </a>
+        </h1>
+      </div>
+      <div class="d-none d-md-block container py-4">
+        <div class="media">
+          <a href="/">
+            <img src="/ian.svg" alt="Ian avatar" class="d-flex mr-4" />
+          </a>
+          <h1 class="media-body pt-1">
+            <a href="/">
+              Ian Langworth’s<br />
+              <em>Things of Variable Interest</em>
+            </a>
+          </h1>
+        </div>
+      </div>
+    </header>
+
+    {% if page.draft %}
+    <div class="bg-danger text-center text-light py-3">
+      <div class="container">
+        <strong>This post is a draft!</strong><br />
+        I haven't finished editing it or anything. Please don't share it with
+        anyone.
+      </div>
     </div>
-  </div>
-</header>
+    {% endif %}
 
-{% if page.draft %}
-  <div class="bg-danger text-center text-light py-3">
-    <div class="container">
-      <strong>This post is a draft!</strong><br/>
-      I haven't finished editing it or anything. Please don't share it with anyone.
+    <div class="container pb-2">
+      {{ content }}
     </div>
-  </div>
-{% endif %}
 
-<div class="container pb-2">
-{{ content }}
-</div>
+    <footer class="container text-center text-secondary">
+      <hr />
+      <p>
+        © {{ 'now' | date: '%Y' }}
+        <a href="https://langworth.com">Ian Langworth</a>. Licensed under a
+        <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>
+        license.
+      </p>
+    </footer>
 
-<footer class="container text-center text-secondary">
-  <hr/>
-  <p>
-    © {{ 'now' | date: "%Y" }}
-    <a href="https://langworth.com">Ian Langworth</a>.
-    Licensed under a <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> license.
-  </p>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
-<script>
-  anchors.options.placement = 'left'
-  anchors.add('article h3, article h4, article h5')
-</script>
-
-</body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
+      integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      anchors.options.placement = 'left'
+      anchors.add('article h3, article h4, article h5')
+    </script>
+  </body>
 </html>
