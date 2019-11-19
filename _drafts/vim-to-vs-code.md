@@ -22,6 +22,9 @@ TL;DR of why I've switched to VS Code:
 * It works on macOS and Linux.
 * The ability to fuzzy-search commands and configuration options is something no person should live without.
 
+### Vim Emulation in VS Code
+
+It's clear that creating a Vim emulation layer isn't easy. The VS Code Vim extension projects has XXX open issues, XXX closed, and has had commits daily since XXXX. Users are eas
 
 
 ### Conclusion
