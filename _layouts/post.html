@@ -26,6 +26,7 @@ layout: default
   {% if page.draft %}
     <span class="text-danger">COMMENTS DISABLED IN DRAFT MODE</span>
   {% else %}
-    {% include disqus.html %}
+    <div id="commento"></div>
+    <script defer src="https://comments.langworth.com/js/commento.js"></script>
   {% endif %}
 </section>
