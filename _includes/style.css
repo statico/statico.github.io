@@ -1,9 +1,18 @@
 body {
   color: #212529;
   font-family: 'PT Serif', serif;
-  font-size: 20px;
-  line-height: 34px;
+  font-size: 18px;
+  line-height: 1.7;
   border-top: 1rem solid #00796b;
+}
+
+.container {
+  max-width: 680px;
+  padding: 0 24px;
+}
+
+p {
+  margin-bottom: 1.3rem;
 }
 
 a {
@@ -145,6 +154,10 @@ footer a {
 }
 
 @media (min-width: 576px) {
+  .container {
+    max-width: 720px;
+  }
+
   .navbar h1 {
     font-size: 1.5rem;
   }
@@ -153,28 +166,24 @@ footer a {
     width: 64px;
     height: 64px;
   }
-
 }
 
 @media (min-width: 768px) {
+  body {
+    font-size: 20px;
+  }
+
   article h2,
   article h3,
   article h4 {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
   }
 
   header img {
     width: 84px;
     height: 84px;
   }
-
 }
 
 @media (min-width: 992px) {
-  .container {
-    max-width: 720px;
-  }
-
 }
-
-
