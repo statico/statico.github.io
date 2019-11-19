@@ -1,39 +1,180 @@
-body { color: #212529; font-family: 'PT Serif', serif; font-size: 20px; line-height: 30px; border-top: 1rem solid #00796B }
-a { color: #0366d6 }
-.reverse { unicode-bidi: bidi-override; direction: rtl }
-h1, h2, h3, h4 { font-family: 'Chivo', sans-serif }
-h1, h2 { text-transform: uppercase }
-h1 em { font-weight: 900; font-style: normal }
-h2, h3 { font-weight: 700 }
-h4, h5, h6 { color: #868e96 }
-header { background: #009688; color: #fff; box-shadow: 0 3px 6px rgba(0,0,0,0.13), 0 3px 6px rgba(0,0,0,0.20) }
-header h1 { font-size: 2.2rem }
-header a, header a:hover { color: #fff }
-header a:hover { text-decoration: none }
-.navbar svg { fill: currentColor }
-h2 a { color: #212529 }
-kbd { font-size: 80%; margin-left: 0.1rem; margin-right: 0.1rem; border-radius: 2px; color: #212529; background: #e6e6e6; white-space: nowrap; box-shadow: inset 0 -1px 0 rgba(27,31,35,0.12) }
-code { color: #c33c13 }
-pre, code, pre code { font-size: 90% }
-pre, pre code { line-height: 1.3 }
-article img:first-child, article video:first-child { display: block; margin: 1.5rem auto; max-width: 85% }
-figure { margin: 1.5rem auto }
-figure img, figure video { margin: 0 auto !important }
-figcaption { margin: .5rem auto 0; text-align: center; font-style: italic }
-.highlight { margin: 1.5rem 2rem }
-.highlight .err { background: transparent }
-.navbar h1 { font-size: 1rem }
-.anchorjs-link { color: #868e96; text-decoration: none }
-header img { width: 42px; height: 42px }
-footer a { color: #868e96 }
+body {
+  color: #212529;
+  font-family: 'PT Serif', serif;
+  font-size: 20px;
+  line-height: 34px;
+  border-top: 1rem solid #00796b;
+}
+
+a {
+  color: #0366d6;
+}
+
+.reverse {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Chivo', sans-serif;
+}
+
+h1,
+h2 {
+  text-transform: uppercase;
+}
+
+h1 em {
+  font-weight: 900;
+  font-style: normal;
+}
+
+h2,
+h3 {
+  font-weight: 700;
+}
+
+h4,
+h5,
+h6 {
+  color: #868e96;
+}
+
+header {
+  background: #009688;
+  color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13), 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 2.2rem;
+}
+
+header a,
+header a:hover {
+  color: #fff;
+}
+
+header a:hover {
+  text-decoration: none;
+}
+
+.navbar svg {
+  fill: currentColor;
+}
+
+h2 a {
+  color: #212529;
+}
+
+kbd {
+  font-size: 80%;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+  border-radius: 2px;
+  color: #212529;
+  background: #e6e6e6;
+  white-space: nowrap;
+  box-shadow: inset 0 -1px 0 rgba(27, 31, 35, 0.12);
+}
+
+code {
+  color: #c33c13;
+}
+
+pre,
+code,
+pre code {
+  font-size: 90%;
+}
+
+pre,
+pre code {
+  line-height: 1.3;
+}
+
+article img:first-child,
+article video:first-child {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 85%;
+}
+
+figure {
+  margin: 1.5rem auto;
+}
+
+figure img,
+figure video {
+  margin: 0 auto !important;
+}
+
+figcaption {
+  margin: 0.5rem auto 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.highlight {
+  margin: 1.5rem 2rem;
+}
+
+.highlight .err {
+  background: transparent;
+}
+
+.navbar h1 {
+  font-size: 1rem;
+}
+
+.anchorjs-link {
+  color: #868e96;
+  text-decoration: none;
+}
+
+header img {
+  width: 42px;
+  height: 42px;
+}
+
+footer a {
+  color: #868e96;
+}
+
 @media (min-width: 576px) {
-  .navbar h1 { font-size: 1.5rem }
-  header img { width: 64px; height: 64px }
+  .navbar h1 {
+    font-size: 1.5rem;
+  }
+
+  header img {
+    width: 64px;
+    height: 64px;
+  }
+
 }
+
 @media (min-width: 768px) {
-  article h2, article h3, article h4 { margin-top: 2rem }
-  header img { width: 84px; height: 84px }
+  article h2,
+  article h3,
+  article h4 {
+    margin-top: 2rem;
+  }
+
+  header img {
+    width: 84px;
+    height: 84px;
+  }
+
 }
+
 @media (min-width: 992px) {
-  .container { max-width: 720px }
+  .container {
+    max-width: 720px;
+  }
+
 }
+
+
