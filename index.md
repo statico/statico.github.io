@@ -7,7 +7,7 @@ title: Welcome
 
 <p>
   I'm Ian. I build things.
-  I'm the CTO of <a href="https://www.wilburlabs.com/">Wilbur Labs</a> in San Francisco, California.
+  I work at <a href="https://www.wilburlabs.com/">Wilbur Labs</a>, a startup studio in San Francisco, California.
   See also:
   <a href="https://www.linkedin.com/in/ianlangworth">LinkedIn</a>.
   <a href="https://github.com/statico">GitHub</a>,
