@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
+    {% seo %}
     <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.png" />
@@ -28,7 +28,7 @@
       {% include style.css %}
     </style>
 
-    {% seo %} {% include analytics.html %} {% if page.draft %}
+    {% include analytics.html %} {% if page.draft %}
     <meta name="robots" content="noindex, nofollow" />
     {% endif %}
   </head>
