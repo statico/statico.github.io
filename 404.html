@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script>
+      (function() {
+        const url = new URL(document.location.href);
+        const path = url.pathname.replace(/.html$/, '');
+        const dest = `https://blog.langworth.com${path}`;
+        const escaped = dest.replace(/[\u00A0-\u9999<>\&]/g, i => '&#'+i.charCodeAt(0)+';');
+        document.body.innerHTML += `Redirecting you to <a href="${escaped}">${escaped}</a>...`;
+        document.location.href = dest;
+      })();
+    </script>
+  </body>
+</html>
